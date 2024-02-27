@@ -32,6 +32,8 @@ class CreateAmeliorationsTable extends Migration
             $table->foreign('cause_id')->references('id')->on('causes');
             $table->unsignedBigInteger('risque_id')->nullable();
             $table->foreign('risque_id')->references('id')->on('risques');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

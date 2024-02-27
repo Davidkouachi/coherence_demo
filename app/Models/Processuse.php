@@ -14,5 +14,11 @@ class Processuse extends Model
         'nom',
         'description',
         'finalite',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

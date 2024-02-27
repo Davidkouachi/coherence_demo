@@ -31,6 +31,7 @@ class Amelioration extends Model
         'date_eff',
         'cause_id',
         'risque_id',
+        'user_id',
     ];
 
     public function risque()
@@ -41,6 +42,11 @@ class Amelioration extends Model
     public function cause()
     {
         return $this->belongsTo(Cause::class, 'cause_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

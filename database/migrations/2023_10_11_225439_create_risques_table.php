@@ -27,6 +27,8 @@ class CreateRisquesTable extends Migration
             $table->foreign('processus_id')->references('id')->on('processuses');
             $table->unsignedBigInteger('poste_id');
             $table->foreign('poste_id')->references('id')->on('postes');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

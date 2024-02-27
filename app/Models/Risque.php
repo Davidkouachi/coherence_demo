@@ -28,6 +28,7 @@ class Risque extends Model
         'statut',
         'traitement',
         'poste_id',
+        'user_id',
     ];
 
     public function processus()
@@ -38,5 +39,10 @@ class Risque extends Model
     public function poste()
     {
         return $this->belongsTo(Poste::class, 'poste_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
