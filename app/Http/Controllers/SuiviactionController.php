@@ -33,6 +33,7 @@ class SuiviactionController extends Controller
                 ->join('processuses', 'risques.processus_id', '=', 'processuses.id')
                 ->join('suivi_actions', 'actions.id', '=', 'suivi_actions.action_id')
                 ->where('risques.statut', 'valider')
+                ->where('risques.user_id',  Auth::user()->id)
                 ->where('suivi_actions.statut', 'non-realiser')
                 ->where('actions.type', 'preventive')
                 ->select('actions.*','postes.nom as responsable','risques.nom as risque' ,'risques.date_validation as date_validation' ,'processuses.nom as processus','risques.date_validation as date_validation')
@@ -48,6 +49,7 @@ class SuiviactionController extends Controller
                     ->join('risques', 'actions.risque_id', '=', 'risques.id')
                     ->join('processuses', 'risques.processus_id', '=', 'processuses.id')
                     ->where('actions.type', 'corrective')
+                    ->where('risques.user_id',  Auth::user()->id)
                     ->select('actions.*', 'postes.nom as poste', 'risques.nom as risque', 'processuses.nom as processus')
                     ->get();
 
@@ -59,6 +61,7 @@ class SuiviactionController extends Controller
                                 ->where('suivi_ameliorations.statut', 'non-realiser')
                                 ->where('ameliorations.statut', 'valider')
                                 ->where('suivi_ameliorations.action_id', $am->id)
+                                ->where('ameliorations.user_id',  Auth::user()->id)
                                 ->select('suivi_ameliorations.*', 'ameliorations.type as type', 'ameliorations.detecteur as detecteur', 'ameliorations.date_fiche as date_fiche', 'ameliorations.lieu as lieu', 'ameliorations.non_conformite as non_conformite', 'ameliorations.consequence as consequence', 'ameliorations.cause as cause', 'ameliorations.date_fiche as date_fiche', 'ameliorations.date_limite as date_limite', 'ameliorations.nbre_jour as nbre_jour', 'ameliorations.choix_select as choix_select')
                                 ->get();
 

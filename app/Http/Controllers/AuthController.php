@@ -70,17 +70,34 @@ class AuthController extends Controller
                 session(['user_poste' => $poste]);
             }
 
-            $auto = Autorisation::where('user_id', $user_id)->first();
-            if ($auto) {
-                session(['user_auto' => $auto]);
-            }
-
             return redirect()->intended(route('index_accueil'))->with('success', 'Connexion réussi.');
         }
 
         return redirect()->back()->withInput(['email' => $request->input('email'), 'password' => $request->input('password')])->with([
             'error_login' => 'L\'authentification a échoué. Veuillez vérifier vos informations d\'identification et réessayer.',
         ]);
+    }
+
+    public function add_register(Request $request)
+    {
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password1),
+            'matricule' => $request->matricule,
+            'tel' => $request->tel,
+            'poste_id' => '2',
+            'suivi_active' => 'non',
+            'fa' => 'non',
+        ]);
+
+        if ($user) {
+
+            return redirect()->route('login');
+        }
+
+        return back()->with('error', 'Echec de la création du compte.');
     }
 
 }

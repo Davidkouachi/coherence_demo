@@ -49,6 +49,7 @@ class ListeamController extends Controller
                             ->orWhere('statut', '=', 'update')
                             ->orWhere('statut', '=', 'modif')
                             ->orWhere('statut', '=', 'soumis')
+                            ->where('user_id',  Auth::user()->id)
                             ->get();
 
         $actionsData = [];
@@ -93,6 +94,7 @@ class ListeamController extends Controller
     {
         $ams = Amelioration::where('statut', 'non-valider')
                            ->orWhere('statut', 'modif')
+                           ->where('user_id',  Auth::user()->id)
                            ->get();
 
         $actionsData = [];
@@ -234,11 +236,8 @@ class ListeamController extends Controller
             return back()->with('error', 'Réclamation non trouvée');
         }
 
-        $postes = Poste::join('users', 'users.poste_id', 'postes.id')
-                        ->select('postes.*') // Sélectionne les colonnes de la table 'postes'
-                        ->distinct() // Rend les résultats uniques
-                        ->get();
-        $processuss = Processuse::all();
+        $postes = Poste::where('occupe', '=', 'oui')->get();
+        $processuss = Processuse::where('user_id',  Auth::user()->id)->get();
 
         return view('traitement.amup2', ['postes' => $postes, 'processuss' => $processuss, 'actionsDatam' => $actionsDatam, 'am' => $am]);  
     }
@@ -261,6 +260,7 @@ class ListeamController extends Controller
                 ->join('processuses', 'risques.processus_id', '=', 'processuses.id')
                 ->where('risques.statut', '=', 'valider' )
                 ->where('risques.page', '=', 'risk' )
+                ->where('risques.user_id',  Auth::user()->id)
                 ->select('risques.*','postes.nom as validateur', 'processuses.nom as nom_processus')
                 ->get();
 
@@ -306,6 +306,7 @@ class ListeamController extends Controller
         $causes_selects = Cause::join('risques', 'causes.risque_id', 'risques.id')
                                 ->where('risques.statut', '=', 'valider' )
                                 ->where('risques.page', '=', 'risk' )
+                                ->where('risques.user_id',  Auth::user()->id)
                                 ->select('causes.*')
                                 ->get();
 
@@ -381,11 +382,9 @@ class ListeamController extends Controller
 
         }
 
-        $postes = Poste::join('users', 'users.poste_id', 'postes.id')
-                        ->select('postes.*') // Sélectionne les colonnes de la table 'postes'
-                        ->distinct() // Rend les résultats uniques
-                        ->get();
-        $processuss = Processuse::all();
+        $postes = Poste::where('occupe', '=', 'oui')->get();
+
+        $processuss = Processuse::where('user_id',  Auth::user()->id)->get();
 
         $color_para = Color_para::where('nbre0', '=', '0')->first();
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();

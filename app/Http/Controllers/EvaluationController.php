@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Processuse;
 use App\Models\Objectif;
@@ -25,7 +26,7 @@ class EvaluationController extends Controller
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
         $color_interval_nbre = count($color_intervals);
 
-        $processus = Processuse::all();
+        $processus = Processuse::where('user_id',  Auth::user()->id)->get();
         $risquesData = [];
 
         foreach ($processus as $processu) {

@@ -40,6 +40,7 @@ class AmeliorationController extends Controller
                 ->join('processuses', 'risques.processus_id', '=', 'processuses.id')
                 ->where('risques.statut', '=', 'valider' )
                 ->where('risques.page', '=', 'risk' )
+                ->where('risques.user_id',  Auth::user()->id)
                 ->select('risques.*','postes.nom as validateur', 'processuses.nom as nom_processus')
                 ->get();
 
@@ -85,6 +86,7 @@ class AmeliorationController extends Controller
         $causes_selects = Cause::join('risques', 'causes.risque_id', 'risques.id')
                                 ->where('risques.statut', '=', 'valider' )
                                 ->where('risques.page', '=', 'risk' )
+                                ->where('risques.user_id',  Auth::user()->id)
                                 ->select('causes.*')
                                 ->get();
 
@@ -160,11 +162,9 @@ class AmeliorationController extends Controller
 
         }
 
-        $postes = Poste::join('users', 'users.poste_id', 'postes.id')
-                        ->select('postes.*') // Sélectionne les colonnes de la table 'postes'
-                        ->distinct() // Rend les résultats uniques
-                        ->get();
-        $processuss = Processuse::all();
+        $postes = Poste::where('occupe', '=', 'oui')->get();
+
+        $processuss = Processuse::where('user_id', '=', Auth::user()->id )->get();
 
         $color_para = Color_para::where('nbre0', '=', '0')->first();
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
@@ -174,7 +174,7 @@ class AmeliorationController extends Controller
 
         if (session('user_poste')->nom == 'demo') {
 
-            $nbre = amelioration::where('user_id', '=', Auth::user()->user_id )->count();
+            $nbre = amelioration::where('user_id', '=', Auth::user()->id )->count();
             if($nbre >= 2){
                 $block = 'oui';
             }else{
@@ -313,16 +313,17 @@ class AmeliorationController extends Controller
         $am->cause = $cause;
         $am->choix_select = $choix_select;
         $am->statut = 'soumis';
+        $am->user_id = Auth::user()->id;
         if ($choix_select === 'cause') {
             $am->cause_id = $causeSelect_id;
 
             $rech_cause = Cause::find($causeSelect_id);
 
             $am->risque_id = $rech_cause->risque_id;
-        }
-        if ($choix_select === 'risque') {
+        }elseif ($choix_select === 'risque') {
             $am->risque_id = $risqueSelect_id;
         }
+
         $am->save();
 
         foreach ($nature as $index => $valeur) {
@@ -368,6 +369,7 @@ class AmeliorationController extends Controller
                 $risquee->page = 'am';
                 $risquee->processus_id = $processus_id[$index];
                 $risquee->poste_id = $poste_id[$index];
+                $risquee->user_id = Auth::user()->id;
                 $risquee->save();
 
                 $cause = new Cause();
@@ -393,65 +395,20 @@ class AmeliorationController extends Controller
                 $suivic->commentaire_am = $commentaire[$index];
                 $suivic->save();
             }
-
-            if ($choix_alert_email === 'email') {
-
-                $user = User::join('postes', 'users.poste_id', 'postes.id')
-                            ->where('postes.id', $poste_id[$index])
-                            ->select('users.*')
-                            ->first();
-                if ($user) {
-
-                    $mail = new PHPMailer(true);
-                    $mail->isHTML(true);
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'coherencemail01@gmail.com';
-                    $mail->Password = 'kiur ejgn ijqt kxam';
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port = 465;
-                    // Destinataire, sujet et contenu de l'email
-                    $mail->setFrom('coherencemail01@gmail.com', 'Coherence');
-                    $mail->addAddress($user->email);
-                    $mail->Subject = 'ALERT !';
-                    $mail->Body = " Nouvelle Fiche d'incident ";
-                    // Envoi de l'email
-                    $mail->send();
-                 }
-
-            }
-
         }
 
         if ($am) {
 
-            if ($choix_alert_alert === 'alert') {
+            return back()->with('success', 'Enregistrement éffectuée.');
 
-                event(new NotificationAcorrective());
-
-            }
-
-            event(new NotificationAmnew());
-
-            $his = new Historique_action();
-            $his->nom_formulaire = "Nouvelle fiche d'amélioration";
-            $his->nom_action = 'Ajouter';
-            $his->user_id = Auth::user()->id;
-            $his->save();
-
-            return back()
-                ->with('success', 'Enregistrement éffectuée.');
-
-        } else {
-            return back()
-                ->with('error', 'Enregistrement non éffectuée.');
         }
+        
+        return back()->with('error', 'Enregistrement non éffectuée.');
     }
 
     public function index_liste()
     {
-        $ams = Amelioration::all();
+        $ams = Amelioration::where('user_id',  Auth::user()->id)->get();
 
         $actionsData = [];
 

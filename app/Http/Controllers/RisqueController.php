@@ -40,7 +40,7 @@ class RisqueController extends Controller
     public function index_risque()
     {
 
-        $processuses = Processuse::all();
+        $processuses = Processuse::where('user_id',  Auth::user()->id)->get();
         $postes = Poste::where('occupe', 'oui')->get();
                         
         $color_para = Color_para::where('nbre0', '=', '0')->first();
@@ -54,7 +54,7 @@ class RisqueController extends Controller
 
         if (session('user_poste')->nom == 'demo') {
 
-            $nbre = risque::where('user_id', '=', Auth::user()->user_id )->count();
+            $nbre = risque::where('user_id', '=', Auth::user()->id )->count();
             if($nbre >= 2){
                 $block = 'oui';
             }else{
@@ -79,7 +79,7 @@ class RisqueController extends Controller
 
     public function recherche_processus($processusId)
     {
-        $objectifs = Objectif::where('processus_id', $processusId)->get();
+        $objectifs = Objectif:: where('processus_id', $processusId)->get();
         $nbre = count($objectifs);
         
         return response()->json([
@@ -133,6 +133,7 @@ class RisqueController extends Controller
         $risque->traitement = $traitement;
         $risque->poste_id = $validateur;
         $risque->statut = 'soumis';
+        $risque->user_id = Auth::user()->id;
         $risque->save();
 
 
@@ -198,63 +199,12 @@ class RisqueController extends Controller
 
         if ($risque && $cause && $nouvelleActionP && $nouvelleActionC )
         {
-            $choix_alert_alert = $request->input('choix_alert_alert');
-            $choix_alert_email = $request->input('choix_alert_email');
-            $choix_alert_sms = $request->input('choix_alert_sms');
 
-            if ($choix_alert_alert === 'alert') {
-
-                event(new NotificationRisque());
-
-            }
-
-            if ($choix_alert_email === 'email') {
-
-                $user = User::join('postes', 'users.poste_id', 'postes.id')
-                            ->where('postes.id', $validateur)
-                            ->select('users.*')
-                            ->first();
-                if ($user) {
-
-                    $mail = new PHPMailer(true);
-                    $mail->isHTML(true);
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'coherencemail01@gmail.com';
-                    $mail->Password = 'kiur ejgn ijqt kxam';
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port = 465;
-                    // Destinataire, sujet et contenu de l'email
-                    $mail->setFrom('coherencemail01@gmail.com', 'Coherence');
-                    $mail->addAddress($user->email);
-                    $mail->Subject = 'ALERT !';
-                    $mail->Body = 'Nouveau Risque';
-                    // Envoi de l'email
-                    $mail->send();
-                }
-
-            }
-
-            if ($choix_alert_sms === 'sms') {
-
-            }
-
-            $his = new Historique_action();
-            $his->nom_formulaire = 'Nouveau Risque';
-            $his->nom_action = 'Ajouter';
-            $his->user_id = Auth::user()->id;
-            $his->save();
-
-            return redirect()
-                ->back()
-                ->with('success', 'Enregistrement éffectuée.');
+            return back()->with('success', 'Enregistrement éffectuée.');
 
         }
 
-        return redirect()
-            ->back()
-            ->with('error', 'Echec.');
+        return back()->with('error', 'Echec.');
     }
 
     public function index_validation_risque()
@@ -262,6 +212,7 @@ class RisqueController extends Controller
         $risques = Risque::join('postes', 'risques.poste_id', '=', 'postes.id')
                 ->where('statut', '!=', 'valider')
                 ->where('page', '=', 'risk')
+                ->where('user_id',  Auth::user()->id)
                 ->select('risques.*','postes.nom as validateur')
                 ->get();
 
@@ -336,11 +287,6 @@ class RisqueController extends Controller
             }
         }
 
-        $postes = Poste::join('users', 'users.poste_id', 'postes.id')
-                        ->select('postes.*') // Sélectionne les colonnes de la table 'postes'
-                        ->distinct() // Rend les résultats uniques
-                        ->get();
-
         $color_para = Color_para::where('nbre0', '=', '0')->first();
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
         $color_interval_nbre = count($color_intervals);
@@ -350,7 +296,6 @@ class RisqueController extends Controller
             'causesData' => $causesData, 
             'actionsDatap' => $actionsDatap , 
             'actionsDatac' => $actionsDatac, 
-            'postes' => $postes,
             'color_para' => $color_para,
             'color_intervals' => $color_intervals,
             'color_interval_nbre' => $color_interval_nbre,
@@ -387,38 +332,6 @@ class RisqueController extends Controller
                         $suivip->save();
                     }
                 }
-            }
-
-            $his = new Historique_action();
-            $his->nom_formulaire = 'Validation fiche risque';
-            $his->nom_action = 'Valider';
-            $his->user_id = Auth::user()->id;
-            $his->save();
-
-            $users = Action::join('postes', 'actions.poste_id', 'postes.id')
-                        ->join('users', 'users.poste_id', 'postes.id')
-                        ->where('actions.risque_id', $id)
-                        ->select('users.email as email')
-                        ->get();
-
-            foreach ($users as $user) {
-
-                $mail = new PHPMailer(true);
-                $mail->isHTML(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'coherencemail01@gmail.com';
-                $mail->Password = 'kiur ejgn ijqt kxam';
-                $mail->SMTPSecure = 'ssl';
-                $mail->Port = 465;
-                // Destinataire, sujet et contenu de l'email
-                $mail->setFrom('coherencemail01@gmail.com', 'Coherence');
-                $mail->addAddress($user->email);
-                $mail->Subject = 'ALERT !';
-                $mail->Body = 'Nouvelle Action Préventive';
-                // Envoi de l'email
-                $mail->send();
             }
 
             event(new NotificationApreventive());

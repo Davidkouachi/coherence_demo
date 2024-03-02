@@ -40,6 +40,7 @@ class ListecauseController extends Controller
                         ->join('processuses', 'risques.processus_id', 'processuses.id')
                         ->where('risques.statut', 'valider')
                         ->where('causes.page', 'risk')
+                        ->where('risques.user_id',  Auth::user()->id)
                         ->select('causes.*','risques.nom as risque', 'risques.statut as statut', 'processuses.nom as processus')
                         ->get();
 

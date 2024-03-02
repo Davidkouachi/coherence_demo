@@ -508,25 +508,26 @@
                                             <div class="card-inner">
                                                 <div class="card-head">
                                                     <h5 class="card-title">
-                                                        Notification
+                                                        <span>Notification</span>
+                                                        <span class="badge rounded bg-danger">Version Pro</span>
                                                     </h5>
                                                 </div>
                                                 <div class="row g-gs">
                                                     <div class="col-lg-4 text-left">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input name="choix_alert_alert" value="alert" required type="checkbox" checked class="custom-control-input" id="customCheck1">
+                                                            <input disabled name="choix_alert_alert" value="alert" required type="checkbox" checked class="custom-control-input" id="customCheck1">
                                                             <label class="custom-control-label" for="customCheck1">Alert à l'écran</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 text-left">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input name="choix_alert_email" value="email" type="checkbox" class="custom-control-input" id="customCheck2">
+                                                            <input disabled name="choix_alert_email" value="email" type="checkbox" class="custom-control-input" id="customCheck2">
                                                             <label class="custom-control-label" for="customCheck2">Par Email</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 text-left">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input name="choix_alert_sms" value="sms" disabled type="checkbox" class="custom-control-input" id="customCheck3">
+                                                            <input disabled name="choix_alert_sms" value="sms" disabled type="checkbox" class="custom-control-input" id="customCheck3">
                                                             <label class="custom-control-label" for="customCheck3">Par Sms</label>
                                                         </div>
                                                     </div>
@@ -559,8 +560,8 @@
                                 <div class="modal-content bg-white">
                                     <div class="modal-body modal-body-lg text-center">
                                         <div class="nk-modal">
-                                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-help bg-warning"></em>
-                                            <h4 class="nk-modal-title">Désolé!</h4>
+                                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-trend-up bg-danger"></em>
+                                            <h4 class="nk-modal-title">Version PRO!</h4>
                                             <div class="nk-modal-text">
                                                 <div class="caption-text">
                                                     Pour éffectuer un nouvel enregistrement, passer a la version Pro

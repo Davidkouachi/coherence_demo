@@ -30,16 +30,19 @@ class StatistiqueController extends Controller
 
     public function index_stat()
     {
-        $processus = Processuse::all();
-        $risques = Risque::where('page', 'risk')->get();
+        $processus = Processuse::where('user_id',  Auth::user()->id)->get();
+        $risques = Risque::where('page', 'risk')->where('user_id',  Auth::user()->id)->get();
         $nbre_processus = $processus->count();
-        $nbre_risque = Risque::where('page', 'risk')->count();
-        $nbre_cause = Cause::where('page', 'risk')->count();
+        $nbre_risque = $risques->count();
+        $nbre_cause = Cause::join('risques', 'causes.risque_id', '=', 'risques.id')
+                            ->where('causes.page', 'risk')
+                            ->where('risques.user_id',  Auth::user()->id)
+                            ->count();
 
-        $nbre_am = Amelioration::all()->count();
-        $nbre_am_nci = Amelioration::where('type', '=', 'non_conformite_interne')->count();
-        $nbre_am_r = Amelioration::where('type', '=', 'reclamation')->count();
-        $nbre_am_c = Amelioration::where('type', '=', 'contentieux')->count();
+        $nbre_am = Amelioration::where('user_id',  Auth::user()->id)->count();
+        $nbre_am_nci = Amelioration::where('type', '=', 'non_conformite_interne')->where('user_id',  Auth::user()->id)->count();
+        $nbre_am_r = Amelioration::where('type', '=', 'reclamation')->where('user_id',  Auth::user()->id)->count();
+        $nbre_am_c = Amelioration::where('type', '=', 'contentieux')->where('user_id',  Auth::user()->id)->count();
 
         $types = ['non_conformite_interne', 'reclamation', 'contentieux'];
 
@@ -50,13 +53,13 @@ class StatistiqueController extends Controller
         foreach ($types as $type) {
             $statistics[$type] = [];
 
-            $statistics[$type]['total'] = Amelioration::where('ameliorations.type', $type)->count();
+            $statistics[$type]['total'] = Amelioration::where('ameliorations.type', $type)->where('user_id',  Auth::user()->id)->count();
 
-            $statistics[$type]['causes'] = Amelioration::where('ameliorations.type', $type)->where('choix_select', 'cause')->count();
+            $statistics[$type]['causes'] = Amelioration::where('ameliorations.type', $type)->where('user_id',  Auth::user()->id)->where('choix_select', 'cause')->count();
 
-            $statistics[$type]['risques'] = Amelioration::where('ameliorations.type', $type)->where('choix_select', 'risque')->count();
+            $statistics[$type]['risques'] = Amelioration::where('ameliorations.type', $type)->where('user_id',  Auth::user()->id)->where('choix_select', 'risque')->count();
                 
-            $statistics[$type]['causes_risques_nt'] = Amelioration::where('ameliorations.type', $type)->where('choix_select', 'cause_risque_nt')->count();
+            $statistics[$type]['causes_risques_nt'] = Amelioration::where('ameliorations.type', $type)->where('user_id',  Auth::user()->id)->where('choix_select', 'cause_risque_nt')->count();
 
             if($nbre_am > 0){
 
@@ -71,28 +74,42 @@ class StatistiqueController extends Controller
             }
         }
         
-        $nbre_ap = Action::where('type', 'preventive')->count();
+        $nbre_ap = Action::join('risques', 'actions.risque_id', '=', 'risques.id')
+                        ->where('actions.type', 'preventive')
+                        ->where('risques.statut', 'valider')
+                        ->where('risques.user_id',  Auth::user()->id)
+                        ->count();
 
         $nbre_ed_ap = Suivi_action::join('actions', 'actions.id', '=', 'suivi_actions.action_id')
                                     ->join('risques', 'risques.id', '=', 'actions.risque_id')
                                     ->where('suivi_actions.statut', 'realiser')
+                                    ->where('risques.user_id',  Auth::user()->id)
                                     ->where('actions.date', '>=', 'suivi_actions.date_action')
                                     ->count();
 
         $nbre_ehd_ap = Suivi_action::join('actions', 'actions.id', '=', 'suivi_actions.action_id')
                                     ->join('risques', 'risques.id', '=', 'actions.risque_id')
                                     ->where('suivi_actions.statut', 'realiser')
+                                    ->where('risques.user_id',  Auth::user()->id)
                                     ->where('actions.date', '<', 'suivi_actions.date_action')
                                     ->count();
 
-        $nbre_hd_ap = Suivi_action::where('statut', '=', 'non-realiser')->count();
+        $nbre_hd_ap = Suivi_action::join('actions', 'actions.id', '=', 'suivi_actions.action_id')
+                                    ->join('risques', 'risques.id', '=', 'actions.risque_id')
+                                    ->where('suivi_actions.statut', '=', 'non-realiser')
+                                    ->where('risques.user_id',  Auth::user()->id)
+                                    ->count();
 
 
 
-        $nbre_ac = Action::where('type', 'corrective')->where('page', 'risk')->count();
-        $nbre_poste = Poste::all()->count();
+        $nbre_ac = Action::join('risques', 'risques.id', '=', 'actions.risque_id')
+                        ->where('actions.type', 'corrective')
+                        ->where('risques.user_id',  Auth::user()->id)
+                        ->where('actions.page', 'risk')
+                        ->count();
 
         $risques_limit = Risque::where('page', '=', 'risk')
+                                ->where('user_id',  Auth::user()->id)
                                 ->inRandomOrder()
                                 ->limit(3)
                                 ->get();
@@ -101,7 +118,9 @@ class StatistiqueController extends Controller
 
             if($nbre_am > 0){
 
-                $risque_limit->nbre = Amelioration::where('risque_id', $risque_limit->id)->where('choix_select', 'risque')->count();
+                $risque_limit->nbre = Amelioration::where('risque_id', $risque_limit->id)
+                                                    ->where('choix_select', 'risque')
+                                                    ->count();
                 $risque_limit->progess = ($risque_limit->nbre / $nbre_am) * 100;
                 $risque_limit->progess = number_format($risque_limit->progess, 2);
                 
@@ -115,19 +134,11 @@ class StatistiqueController extends Controller
 
         $risques_limit = $risques_limit->sortByDesc('progess');
 
-        $users = User::join('postes', 'users.poste_id', '=', 'postes.id')
-                    ->select('users.*', 'postes.nom as poste')
-                    ->inRandomOrder()
-                    ->limit(4)
-                    ->get();
-
-        $nbre_user = User::all()->count();
-
         $color_para = Color_para::where('nbre0', '=', '0')->first();
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
         $color_interval_nbre = count($color_intervals);
 
-        return view('statistique.index', ['statistics' => $statistics, 'processus' => $processus, 'nbre_processus' => $nbre_processus, 'nbre_risque' => $nbre_risque, 'nbre_cause' => $nbre_cause, 'nbre_ap' => $nbre_ap, 'nbre_am' => $nbre_am, 'nbre_ed_ap' => $nbre_ed_ap,'nbre_ehd_ap' => $nbre_ehd_ap,'nbre_hd_ap' => $nbre_hd_ap , 'nbre_ac' => $nbre_ac,'nbre_poste' => $nbre_poste, 'risques' => $risques, 'risques_limit' => $risques_limit, 'color_para' => $color_para, 'color_intervals' => $color_intervals, 'color_interval_nbre' => $color_interval_nbre, 'users' => $users, 'nbre_am_nci' => $nbre_am_nci, 'nbre_am_r' => $nbre_am_r, 'nbre_am_c' => $nbre_am_c, 'nbre_user' => $nbre_user,]);
+        return view('statistique.index', ['statistics' => $statistics, 'processus' => $processus, 'nbre_processus' => $nbre_processus, 'nbre_risque' => $nbre_risque, 'nbre_cause' => $nbre_cause, 'nbre_ap' => $nbre_ap, 'nbre_am' => $nbre_am, 'nbre_ed_ap' => $nbre_ed_ap,'nbre_ehd_ap' => $nbre_ehd_ap,'nbre_hd_ap' => $nbre_hd_ap , 'nbre_ac' => $nbre_ac, 'risques' => $risques, 'risques_limit' => $risques_limit, 'color_para' => $color_para, 'color_intervals' => $color_intervals, 'color_interval_nbre' => $color_interval_nbre, 'nbre_am_nci' => $nbre_am_nci, 'nbre_am_r' => $nbre_am_r, 'nbre_am_c' => $nbre_am_c,]);
     }
 
     public function get_processus($id)
@@ -177,6 +188,7 @@ class StatistiqueController extends Controller
             $nbres[$type] = Amelioration::where('ameliorations.date_fiche', '>=', $date1)
                                         ->where('ameliorations.date_fiche', '<=', $date2)
                                         ->where('ameliorations.type', $type)
+                                        ->where('ameliorations.user_id',  Auth::user()->id)
                                         ->count();
         }
 

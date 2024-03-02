@@ -46,7 +46,7 @@ class ProcessusController extends Controller
 
         if (session('user_poste')->nom == 'demo') {
 
-            $nbre = processus::where('user_id', '=', Auth::user()->user_id )->count();
+            $nbre = processuse::where('user_id', '=', Auth::user()->id )->count();
             if($nbre >= 2){
                 $block = 'oui';
             }else{
@@ -72,6 +72,7 @@ class ProcessusController extends Controller
         $processus->nom = $nomProcessus;
         $processus->description = $descriptionProcessus;
         $processus->finalite = $finalite;
+        $processus->user_id = Auth::user()->id;
         $processus->save();
 
         if ($request->hasFile('pdfFile') && $request->file('pdfFile')->isValid()) {

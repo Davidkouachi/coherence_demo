@@ -29,8 +29,4 @@ class UserController extends Controller
         return view('add.res-va', ['postes' => $postes]);
     }
 
-    public function add_register(Request $request)
-    {
-        dd($request->all());
-    }
 }

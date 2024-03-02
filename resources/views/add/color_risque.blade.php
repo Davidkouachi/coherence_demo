@@ -94,9 +94,9 @@
                                                     </label>
                                                     <div class="form-control-wrap d-flex">
                                                         <input value="{{ $color_para->operation }}" readonly type="text" class="form-control text-center me-2">
-                                                        <a data-bs-toggle="modal" data-bs-target="#modalColor_para" href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-info border border-1 border-white rounded">
+                                                        <!--<a data-bs-toggle="modal" data-bs-target="#modalColor_para" href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-info border border-1 border-white rounded">
                                                             <em class="icon ni ni-edit"></em>
-                                                        </a>
+                                                        </a>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,9 +188,9 @@
                                                 </div>
                                             </div>
                                             <div class="nk-activity-media">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalConfirme{{$color_interval->id}}" class="btn btn-icon btn-white btn-dim btn-sm btn-danger border border-1 border-white rounded">
+                                                <!--<a href="#" data-bs-toggle="modal" data-bs-target="#modalConfirme{{$color_interval->id}}" class="btn btn-icon btn-white btn-dim btn-sm btn-danger border border-1 border-white rounded">
                                                         <em class="icon ni ni-trash"></em>
-                                                    </a>
+                                                    </a>-->
                                             </div>
                                         </li>
                                         @endforeach

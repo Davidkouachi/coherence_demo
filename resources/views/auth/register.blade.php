@@ -24,7 +24,7 @@
                                         <h4 class="nk-block-title">Nouveau Compte</h4>
                                     </div>
                                 </div>
-                                <form action="{{ route('add_register') }}" method="post" >
+                                <form id="registration-form" action="/add_register" method="post" >
                                     @csrf
                                     <div class="form-group">
                                         <div class="form-label-group">
