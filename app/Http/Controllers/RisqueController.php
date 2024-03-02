@@ -50,6 +50,21 @@ class RisqueController extends Controller
         $pdfFiles = Pdf_file::all();
         $pdfFiles2 = Pdf_file_processus::all();
 
+        $block = null;
+
+        if (session('user_poste')->nom == 'demo') {
+
+            $nbre = risque::where('user_id', '=', Auth::user()->user_id )->count();
+            if($nbre >= 2){
+                $block = 'oui';
+            }else{
+                $block = 'non';
+            }
+        }else{
+            
+            $block = 'non';
+        }
+
         return view('add.processuseva', [
             'processuses' => $processuses,
             'postes' => $postes,
@@ -58,6 +73,7 @@ class RisqueController extends Controller
             'color_interval_nbre' => $color_interval_nbre,
             'pdfFiles' => $pdfFiles,
             'pdfFiles2' => $pdfFiles2,
+            'block' => $block,
         ]);
     }
 

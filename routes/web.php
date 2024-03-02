@@ -26,6 +26,7 @@ use App\Http\Controllers\HistoriqueController;
 
 /*--Connexion---------------------------------------------------------------------------------------------------------------*/
     Route::get('/Login', [AuthController::class, 'view_login'])->name('login');
+    Route::get('/Register', [AuthController::class, 'view_register'])->name('register');
     Route::post('/auth_user', [AuthController::class, 'auth_user']);
 /*----------------------------------------------------------------------------------------------------------------------------*/
 
@@ -60,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
     /*--Utilisateur-------------------------------------------------------------------------------------------------------------------*/
         Route::get('/Nouveau utilisateur', [UserController::class, 'index_user'])->name('index_user');
-        Route::post('/traitement user', [UserController::class, 'add_user'])->name('add_user');
+        Route::post('/traitement register', [UserController::class, 'add_register'])->name('add_register');
         Route::get('/Liste des utilisateurs', [ListeuserController::class, 'index'])->name('index_liste_user');
         Route::post('/Modification des autorisations', [ListeuserController::class, 'index_user_modif'])->name('index_user_modif');
         Route::post('/traitement modif user', [ListeuserController::class, 'index_modif_traitement'])->name('index_modif_auto');

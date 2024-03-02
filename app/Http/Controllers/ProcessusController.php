@@ -41,7 +41,23 @@ class ProcessusController extends Controller
     {
         $pdfFiles = Pdf_file_processus::all();
         $pdfFiles2 = Pdf_file::all();
-        return view('add.processus',['pdfFiles' => $pdfFiles,'pdfFiles2' => $pdfFiles2]);
+
+        $block = null;
+
+        if (session('user_poste')->nom == 'demo') {
+
+            $nbre = processus::where('user_id', '=', Auth::user()->user_id )->count();
+            if($nbre >= 2){
+                $block = 'oui';
+            }else{
+                $block = 'non';
+            }
+        }else{
+            
+            $block = 'non';
+        }
+
+        return view('add.processus',['pdfFiles' => $pdfFiles,'pdfFiles2' => $pdfFiles2,'block' => $block]);
     }
 
     public function add_processus(Request $request)

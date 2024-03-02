@@ -27,6 +27,7 @@
                         </div>
                     </div>
                 </div>
+                @if( $block == 'non')
                     @if( intval($color_para->nbre_color) > intval($color_interval_nbre) )
                         <div class="nk-block">
                             <div class="row g-gs">
@@ -387,6 +388,27 @@
                             </form>
                         @endif
                     @endif
+                @else
+                    <div class="nk-block ">
+                        <div class="row g-gs">
+                            <div class="col-lg-12 col-xxl-12 ">
+                                <div class="modal-content bg-white">
+                                    <div class="modal-body modal-body-lg text-center">
+                                        <div class="nk-modal">
+                                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-help bg-warning"></em>
+                                            <h4 class="nk-modal-title">Désolé!</h4>
+                                            <div class="nk-modal-text">
+                                                <div class="caption-text">
+                                                    Pour éffectuer un nouvel enregistrement, passer a la version Pro
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

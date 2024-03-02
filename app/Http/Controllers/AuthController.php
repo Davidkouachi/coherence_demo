@@ -35,8 +35,12 @@ class AuthController extends Controller
     
     public function view_login()
     {
-        Cache::flush();
         return view('auth.login');
+    }
+
+    public function view_register()
+    {
+        return view('auth.register');
     }
 
     public function logout(Request $request)

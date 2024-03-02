@@ -30,93 +30,115 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="nk-block ">
-                                <div class="row g-gs align-items-center justify-content-center" >
-                                    <div class="col-md-10 col-xxl-10 "  >
-                                        <div class="card card-bordered ">
-                                            <div class="card-inner">
-                                                <form id="processus-form" method="post" action="{{ route('add_processus') }}" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="row g-4 mb-4" id="objectifs-container">
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="cf-full-name">
-                                                                    Fichier ( .pdf )
-                                                                </label>
-                                                                <input autocomplete="off" id="fileInput" name="pdfFile" accept=".pdf" type="file" class="form-control" id="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group text-center">
-                                                                <label class="form-label" for="Cause">
-                                                                    Nom du processus
-                                                                </label>
-                                                                <div class="form-control-wrap">
-                                                                    <input placeholder="Saisie obligatoire" autocomplete="off" required name="nprocessus" type="text" class="form-control text-center" id="Cause" oninput="this.value = this.value.toUpperCase()">
+                            @if( $block == 'non')
+                                <div class="nk-block ">
+                                    <div class="row g-gs align-items-center justify-content-center" >
+                                        <div class="col-md-10 col-xxl-10 "  >
+                                            <div class="card card-bordered ">
+                                                <div class="card-inner">
+                                                    <form id="processus-form" method="post" action="{{ route('add_processus') }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="row g-4 mb-4" id="objectifs-container">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="cf-full-name">
+                                                                        Fichier ( .pdf )
+                                                                    </label>
+                                                                    <input autocomplete="off" id="fileInput" name="pdfFile" accept=".pdf" type="file" class="form-control" id="">
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group text-center">
-                                                                <label class="form-label" for="description">
-                                                                    Finalité
-                                                                </label>
-                                                                <div class="form-control-wrap">
-                                                                    <input placeholder="Saisie obligatoire" autocomplete="off" required type="text" class="form-control text-center description" name="finalite">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group text-center">
+                                                                    <label class="form-label" for="Cause">
+                                                                        Nom du processus
+                                                                    </label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input placeholder="Saisie obligatoire" autocomplete="off" required name="nprocessus" type="text" class="form-control text-center" id="Cause" oninput="this.value = this.value.toUpperCase()">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group text-center">
+                                                                    <label class="form-label" for="description">
+                                                                        Finalité
+                                                                    </label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input placeholder="Saisie obligatoire" autocomplete="off" required type="text" class="form-control text-center description" name="finalite">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group text-center">
+                                                                    <label class="form-label" for="description">
+                                                                        Description
+                                                                    </label>
+                                                                    <div class="form-control-wrap">
+                                                                        <textarea name="description" class="form-control no-resize" id="default-textarea"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group text-center">
+                                                                    <label class="form-label" for="objectif">
+                                                                        Objectif(s)
+                                                                    </label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input placeholder="Saisie obligatoire" autocomplete="off" required type="text" class="form-control text-center objectif" name="objectifs[]">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group text-center">
-                                                                <label class="form-label" for="description">
-                                                                    Description
-                                                                </label>
-                                                                <div class="form-control-wrap">
-                                                                    <textarea name="description" class="form-control no-resize" id="default-textarea"></textarea>
+                                                        <div class="row g-gs">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group text-center">
+                                                                    <button type="button" class="btn btn-lg btn-primary btn-dim" id="ajouter-objectif">
+                                                                        <em class="ni ni-plus me-2"></em>
+                                                                        <em>Objectif</em>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group text-center">
+                                                                    <a data-bs-toggle="modal" data-bs-target="#modalDetail" class="btn btn-lg btn-warning btn-dim">
+                                                                        <em class="ni ni-eye me-2"></em>
+                                                                        <em>Voir le fichier</em>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group text-center">
+                                                                    <button type="submit" class="btn btn-lg btn-success btn-dim">
+                                                                        <em class="ni ni-check me-2"></em>
+                                                                        <em>Enregistrer</em>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group text-center">
-                                                                <label class="form-label" for="objectif">
-                                                                    Objectif(s)
-                                                                </label>
-                                                                <div class="form-control-wrap">
-                                                                    <input placeholder="Saisie obligatoire" autocomplete="off" required type="text" class="form-control text-center objectif" name="objectifs[]">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-gs">
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group text-center">
-                                                                <button type="button" class="btn btn-lg btn-primary btn-dim" id="ajouter-objectif">
-                                                                    <em class="ni ni-plus me-2"></em>
-                                                                    <em>Objectif</em>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group text-center">
-                                                                <a data-bs-toggle="modal" data-bs-target="#modalDetail" class="btn btn-lg btn-warning btn-dim">
-                                                                    <em class="ni ni-eye me-2"></em>
-                                                                    <em>Voir le fichier</em>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group text-center">
-                                                                <button type="submit" class="btn btn-lg btn-success btn-dim">
-                                                                    <em class="ni ni-check me-2"></em>
-                                                                    <em>Enregistrer</em>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="nk-block ">
+                                    <div class="row g-gs">
+                                        <div class="col-lg-12 col-xxl-12 ">
+                                            <div class="modal-content bg-white">
+                                                <div class="modal-body modal-body-lg text-center">
+                                                    <div class="nk-modal">
+                                                        <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-help bg-warning"></em>
+                                                        <h4 class="nk-modal-title">Désolé!</h4>
+                                                        <div class="nk-modal-text">
+                                                            <div class="caption-text">
+                                                                Pour éffectuer un nouvel enregistrement, passer a la version Pro
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

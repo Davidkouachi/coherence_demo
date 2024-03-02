@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                     <div class="nk-block">
-                        <form class="row g-gs" method="post" action="{{ route('add_user') }}">
+                        <form class="row g-gs" method="post" action="">
                             @csrf
                             <div class="col-md-8" style="margin: 20px auto;">
                                 <div class="row g-gs" >

@@ -170,6 +170,21 @@ class AmeliorationController extends Controller
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
         $color_interval_nbre = count($color_intervals);
 
+        $block = null;
+
+        if (session('user_poste')->nom == 'demo') {
+
+            $nbre = amelioration::where('user_id', '=', Auth::user()->user_id )->count();
+            if($nbre >= 2){
+                $block = 'oui';
+            }else{
+                $block = 'non';
+            }
+        }else{
+            
+            $block = 'non';
+        }
+
         return view('add.ficheamelioration',[
             'risques' => $risques, 
             'causesData' => $causesData, 
@@ -182,6 +197,7 @@ class AmeliorationController extends Controller
             'color_para' => $color_para,
             'color_intervals' => $color_intervals,
             'color_interval_nbre' => $color_interval_nbre,
+            'block' => $block,
         ]);
    }
 

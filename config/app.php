@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Coherence'),
+    'name' => env('APP_NAME', 'Coherence_demo'),
 
     /*
     |--------------------------------------------------------------------------

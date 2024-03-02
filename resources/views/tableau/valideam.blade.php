@@ -103,11 +103,13 @@
                                                                     href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-success border border-1 border-white rounded">
                                                                     <em class="icon ni ni-check"></em>
                                                                 </a>
+                                                                @if(session('user_poste')->nom === 'pro')
                                                                 <a data-bs-toggle="modal"
                                                                     data-bs-target="#modalRejet{{ $am->id }}"
                                                                     href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-danger border border-1 border-white rounded">
                                                                     <em class="icon ni ni-cross"></em>
                                                                 </a>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                     </tr>

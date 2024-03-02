@@ -50,9 +50,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-lg btn-success btn-block">Connexion</button>
+                                        <button type="submit" class="btn btn-lg btn-success btn-block">Connexion</button>
                                     </div>
                                 </form>
+                                <div class="form-note-s2 text-center pt-4">
+                                    Vous n'avez pas de compte démo? 
+                                    <a href="{{route('register')}}">Créer un compte</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -67,16 +71,6 @@
 
     <link href="{{asset('notification/toastr.min.css')}}" rel="stylesheet">
     <script src="{{asset('notification/toastr.min.js')}}"></script>
-
-    <!--<script>
-        // Fonction pour rafraîchir la page
-        function refreshPage() {
-            location.reload();
-        }
-
-        // Rafraîchir la page toutes les 5 minutes (300 000 millisecondes)
-        setInterval(refreshPage, 300000);
-    </script>-->
 
     @if (session('error_login'))
         <script>

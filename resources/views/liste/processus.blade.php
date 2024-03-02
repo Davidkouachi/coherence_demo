@@ -45,7 +45,7 @@
                                                     <!--<th>Finalié</th>-->
                                                     <th>Nombre de risques</th>
                                                     <th>Nombre d'objectif</th>
-                                                    <th>Pourcentage</th>
+                                                    <th>Taux</th>
                                                     <th>Date de création</th>
                                                     <th></th>
                                                 </tr>

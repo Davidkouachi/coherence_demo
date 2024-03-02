@@ -511,13 +511,9 @@
                 <div class="container-fluid">
                     <div class="nk-footer-wrap">
                         <div class="nk-footer-copyright">
-                            © 2024 Cohérence.
-                            <img height="30" width="30" src="/images/logo.png" alt="" class="me-5">
-                            @if(session('user_poste')->nom === 'pro')
-                                <span id="anime" class="badge rounded bg-danger">Version Pro</span>
-                            @else
-                                <span id="anime" class="badge rounded bg-warning">Version Démo</span>
-                            @endif
+                            <span>© 2024 Cohérence.</span>
+                            <span><img height="30" width="30" src="/images/logo.png" alt="" class="me-5"></span>
+                            <span id="anime" class="badge rounded bg-warning">Version Démo</span>
                         </div>
                     </div>
                 </div>

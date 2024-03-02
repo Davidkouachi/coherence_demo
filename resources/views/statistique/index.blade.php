@@ -113,14 +113,6 @@
                                                 <div class="title text-center">Actions correctives</div>
                                                 <div class="amount text-center">{{ $nbre_ac }}</div>
                                             </div>
-                                            <div class="invest-data-history">
-                                                <div class="title text-center">Utilisateurs</div>
-                                                <div class="amount text-center">{{ $nbre_user }}</div>
-                                            </div>
-                                            <div class="invest-data-history">
-                                                <div class="title text-center">Postes</div>
-                                                <div class="amount text-center">{{ $nbre_poste }}</div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -383,7 +375,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="card card-bordered card-full">
                                 <div class="card-inner">
                                     <div class="card-title-group">
@@ -524,54 +516,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6">
-                            <div class="card card-bordered card-full">
-                                <div class="card-inner">
-                                    <div class="card-title-group">
-                                        <div class="card-title">
-                                            <h6 class="title">
-                                                <span class="me-2">
-                                                Quelques Utilisateurs
-                                                </span>
-                                                <!--<a href="" class="btn btn-outline-warning btn-dim">
-                                                    <em class="me-1" >Voir Plus</em>
-                                                    <em class="ni ni-eye"></em>
-                                                </a>-->
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-inner p-0 border-top">
-                                    <div class="nk-tb-list nk-tb-orders">
-                                        <div class="nk-tb-item nk-tb-head">
-                                            <div class="nk-tb-col"><span>Nom et prénoms</span></div>
-                                            <div class="nk-tb-col "><span>Email</span></div>
-                                            <div class="nk-tb-col "><span>Contact</span></div>
-                                            <div class="nk-tb-col "><span>Poste</span></div>
-                                        </div>
-
-                                        @foreach($users as $user)
-                                        <div class="nk-tb-item">
-                                            <div class="nk-tb-col">
-                                                <span class="tb-lead">{{$user->name}}</span>
-                                            </div>
-                                            <div class="nk-tb-col ">
-                                                <span class="tb-lead">{{$user->email}}</span>
-                                            </div>
-                                            <div class="nk-tb-col ">
-                                                <span class="tb-lead">{{$user->tel}}</span>
-                                            </div>
-                                            <div class="nk-tb-col ">
-                                                <span class="tb-lead">{{$user->poste}}</span>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
