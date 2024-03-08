@@ -592,7 +592,7 @@
                                 </div>
                             </div>
                             <div class="nk-modal-action">
-                                <a href="/risque valider/{{ $risque->id }}" class="btn btn-lg btn-mw btn-success me-2">
+                                <a id="valide" href="/risque valider/{{ $risque->id }}" class="btn btn-lg btn-mw btn-success me-2">
                                     oui
                                 </a>
                                 <a href="#" class="btn btn-lg btn-mw btn-danger"data-bs-dismiss="modal">
@@ -606,6 +606,33 @@
         </div>
     @endforeach
 
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Validation en cours</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("valide").addEventListener("click", function(event) {
+
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+            });
+        </script>
+
     @foreach ($risques as $risque)
         <div class="modal fade" id="modalRejet{{ $risque->id }}" aria-modal="true" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
@@ -615,7 +642,7 @@
                             aria-label="Close"><em class="icon ni ni-cross"></em></a>
                     </div>
                     <div class="modal-body">
-                        <form action="{{route('risque_rejet')}}" method="post" >
+                        <form id="rejet" action="{{route('risque_rejet')}}" method="post" >
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="pay-amount">Motif</label>
@@ -635,6 +662,36 @@
             </div>
         </div>
     @endforeach
+
+        <div class="modal fade" tabindex="-1" id="modalLoadr" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Rejet en cours</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("rejet").addEventListener("submit", function(event) {
+                event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+                $('.modal').modal('hide');
+                $(`#modalLoadr`).modal('hide');
+                $(`#modalLoadr`).modal('show');
+
+                // Si toutes les validations passent, soumettre le formulaire
+                this.submit();
+            });
+        </script>
 
     <script>
         Pusher.logToConsole = true;

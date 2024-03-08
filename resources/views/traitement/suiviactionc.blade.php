@@ -223,7 +223,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="nk-block">
-                            <form class="row g-gs" method="post" action="/Suivi_actionc/{{ $am->id }}">
+                            <form class="row g-gs" id="registration" method="post" action="/Suivi_actionc/{{ $am->id }}">
                                 @csrf
                                 <div class="col-lg-12 col-xxl-12" >
                                     <div class="card">
@@ -271,7 +271,7 @@
                                                                 Date de réalisation
                                                             </label>
                                                             <div class="form-control-wrap">
-                                                                <input name="date_action" id="date_action" type="date" class="form-control" max="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="checkDate0()" >
+                                                                <input required name="date_action" id="date_action" type="date" class="form-control" max="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="checkDate0()" >
                                                                 <script>
                                                                     function checkDate0() {
                                                                         var dateInput = document.getElementById('date_action');
@@ -297,7 +297,7 @@
                                                                 Commentaire
                                                             </label>
                                                             <div class="form-control-wrap">
-                                                                <textarea name="commentaire" class="form-control no-resize" id="default-textarea"></textarea>
+                                                                <textarea required name="commentaire" class="form-control no-resize" id="default-textarea"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -320,6 +320,36 @@
             </div>
         </div>
     @endforeach
+
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Vérification des données</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("registration").addEventListener("submit", function(event) {
+                event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+                // Si toutes les validations passent, soumettre le formulaire
+                this.submit();
+            });
+        </script>
 
 
     <script>

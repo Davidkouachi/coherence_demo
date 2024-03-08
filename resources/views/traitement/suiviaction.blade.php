@@ -55,8 +55,8 @@
                                                         <td>
                                                             <a data-bs-toggle="modal"
                                                                 data-bs-target="#modalDetail{{ $action->id }}"
-                                                                href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-warning border border-1 border-white rounded">
-                                                                <em class="icon ni ni-eye"></em>
+                                                                href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-primary border border-1 border-white rounded">
+                                                                <em class="icon ni ni-calender-date"></em>
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="nk-block">
-                            <form class="row g-gs" method="post" action="/Suivi_action/{{ $action->id }}">
+                            <form class="row g-gs" id="registration" method="post" action="/Suivi_action/{{ $action->id }}">
                                 @csrf
                                 <div class="col-lg-12 col-xxl-12" >
                                     <div class="card">
@@ -100,26 +100,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--<div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label" for="Cause">
-                                                                Processus
-                                                            </label>
-                                                            <div class="form-control-wrap">
-                                                                <input disabled value="{{ $action->processus }}" type="text" class="form-control" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label" for="controle">
-                                                                Risque
-                                                            </label>
-                                                            <div class="form-control-wrap">
-                                                                <input disabled value="{{ $action->risque }}" type="text" class="form-control" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label class="form-label" for="Coût">
@@ -162,7 +142,7 @@
                                                                 Date d'action éffectuée
                                                             </label>
                                                             <div class="form-control-wrap">
-                                                                <input name="date_action" id="date_action" type="date" class="form-control" max="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="checkDate0()" >
+                                                                <input required name="date_action" id="date_action" type="date" class="form-control" max="{{ \Carbon\Carbon::now()->toDateString() }}" onchange="checkDate0()" >
                                                                 <script>
                                                                     function checkDate0() {
                                                                         var dateInput = document.getElementById('date_action');
@@ -188,7 +168,7 @@
                                                                 Commentaire
                                                             </label>
                                                             <div class="form-control-wrap">
-                                                                <textarea name="commentaire" class="form-control no-resize" id="default-textarea"></textarea>
+                                                                <textarea required name="commentaire" class="form-control no-resize" id="default-textarea"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,6 +191,36 @@
             </div>
         </div>
     @endforeach
+
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Vérification des données</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("registration").addEventListener("submit", function(event) {
+                event.preventDefault(); // Empêche la soumission par défaut du formulaire
+                
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+                // Si toutes les validations passent, soumettre le formulaire
+                this.submit();
+            });
+        </script>
 
 
     <script>

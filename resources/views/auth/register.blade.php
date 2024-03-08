@@ -99,7 +99,7 @@
                                     </div>
                                 </form>
                                 <div class="form-note-s2 text-center pt-4">
-                                    Vous avez dèjà un compte démo? 
+                                    Vous avez dèjà un compte démo ? 
                                     <a href="{{route('login')}}">Se connecter</a>
                                 </div>
                             </div>

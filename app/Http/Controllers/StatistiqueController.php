@@ -63,7 +63,7 @@ class StatistiqueController extends Controller
 
             if($nbre_am > 0){
 
-                $nbre = Amelioration::where('type', $type)->count();
+                $nbre = Amelioration::where('type', $type)->where('user_id',  Auth::user()->id)->count();
                 $statistics[$type]['progres'] = ($nbre / $nbre_am) * 100;
                 $statistics[$type]['progres'] = number_format($statistics[$type]['progres'], 2);
                 

@@ -22,6 +22,7 @@ use App\Http\Controllers\ParamettreController;
 use App\Http\Controllers\PosteController;
 use App\Http\Controllers\RisqueController;
 use App\Http\Controllers\HistoriqueController;
+use App\Http\Controllers\ResetpasswordController;
 
 
 /*--Connexion---------------------------------------------------------------------------------------------------------------*/
@@ -29,10 +30,16 @@ use App\Http\Controllers\HistoriqueController;
     Route::post('/auth_user', [AuthController::class, 'auth_user']);
     Route::get('/Register', [AuthController::class, 'view_register'])->name('register');
     Route::post('/add_register', [AuthController::class, 'add_register']);
+    Route::get('/Réinitialisation', [AuthController::class, 'view_reset_password'])->name('reset_password');
 /*----------------------------------------------------------------------------------------------------------------------------*/
 
 /*--Erreur---------------------------------------------------------------------------------------------------------------*/
     Route::get('/Erreur', [Controller::class, 'errorData'])->name('errorData');
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*--Réinitialiser le Mot de passe------------------------------------------------------------------------------------------*/
+    Route::get('/Verification_email/{email}', [ResetpasswordController::class, 'verif_email']);
+    Route::get('/Verification_code/{code}', [ResetpasswordController::class, 'verif_code']);
 /*------------------------------------------------------------------------------------------------------------------------*/
 
 Route::middleware(['auth'])->group(function () {

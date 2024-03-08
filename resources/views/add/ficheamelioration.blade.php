@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                         @else
-                            <form class="nk-block" method="post" action="{{ route('index_add') }}">
+                            <form class="nk-block" id="registration" method="post" action="{{ route('index_add') }}">
                                 @csrf
                                 <div class="row g-gs">
 
@@ -1106,6 +1106,13 @@
             $(`#modalVurisque${selectedValue}`).modal('hide');
             // Ouvrez le modal correspondant à la valeur sélectionnée
             $(`#modalVurisque${selectedValue}`).modal('show');
+
+            var dynamicFields = document.getElementById("dynamic-fields");
+            // Supprimer le contenu existant
+            while (dynamicFields.firstChild) {
+                dynamicFields.removeChild(dynamicFields.firstChild);
+            }
+            document.getElementById("btn_enrg").style.display = "none";
         });
     });
 </script>
@@ -1121,6 +1128,13 @@
             $(`#modalVucause${selectedValu}`).modal('hide');
             // Ouvrez le modal correspondant à la valeur sélectionnée
             $(`#modalVucause${selectedValu}`).modal('show');
+
+            var dynamicFields = document.getElementById("dynamic-fields");
+            // Supprimer le contenu existant
+            while (dynamicFields.firstChild) {
+                dynamicFields.removeChild(dynamicFields.firstChild);
+            }
+            document.getElementById("btn_enrg").style.display = "none";
         });
     });
 </script>
@@ -1129,6 +1143,35 @@
     var postes = @json($postes);
     var processuss = @json($processuss);
 </script>
+
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Vérification des données</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("registration").addEventListener("submit", function(event) {
+
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+                // Si toutes les validations passent, soumettre le formulaire
+                this.submit();
+            });
+        </script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -1409,10 +1452,11 @@
                                                                                     <label class="form-label" for="Coût">
                                                                                         Responsable
                                                                                     </label>
-                                                                                    <select required id="responsable_idc" required name="poste_id[]" class="form-select" >
-                                                                                        ${postes.map(poste => `<option value="${poste.id}" ${action.poste_id == poste.id ? 'selected' : ''}>${poste.nom}</option>`).join('')}
+                                                                                    <select required id="responsable_idc" required name="poste_id[]" class="form-select">
+                                                                                        ${postes.filter(poste => poste.id == action.poste_id).map(poste => `<option value="${poste.id}" selected>${poste.nom}</option>`).join('')}
                                                                                     </select>
-                                                                                </div>
+                                                                                </div>  
+
                                                                     </div>
                                                                     <div class="col-lg-5">
                                                                         <div class="form-group text-center">

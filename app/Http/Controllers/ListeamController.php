@@ -408,43 +408,6 @@ class ListeamController extends Controller
 
             if ($valide) {
 
-                $his = new Historique_action();
-                $his->nom_formulaire = 'Validation fiche amelioration';
-                $his->nom_action = 'Valider';
-                $his->user_id = Auth::user()->id;
-                $his->save();
-
-                $users = Suivi_amelioration::join('ameliorations', 'suivi_ameliorations.amelioration_id', 'ameliorations.id')
-                            ->join('actions', 'suivi_ameliorations.action_id', 'actions.id')
-                            ->join('postes', 'actions.poste_id', 'postes.id')
-                            ->join('users', 'users.poste_id', 'postes.id')
-                            ->where('ameliorations.id', $id)
-                            ->select('users.email as email')
-                            ->get();
-
-                foreach ($users as $user) {
-
-                    $mail = new PHPMailer(true);
-                    $mail->isHTML(true);
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'coherencemail01@gmail.com';
-                    $mail->Password = 'kiur ejgn ijqt kxam';
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port = 465;
-                    // Destinataire, sujet et contenu de l'email
-                    $mail->setFrom('coherencemail01@gmail.com', 'Coherence');
-                    $mail->addAddress($user->email);
-                    $mail->Subject = 'ALERT !';
-                    $mail->Body = 'Nouvelle Action Corrective';
-                    // Envoi de l'email
-                    $mail->send();
-                }
-
-                event(new NotificationAmvalider());
-                event(new NotificationAmcorrective());
-
                 return redirect()
                     ->back()
                     ->with('success', 'Validation éffectuée.');
@@ -486,43 +449,6 @@ class ListeamController extends Controller
                 $valide->update();
 
                 if ($valide) {
-
-                    $his = new Historique_action();
-                    $his->nom_formulaire = " Validation fiche d'incidents ";
-                    $his->nom_action = 'Rejet';
-                    $his->user_id = Auth::user()->id;
-                    $his->save();
-
-                    event(new NotificationAmrejet());
-
-                    /*$users = Suivi_amelioration::join('ameliorations', 'suivi_ameliorations.amelioration_id', 'ameliorations.id')
-                                ->join('actions', 'suivi_ameliorations.action_id', 'actions.id')
-                                ->join('postes', 'actions.poste_id', 'postes.id')
-                                ->join('users', 'users.poste_id', 'postes.id')
-                                ->where('ameliorations.id', $id)
-                                ->select('users.email as email')
-                                ->get();
-
-                    foreach ($users as $user) {
-
-                        $mail = new PHPMailer(true);
-                        $mail->isHTML(true);
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'coherencemail01@gmail.com';
-                        $mail->Password = 'kiur ejgn ijqt kxam';
-                        $mail->SMTPSecure = 'ssl';
-                        $mail->Port = 465;
-                        // Destinataire, sujet et contenu de l'email
-                        $mail->setFrom('coherencemail01@gmail.com', 'Coherence');
-                        $mail->addAddress($user->email);
-                        $mail->Subject = 'ALERT !';
-                        $mail->Body = 'Nouvelle Action Préventive';
-                        // Envoi de l'email
-                        $mail->send();
-                    }*/
-
 
                     return redirect()
                         ->back()

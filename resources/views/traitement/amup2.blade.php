@@ -36,7 +36,7 @@
                                     </div>
                     </div>
                 </div>
-                <form class="nk-block" method="post" action="{{ route('amup2_traitement') }}">
+                <form class="nk-block" id="registration" method="post" action="{{ route('amup2_traitement') }}">
                     @csrf
                     <input type="text" value="{{ $am->id }}" name="amelioration_id" style="display: none;" >
                     <div class="row g-gs">
@@ -370,6 +370,36 @@
         </a>
     </li>
 </ul>
+
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Mise à jour en cours</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("registration").addEventListener("submit", function(event) {
+                event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+                // Si toutes les validations passent, soumettre le formulaire
+                this.submit();
+            });
+        </script>
 
 <script>
     var postes = @json($postes);

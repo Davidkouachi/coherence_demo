@@ -80,24 +80,42 @@ class AuthController extends Controller
 
     public function add_register(Request $request)
     {
+        $user_vrf = User::where('email', $request->email)
+                        ->orWhere('tel', $request->tel)
+                        ->first();
+                        
+        if ($user_vrf) {
+            if ($user_vrf->email === $request->email) {
+                return back()->with('error', 'Email existe déjà.');
+            } else {
+                return back()->with('error', 'Contact existe déjà.');
+            }
+        } else {
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password1),
-            'matricule' => $request->matricule,
-            'tel' => $request->tel,
-            'poste_id' => '2',
-            'suivi_active' => 'non',
-            'fa' => 'non',
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password1),
+                'matricule' => $request->matricule,
+                'tel' => $request->tel,
+                'poste_id' => '2',
+                'suivi_active' => 'non',
+                'fa' => 'non',
+            ]);
 
-        if ($user) {
+            if ($user) 
+            {
+                return redirect()->route('login');
+            }
 
-            return redirect()->route('login');
         }
 
         return back()->with('error', 'Echec de la création du compte.');
+    }
+
+    public function view_reset_password()
+    {
+        return view('auth.reset_password');
     }
 
 }

@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="nk-modal-action">
-                                <a href="/am_update/{{ $am->id }}" class="btn btn-lg btn-mw btn-success me-2">
+                                <a id="valide"  href="/am_update/{{ $am->id }}" class="btn btn-lg btn-mw btn-success me-2">
                                     oui
                                 </a>
                                 <a href="#" class="btn btn-lg btn-mw btn-danger"data-bs-dismiss="modal">
@@ -153,6 +153,33 @@
             </div>
         </div>
     @endforeach
+
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Mise à jour en cours</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("valide").addEventListener("click", function(event) {
+
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+            });
+        </script>
 
     @foreach ($ams as $am)
         <div class="modal fade" tabindex="-1" id="modalDelete{{ $am->id }}" aria-modal="true" role="dialog">
@@ -169,7 +196,7 @@
                                 </div>
                             </div>
                             <div class="nk-modal-action">
-                                <a href="/am_delete/{{ $am->id }}" class="btn btn-lg btn-mw btn-success me-2">
+                                <a id="suppr" href="/am_delete/{{ $am->id }}" class="btn btn-lg btn-mw btn-success me-2">
                                     oui
                                 </a>
                                 <a href="#" class="btn btn-lg btn-mw btn-danger"data-bs-dismiss="modal">
@@ -182,6 +209,33 @@
             </div>
         </div>
     @endforeach
+
+        <div class="modal fade" tabindex="-1" id="modalLoads" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Suppression en cours</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("suppr").addEventListener("click", function(event) {
+
+                $('.modal').modal('hide');
+                $(`#modalLoads`).modal('hide');
+                $(`#modalLoads`).modal('show');
+
+            });
+        </script>
 
     @foreach($ams as $am)
         <div class="modal fade zoom" tabindex="-1" id="modalMotif{{ $am->id }}">

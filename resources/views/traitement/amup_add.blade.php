@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                         @else
-                            <form class="nk-block" method="post" action="{{ route('amup2_add_traitement') }}">
+                            <form class="nk-block" id="registration" method="post" action="{{ route('amup2_add_traitement') }}">
                                 @csrf
                                 <div class="row g-gs">
                                     <input type="text" name="amelioration_id" value="{{ $am_id }}" style="display: none;">
@@ -906,6 +906,13 @@
             $(`#modalVurisque${selectedValue}`).modal('hide');
             // Ouvrez le modal correspondant à la valeur sélectionnée
             $(`#modalVurisque${selectedValue}`).modal('show');
+
+            var dynamicFields = document.getElementById("dynamic-fields");
+            // Supprimer le contenu existant
+            while (dynamicFields.firstChild) {
+                dynamicFields.removeChild(dynamicFields.firstChild);
+            }
+            document.getElementById("btn_enrg").style.display = "none";
         });
     });
 </script>
@@ -921,9 +928,46 @@
             $(`#modalVucause${selectedValu}`).modal('hide');
             // Ouvrez le modal correspondant à la valeur sélectionnée
             $(`#modalVucause${selectedValu}`).modal('show');
+
+            var dynamicFields = document.getElementById("dynamic-fields");
+            // Supprimer le contenu existant
+            while (dynamicFields.firstChild) {
+                dynamicFields.removeChild(dynamicFields.firstChild);
+            }
+            document.getElementById("btn_enrg").style.display = "none";
         });
     });
 </script>
+
+        <div class="modal fade" tabindex="-1" id="modalLoad" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <h5 class="nk-modal-title">Vérification des données</h5>
+                            <div class="nk-modal-text">
+                                <div class="text-center">
+                                    <div class="spinner-border text-warning" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("registration").addEventListener("submit", function(event) {
+                event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+                $('.modal').modal('hide');
+                $(`#modalLoad`).modal('hide');
+                $(`#modalLoad`).modal('show');
+
+                // Si toutes les validations passent, soumettre le formulaire
+                this.submit();
+            });
+        </script>
 
 <script>
     var postes = @json($postes);
