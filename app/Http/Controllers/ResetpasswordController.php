@@ -41,67 +41,45 @@ class ResetpasswordController extends Controller
         $user = User::where('email', $email)->first();
 
         if ($user) {
-            // Generate a verification code
+
             $verif_code = rand(100, 999) . '-' . rand(100, 999);
-
+            // Generate a verification code
+            $hpass = "1234";
+            $pass = password_hash("1234", PASSWORD_DEFAULT);
             // Check if a verification code already exists for the user
-            $code = Code_password::where('user_id', $user->id)->first();
-            
-            if ($code) {
-                // If a code exists, update it
-                $code->code = $verif_code;
-                $code->save();
-            } else {
-                // If no code exists, create a new one
-                $vcode = Code_password::where('code', $verif_code)->first();
-                if ($vcode) {
-
-                    $verif_code = rand(100, 999) . '-' . rand(100, 999);
-
-                    $new_code = new Code_password();
-                    $new_code->user_id = $user->id;
-                    $new_code->code = $verif_code;
-                    $new_code->save();
-                    
-                }else {
-
-                    $new_code = new Code_password();
-                    $new_code->user_id = $user->id;
-                    $new_code->code = $verif_code;
-                    $new_code->save();
-
-                }
-                
-            }
-            
+            $user->password = $pass;
+            $user->save();
             // Return the number of users found (should be 1) and the generated verification code
+            $mail = new PHPMailer(true);
+            $mail->isHTML(true);
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'coherencemail01@gmail.com';
+            $mail->Password = 'kiur ejgn ijqt kxam';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            // Destinataire, sujet et contenu de l'email
+            $mail->setFrom('coherencemail01@gmail.com', 'Coherence');
+            $mail->addAddress($user->email);
+            $mail->Subject = "Nouveau mot de passe généré";
+            $mail->Body = 'Cher/Chère '. $user->name .' ! <br><br>'.'<br>'
+                        . 'Vous avez oublié votre mot de passe, pas de panique <br>'
+                        . 'Nous avons généré un mot de passe qui vous permettra de récupéré votre compte, veuillez utiliser le nouveau Mot de passe ci-dessous :<br>'
+                        . 'Mot de passe : '. $hpass .'<br>'
+                        . 'NB : Une fois connecté, Vous avez la possibilié de soite modifier le mot de passe dans les paramétre de sécurité ou conserver le mot de passe généré.';
+            // Envoi de l'email
+            $mail->send();
+            
             return response()->json([
-                'nbre_user' => 1,
-                'verif_code' => $verif_code,
+                'user' => 1,
             ]);
+
         } else {
             // If no user found with the given email
             return response()->json([
-                'nbre_user' => 0,
-                'verif_code' => 0,
+                'user' => 0,
             ]);
         }
-    }
-
-    public function verif_code($code)
-    {
-        $verif_code = Code_password::where('code', $code)->first();
-
-        if ($verif_code) {
-            return response()->json([
-                'verif_code' => 1,
-            ]);
-        } else {
-
-           return response()->json([
-                'verif_code' => 0,
-            ]); 
-        } 
-        
     }
 }

@@ -118,5 +118,6 @@
         </script>
         {{ session()->forget('info') }}
     @endif
+    
 
 </html>
