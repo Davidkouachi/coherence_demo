@@ -24,14 +24,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-xxl-12 " >
+                            <div class="col-md-12 col-xxl-12 mb-0" >
                                 <div class="card card-preview" style="background: transparent;">
                                     <div class="card-inner text-center">
-                                        <img height="20%" width="20%" src="{{asset('images/logo.png')}}" alt="">
+                                        <img height="10%" width="10%" src="{{asset('images/logo.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-xxl-12 " >
+                            <div class="col-md-12 col-xxl-12 mt-0" >
                                 <div class="card card-preview" style="background: transparent;">
                                     <div class="card-inner text-center">
                                         <label class="form-label" style="font-size: 40px;">
@@ -228,8 +228,7 @@
                                         </ul>
                                         <div class="pricing-action">
                                             <span class="w-50 fw-bold">
-                                                Pour avoir la version Pro, Contacter nous au numéro suiviant:
-                                                <br>
+                                                Pour plus d'infos : 
                                                 <span>
                                                     +225 0715778107 / +225 0140073501
                                                 </span> 

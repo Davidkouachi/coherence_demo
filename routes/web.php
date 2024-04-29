@@ -65,12 +65,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/info_update', [ProfilController::class, 'info_update']);
     /*----------------------------------------------------------------------------------------------------------------------------*/
 
-    /*--Utilisateur-------------------------------------------------------------------------------------------------------------------
-        Route::get('/Nouveau utilisateur', [UserController::class, 'index_user'])->name('index_user');
+    /*--Utilisateur-------------------------------------------------------------------------------------------------------------------*/
+        /*Route::get('/Nouveau utilisateur', [UserController::class, 'index_user'])->name('index_user');
         Route::get('/Liste des utilisateurs', [ListeuserController::class, 'index'])->name('index_liste_user');
         Route::post('/Modification des autorisations', [ListeuserController::class, 'index_user_modif'])->name('index_user_modif');
-        Route::post('/traitement modif user', [ListeuserController::class, 'index_modif_traitement'])->name('index_modif_auto');
-    ----------------------------------------------------------------------------------------------------------------------------*/
+        Route::post('/traitement modif user', [ListeuserController::class, 'index_modif_traitement'])->name('index_modif_auto');*/
+        Route::get('/Liste des utilisateurs', [ListeuserController::class, 'index_liste_user'])->name('index_liste_user');
+    /*----------------------------------------------------------------------------------------------------------------------------*/
 
     /*--Processus-------------------------------------------------------------------------------------------------------------------*/
         Route::get('/Nouveau Processus', [ProcessusController::class, 'index_add_processus'])->name('index_add_processus');

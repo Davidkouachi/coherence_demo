@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <link href="images/logo.png" rel="shortcut icon">
-    <title>Réinitialisatio du mot de passe</title>
+    <title>Réinitialisation du mot de passe</title>
     <link rel="stylesheet" href="{{asset('../../assets/css/dashlite0226.css')}}">
     <link id="skin-default" rel="stylesheet" href="{{asset('../../assets/css/theme0226.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
@@ -22,11 +22,17 @@
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-0 text-center">
-                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-lock-alt bg-primary"></em>
+                            <div class="card-inner text-center">
+                                <img height="35%" width="35%" src="{{asset('images/logo.png')}}" alt="">
+                            </div>
                         </div>
                         <div class="card pt-0">
                             <div class="card-inner card-inner-lg">
-
+                                <div class="nk-block-head text-center mt-0">
+                                    <div class="nk-block-head-content">
+                                        <h4 class="nk-block-title">Réinitialisation du mot de passe</h4>
+                                    </div>
+                                </div>
                                 <div id="cadre_email">
                                     <div class="nk-block-des">
                                         <p>
@@ -80,25 +86,17 @@
     <script src="{{asset('assets/js/bundle0226.js')}}"></script>
     <script src="{{asset('assets/js/scripts0226.js')}}"></script>
     <script src="{{asset('assets/js/demo-settings0226.js')}}"></script>
-
-    <link href="{{asset('notification/toastr.min.css')}}" rel="stylesheet">
-    <script src="{{asset('notification/toastr.min.js')}}"></script>
+    <script src="{{asset('assets/js/example-toastr0226.js') }}"></script>
 
     @if (session('error'))
         <script>
-            toastr.error("{{ session('error') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
         </script>
         {{ session()->forget('error') }}
     @endif
     @if (session('info'))
         <script>
-            toastr.info("{{ session('info') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.", "info", {position: "top-right"});
         </script>
         {{ session()->forget('info') }}
     @endif
@@ -108,7 +106,7 @@
                 <div class="modal-content">
                     <div class="modal-body modal-body-lg text-center">
                         <div class="nk-modal">
-                            <h5 class="nk-modal-title">Vérification des données</h5>
+                            <h5 class="nk-modal-title">Traitement en cours</h5>
                             <div class="nk-modal-text">
                                 <div class="text-center">
                                     <div class="spinner-border text-warning" role="status"></div>
@@ -129,6 +127,12 @@
 
                 const email = document.getElementById("email").value;
 
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.", "info", {position: "top-right"});
+                    return false;
+                }
+
                 if (email !== '') {
                     $('.modal').modal('hide');
                     $(`#modalmdp`).modal('hide');
@@ -142,10 +146,11 @@
 
                             if (user === 1) {
 
-                                toastr.info("Veuillez vous connecté a nouveau.");
+                                NioApp.Toast("<h5>Succès</h5><p>Mot de passe envoyé.Veuillez vous connecté a nouveau.", "success", {position: "top-right"});
 
                             } else {
-                                toastr.info("Aucun compte n'est associé a ce email");
+
+                                NioApp.Toast("<h5>Alert</h5><p>Aucun compte n'est associé a ce email.", "warning", {position: "top-right"});
                             }
 
                             $('.modal').modal('hide');
@@ -153,7 +158,8 @@
 
                         },
                         error: function() {
-                            toastr.error("Une erreur s'est produite lors de la vérification de l'email.");
+
+                            NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la vérification de l'email.", "error", {position: "top-right"});
 
                             $('.modal').modal('hide');
                             $(`#modalmdp`).modal('hide');
@@ -161,7 +167,8 @@
                     });
 
                 } else {
-                    toastr.warning(" Veuillez saisir votre Email s'il vous plait !!!");
+
+                    NioApp.Toast("<h5>Alert</h5><p>Veuillez saisir votre Email s'il vous plait !!!.", "warning", {position: "top-right"});
                 }
 
             });

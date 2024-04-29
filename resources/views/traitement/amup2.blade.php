@@ -388,7 +388,7 @@
                         // Si toutes les cases sont cochées, décocher la dernière case cochée
                         checkbox.checked = false;
 
-                        toastr.warning(`Impossible de supprimé cette action `);
+                        NioApp.Toast("<h5>Alert</h5><p>Impossible de supprimé cette action.", "warning", {position: "top-right"});
                     }
                 });
             });
@@ -462,7 +462,7 @@
                                                                             <input required style="display:none;" name="nature1[]" value="new" type="text" >
                                                                             <select required id="responsable_idc" required name="processus_id1[]" class="form-select">
                                                                                 <option selected value="">
-                                                                                    Choisir un responsable
+                                                                                    Choisir un processus
                                                                                 </option>
                                                                                 ${processuss.map(processus => `<option value="${processus.id}">${processus.nom}</option>`).join('')}
                                                                             </select>

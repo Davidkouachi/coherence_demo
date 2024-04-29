@@ -187,11 +187,6 @@
                                                     De {{ $color_interval->nbre1 }} à {{ $color_interval->nbre2 }}
                                                 </div>
                                             </div>
-                                            <div class="nk-activity-media">
-                                                <!--<a href="#" data-bs-toggle="modal" data-bs-target="#modalConfirme{{$color_interval->id}}" class="btn btn-icon btn-white btn-dim btn-sm btn-danger border border-1 border-white rounded">
-                                                        <em class="icon ni ni-trash"></em>
-                                                    </a>-->
-                                            </div>
                                         </li>
                                         @endforeach
                                     @endif

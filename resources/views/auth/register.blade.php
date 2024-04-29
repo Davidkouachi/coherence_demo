@@ -15,11 +15,13 @@
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-0 text-center">
-                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-user-add bg-primary"></em>
+                            <div class="card-inner text-center">
+                                <img height="35%" width="35%" src="{{asset('images/logo.png')}}" alt="">
+                            </div>
                         </div>
                         <div class="card pt-0">
-                            <div class="card-inner card-inner-lg">
-                                <div class="nk-block-head text-center">
+                            <div class="card-inner card-inner-sm">
+                                <div class="nk-block-head text-center mt-0">
                                     <div class="nk-block-head-content">
                                         <h4 class="nk-block-title">Nouveau Compte</h4>
                                     </div>
@@ -110,6 +112,23 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" id="modalL" aria-modal="true" style="position: fixed;" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body modal-body-lg text-center">
+                    <div class="nk-modal">
+                        <h5 class="nk-modal-title text-warning">Creation de compte en cours</h5>
+                        <div class="nk-modal-text">
+                            <div class="text-center">
+                                <div class="spinner-border text-warning" role="status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function generateMatricule(length) {
           const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
@@ -144,30 +163,33 @@
 
             // Validation des champs
             if (!name || !email || !tel || !password1 || !password2 ) {
-                toastr.warning("Veuillez remplir tous les champs.");
+                NioApp.Toast("<h5>Alert</h5><p>Veuillez remplir tous les champs.", "warning", {position: "top-right"});
                 return false;
             }
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expression régulière pour valider l'e-mail
             if (!emailRegex.test(email)) {
-                toastr.info("Veuillez saisir une adresse e-mail valide.");
+                NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.", "info", {position: "top-right"});
                 return false;
             }
 
             if (password1 !== password2) {
-                toastr.error("Les mots de passe ne correspondent pas.");
+                NioApp.Toast("<h5>Erreur</h5><p>Les mots de passe ne correspondent pas.", "error", {position: "top-right"});
                 return false;
             }
             
             if (password1 === password2) {
                 // Vérification si le mot de passe satisfait les critères
                 if (!verifierMotDePasse(password1) || !verifierMotDePasse(password2) ) {
-                    // Afficher un message d'erreur
-                    toastr.info("Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.");
+                    NioApp.Toast("<h5>Information</h5><p>Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.", "error", {position: "top-right"});
                     return false;
                 }
 
             }
+
+            $('.modal').modal('hide');
+            $(`#modalL`).modal('hide');
+            $(`#modalL`).modal('show');
 
             // Si toutes les validations passent, soumettre le formulaire
             this.submit();
@@ -203,15 +225,11 @@
     <script src="{{asset('assets/js/bundle0226.js')}}"></script>
     <script src="{{asset('assets/js/scripts0226.js')}}"></script>
     <script src="{{asset('assets/js/demo-settings0226.js')}}"></script>
-    <link href="{{asset('notification/toastr.min.css')}}" rel="stylesheet">
-    <script src="{{asset('notification/toastr.min.js')}}"></script>
+    <script src="{{asset('assets/js/example-toastr0226.js') }}"></script>
 
     @if (session('error'))
         <script>
-            toastr.error("{{ session('error') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
         </script>
         {{ session()->forget('error') }}
     @endif

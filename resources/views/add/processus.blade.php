@@ -42,9 +42,10 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label class="form-label" for="cf-full-name">
-                                                        Fichier ( .pdf )
+                                                        <span>Fichier ( .pdf )</span>
+                                                        <span class="badge rounded bg-danger">Version Pro</span>
                                                     </label>
-                                                    <input autocomplete="off" id="fileInput" name="pdfFile" accept=".pdf" type="file" class="form-control" id="">
+                                                    <input disabled autocomplete="off" id="fileInput" name="pdfFile" accept=".pdf" type="file" class="form-control" id="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">

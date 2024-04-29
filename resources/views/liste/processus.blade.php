@@ -86,12 +86,6 @@
                                                                         <em class="icon ni ni-list-thumb"></em>
                                                                     </a>
                                                                     @endif
-                                                                    @if($processu->pdf_nom != null)
-                                                                    <a href="{{ asset('storage/pdf/'.$processu->pdf_nom) }} " target="_bank" 
-                                                                        class="btn btn-icon btn-white btn-dim btn-sm btn-info border border-1 border-white rounded">
-                                                                        <em class="icon ni ni-download"></em>
-                                                                    </a>
-                                                                    @endif
                                                                     <button class="btn btn-icon btn-white btn-dim btn-sm btn-primary">
                                                                         <em class="icon ni ni-printer-fill"></em>
                                                                     </button>
@@ -109,6 +103,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        <a class="btn btn-icon btn-white btn-dim btn-sm btn-primary border border-1 border-white rounded"> <em class="icon ni ni-help"></em> </a>
                                     </div>
                                 </div>
                             </div>

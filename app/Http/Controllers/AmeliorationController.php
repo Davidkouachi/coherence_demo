@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\NotificationAcorrective;
 use App\Events\NotificationAmnew;
 
-use App\Models\Processuse;
+use App\Models\processuse;
 use App\Models\Objectif;
 use App\Models\Resva;
 use App\Models\Risque;
@@ -164,7 +164,7 @@ class AmeliorationController extends Controller
 
         $postes = Poste::where('occupe', '=', 'oui')->get();
 
-        $processuss = Processuse::where('user_id', '=', Auth::user()->id )->get();
+        $processuss = processuse::where('user_id', '=', Auth::user()->id )->get();
 
         $color_para = Color_para::where('nbre0', '=', '0')->first();
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
@@ -218,7 +218,7 @@ class AmeliorationController extends Controller
             $action->risque = $risque->nom;
             $action->risque_id = $risque->id;
 
-            $processus = Processuse::find($risque->processus_id);
+            $processus = processuse::find($risque->processus_id);
             $action->processus = $processus->nom;
             $action->processus_id = $processus->id;
 
@@ -248,7 +248,7 @@ class AmeliorationController extends Controller
             $action->risque = $risque->nom;
             $action->risque_id = $risque->id;
 
-            $processus = Processuse::find($risque->processus_id);
+            $processus = processuse::find($risque->processus_id);
             $action->processus = $processus->nom;
             $action->processus_id = $processus->id;
 
@@ -430,6 +430,7 @@ class AmeliorationController extends Controller
                                             ->join('risques', 'actions.risque_id', 'risques.id')
                                             ->join('processuses', 'risques.processus_id', 'processuses.id')
                                             ->where('actions.id', '=', $suivis->action_id)
+                                            ->where('suivi_ameliorations.amelioration_id', '=', $am->id)
                                             ->select('suivi_ameliorations.*', 'actions.action as action', 'actions.date as date', 'postes.nom as poste', 'processuses.nom as processus', 'risques.nom as risque')
                                             ->first();
 

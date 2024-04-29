@@ -388,6 +388,16 @@
                                                         </span>
                                                     </a>
                                                 </li>
+                                                @if ( session('user_poste')->nom === 'pro')
+                                                <li>
+                                                    <a href="{{ route('index_liste_user') }}">
+                                                        <em class="icon ni ni-users"></em>
+                                                        <span>
+                                                            Liste des utilisateurs
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                @endif
                                                 <!--<li>
                                                     <a>
                                                         <em class="icon ni ni-activity-alt"></em>
@@ -463,7 +473,7 @@
             <div class="modal-content">
                 <div class="modal-body modal-body-lg text-center">
                     <div class="nk-modal">
-                        <h5 class="nk-modal-title">Traitement en cours</h5>
+                        <h5 class="nk-modal-title text-warning ">Traitement en cours</h5>
                         <div class="nk-modal-text">
                             <div class="text-center">
                                 <div class="spinner-border text-warning" role="status"></div>
@@ -477,13 +487,12 @@
 
     <script>
         document.getElementById("form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche la soumission par défaut du formulaire
+            event.preventDefault();
 
             $('.modal').modal('hide');
             $(`#modalt`).modal('hide');
             $(`#modalt`).modal('show');
 
-            // Si toutes les validations passent, soumettre le formulaire
             this.submit();
         });
     </script>
@@ -527,15 +536,12 @@
         </script>
 
         <script>
-            // Cette fonction affiche le modal après un délai de 2 minutes
             function afficherModalApresDelai() {
-                $('.modal').modal('hide'); // Assurez-vous que les modaux précédents sont masqués
-                $('#modalAlert2').modal('show'); // Affiche le modal spécifié
-                // Vous pouvez également ajouter d'autres opérations à effectuer après l'affichage du modal ici
+                $('.modal').modal('hide');
+                $('#modalAlert2').modal('show');
             }
-            // Utilise setTimeout() pour déclencher la fonction après un délai de 2 minutes
             document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(afficherModalApresDelai, 900000); // 900000 millisecondes = 15 minutes
+                setTimeout(afficherModalApresDelai, 900000);
             });
         </script>
 
@@ -543,46 +549,35 @@
     <script src="{{asset('assets/js/scripts0226.js')}}"></script>
     <script src="{{asset('assets/js/demo-settings0226.js')}}"></script>
     <script src="{{asset('assets/js/libs/datatable-btns0226.js')}}"></script>
-
-    <link href="{{asset('notification/toastr.min.css')}}" rel="stylesheet">
-    <script src="{{asset('notification/toastr.min.js')}}"></script>
+    <script src="{{asset('assets/js/example-toastr0226.js') }}"></script>
+    <script src="{{asset('assets/js/example-sweetalert0226.js') }}"></script>
 
     @if (session('success'))
         <script>
-            toastr.success("{{ session('success') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Succès</h5><p>{{ session('success') }}.", "success", {position: "top-right"});
         </script>
         {{ session()->forget('success') }}
     @endif
     @if (session('error'))
         <script>
-            toastr.error("{{ session('error') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
         </script>
         {{ session()->forget('error') }}
     @endif
     @if (session('warning'))
         <script>
-            toastr.warning("{{ session('warning') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Alert</h5><p>{{ session('warning') }}.", "warning", {position: "top-right"});
         </script>
         {{ session()->forget('warning') }}
     @endif
     @if (session('info'))
         <script>
-            toastr.info("{{ session('info') }}"," ",
-            {positionClass:"toast-top-left",timeOut:5e3,debug:!1,newestOnTop:!0,
-            preventDuplicates:!0,showDuration:"300",hideDuration:"1000",extendedTimeOut:"1000",
-            showEasing:"swing",showMethod:"fadeIn",hideMethod:"fadeOut"})
+            NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.", "info", {position: "top-right"});
         </script>
         {{ session()->forget('info') }}
     @endif
+
+    
 
 </body>
 

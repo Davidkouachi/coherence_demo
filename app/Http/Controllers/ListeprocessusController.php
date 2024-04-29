@@ -74,13 +74,13 @@ class ListeprocessusController extends Controller
                 ];
             }
 
-            $processu->nbre = Amelioration::join('risques', 'ameliorations.risque_id', 'risques.id')
+            $processu->nbre0 = Amelioration::join('risques', 'ameliorations.risque_id', 'risques.id')
                                         ->join('processuses', 'risques.processus_id', 'processuses.id')
-                                        ->where('processuses.id', $processu->id)                                        
+                                        ->where('processuses.id', $processu->id)
                                         ->count();
 
             if ($nbre_total != 0) {
-                $processu->progress = ($processu->nbre / $nbre_total) * 100;
+                $processu->progress = ($processu->nbre0 / $nbre_total) * 100;
                 $processu->progress = number_format($processu->progress, 2);
             } else {
                 // Handle the case where $nbre_total is zero (optional)

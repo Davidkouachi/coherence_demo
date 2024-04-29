@@ -109,7 +109,7 @@ class AuthController extends Controller
 
             if ($user) 
             {
-                return redirect()->route('login');
+                return redirect()->route('login')->with('success', 'Compte crée avec succés, veuillez-vous connecter.');
             }
 
         }
