@@ -269,12 +269,6 @@
                                                                             <label id="labelcolor" class="form-label">Coût</label>
                                                                             <input placeholder="Entrer le montant" id="cout" autocomplete="off" required name="cout" type="text" class="form-control ">
                                                                         </div>
-                                                                        <script>
-                                                                            var inputElement = document.getElementById('cout');
-                                                                                inputElement.addEventListener('input', function() {
-                                                                                    this.value = this.value.replace(/[^0-9]/g, '');
-                                                                                });
-                                                                        </script>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -363,12 +357,6 @@
                                                         <div class="form-group">
                                                             <label id="labelcolor" class="form-label">Coût</label>
                                                             <input placeholder="Entrer le montant" id="cout_residuel" autocomplete="off" required name="cout_residuel" type="text" class="form-control">
-                                                            <script>
-                                                                var inputElement = document.getElementById('cout_residuel');
-                                                                    inputElement.addEventListener('input', function() {
-                                                                    this.value = this.value.replace(/[^0-9]/g, '');
-                                                                });
-                                                            </script>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
@@ -580,14 +568,6 @@
     </div>
 </div>
 
-<div class="modal fade zoom" tabindex="-1" id="modalDetail">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" id="pdfPreviewmodal" data-simplebar>
-            <p class="text-center mt-2">Aucun fichier sélectionner </p>
-        </div>
-    </div>
-</div>
-
 
 <script>
     const color_intervals = @json($color_intervals);
@@ -689,7 +669,7 @@
                 const objectifs = data.objectifs;
                 const nbre = data.nbre;
 
-                NioApp.Toast("<h5>Information</h5><p>" + nbre + " Objectif(s) trouvé(s).", "info", {position: "top-right"});
+                NioApp.Toast("<h5>Information</h5><p>" + nbre + " Objectif(s) trouvé(s).</p>", "info", {position: "top-right"});
 
                 listeObjectifs.innerHTML = "";
                 objectifs.forEach(objectif => {
@@ -711,7 +691,7 @@
 
         if (nom_cause.value === '' || dispositif.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une cause.", "info", {position: "top-right"});
+            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une cause.</p>", "info", {position: "top-right"});
 
         } else {
 
@@ -772,7 +752,7 @@
 
         if (actionp.value === '' || delai.value === '' || responsable_idp.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action preventive.", "info", {position: "top-right"});
+            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action preventive.</p>", "info", {position: "top-right"});
 
         } else {
 
@@ -853,7 +833,7 @@
 
         if (actionc.value === '' || responsable_idc.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action corrective.", "info", {position: "top-right"});
+            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action corrective.</p>", "info", {position: "top-right"});
 
         } else {
 
@@ -911,76 +891,35 @@
     });
 </script>
 
-<script>
-    const fileInput = document.getElementById('fileInput');
-    const pdfPreview = document.getElementById('pdfPreview');
-    const fileSizeElement = document.getElementById('fileSize');
-    var pdfFiles = @json($pdfFiles);
-    var pdfFiles2 = @json($pdfFiles2);
-
-    fileInput.addEventListener('change', function() {
-        // Initialiser la variable trouver
-        let trouver = 0;
-
-        var selectedFileName = this.value.split('\\').pop(); // Récupérer le nom du fichier sélectionné
-
-        // Parcourir la liste des fichiers
-        pdfFiles.forEach(function(pdfFile) {
-            if (selectedFileName === pdfFile.pdf_nom) {
-
-                NioApp.Toast("<h5>Erreur</h5><p>Ce fichier PDF existe déjà.", "error", {position: "top-right"});
-
-                fileInput.value = ''; // Vider l'input
-
-                trouver = 1;
-                
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
-        });
-        pdfFiles2.forEach(function(pdfFile2) {
-            if (selectedFileName === pdfFile2.pdf_nom) {
-
-                NioApp.Toast("<h5>Erreur</h5><p>Ce fichier PDF existe déjà.", "error", {position: "top-right"});
-
-                fileInput.value = ''; // Vider l'input
-                trouver = 1;
-                    
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
-        });
-
-        // Vérifier la valeur de trouver avant de procéder
-        if (trouver === 0) {
-            // Obtenez le fichier PDF sélectionné
-            const fichier = fileInput.files[0];
-
-            // Vérifiez si un fichier a été sélectionné
-            if (fichier) {
-                // Créez un élément d'incorporation pour le fichier PDF
-                const embedElement = document.createElement('embed');
-                embedElement.src = URL.createObjectURL(fichier);
-                embedElement.type = 'application/pdf';
-                embedElement.style.width = '100%';
-                embedElement.style.height = '100%';
-                // Affichez l'élément d'incorporation dans la div de prévisualisation
-                pdfPreview.innerHTML = '';
-                pdfPreview.appendChild(embedElement);
-                // Affichez la taille du fichier
-                const fileSize = fichier.size; // Taille du fichier en octets
-                const fileSizeInKB = fileSize / 1024; // Taille du fichier en kilo-octets
-                fileSizeElement.textContent = `Taille du fichier : ${fileSizeInKB.toFixed(2)} Ko`;
-            } else {
-                // Si aucun fichier n'est sélectionné, videz la div de prévisualisation et l'élément de la taille du fichier
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
+    <script>
+        function formatPrice(input) {
+            input = input.replace(/\./g, '');
+            
+            return input.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
-    });
-</script>
 
+        document.getElementById('cout').addEventListener('input', function() {
+            this.value = formatPrice(this.value);
+        });
 
+        document.getElementById('cout_residuel').addEventListener('input', function() {
+            this.value = formatPrice(this.value);
+        });
+
+        document.getElementById('cout').addEventListener('keypress', function(event) {
+            const key = event.key;
+            if (isNaN(key)) {
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById('cout_residuel').addEventListener('keypress', function(event) {
+            const key = event.key;
+            if (isNaN(key)) {
+                event.preventDefault();
+            }
+        });
+    </script>
 
 @endsection
 

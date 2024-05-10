@@ -291,14 +291,10 @@
                                                                             </label>
                                                                         </div>
                                                                     </div>
-                                                                    @php
-                                                                        $cout = $risque->cout;
-                                                                        $formatcommande = number_format($cout, 0, '.', '.');
-                                                                    @endphp
                                                                     <div class="col-lg-9">
                                                                         <div class="form-group ">
                                                                             <span class="fw-normal text-dark" style="font-size: 14px;">
-                                                                                {{ $formatcommande }} Fcfa
+                                                                                {{ $risque->cout }} Fcfa
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -469,14 +465,10 @@
                                                                             </label>
                                                                         </div>
                                                                     </div>
-                                                                    @php
-                                                                        $cout2 = $risque->cout_residuel;
-                                                                        $formatcommande2 = number_format($cout2, 0, '.', '.');
-                                                                    @endphp
                                                                     <div class="col-lg-9">
                                                                         <div class="form-group ">
                                                                             <span class="fw-normal text-dark" style="font-size: 14px;">
-                                                                                {{ $formatcommande2 }} Fcfa
+                                                                                {{ $risque->cout_residuel }} Fcfa
                                                                             </span>
                                                                         </div>
                                                                     </div>

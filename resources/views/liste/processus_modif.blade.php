@@ -109,27 +109,19 @@
                                                         @endforeach
                                                     </div>
                                                     <div class="row g-gs">
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <div class="form-group text-center">
-                                                                <a class="btn btn-lg btn-dim btn-primary" id="ajouter-objectif">
-                                                                    <em class="ni ni-plus me-2"></em>
-                                                                    <em>Objectif</em>
+                                                                <a class="btn btn-md btn-dim btn-primary" id="ajouter-objectif">
+                                                                    <em class="icon ni ni-plus "></em>
+                                                                    <span>Objectif</span>
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <div class="form-group text-center">
-                                                                <a data-bs-toggle="modal" data-bs-target="#modalDetail" class="btn btn-lg btn-warning btn-dim">
-                                                                    <em class="ni ni-eye me-2"></em>
-                                                                    <em>Voir le fichier</em>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group text-center">
-                                                                <button type="submit" class="btn btn-lg btn-dim btn-success">
-                                                                    <em class="ni ni-check me-2"></em>
-                                                                    <em>Mise à jour</em>
+                                                                <button type="submit" class="btn btn-md btn-dim btn-success">
+                                                                    <em class="icon ni ni-check"></em>
+                                                                    <span>Mise à jour</span>
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -199,57 +191,5 @@
             });
         });
     </script>
-
-    <div class="modal fade zoom" tabindex="-1" id="modalDetail">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" id="pdfPreviewmodal" style="height:700px;" data-simplebar>
-                <p class="text-center mt-2">Aucun fichier</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const pdfPreview = document.getElementById('pdfPreviewmodal');
-
-        var pdfFiles = @json($pdfFiles);
-
-        fileInput.addEventListener('change', function() {
-            // Initialiser la variable trouver
-            let trouver = 0;
-            var selectedFileName = this.value.split('\\').pop(); // Récupérer le nom du fichier sélectionné
-            // Parcourir la liste des fichiers
-            pdfFiles.forEach(function(pdfFile) {
-                if (selectedFileName === pdfFile.pdf_nom) {
-                    toastr.error("Ce fichier PDF existe déjà.");
-                    fileInput.value = ''; // Vider l'input
-                    trouver = 1;
-                    
-                    pdfPreview.innerHTML = '';
-                    fileSizeElement.textContent = '';
-                }
-            });
-            // Vérifier la valeur de trouver avant de procéder
-            if (trouver === 0) {
-                // Obtenez le fichier PDF sélectionné
-                const fichier = fileInput.files[0];
-                // Vérifiez si un fichier a été sélectionné
-                if (fichier) {
-                    // Créez un élément d'incorporation pour le fichier PDF
-                    const embedElement = document.createElement('embed');
-                    embedElement.src = URL.createObjectURL(fichier);
-                    embedElement.type = 'application/pdf';
-                    embedElement.style.width = '100%';
-                    embedElement.style.height = '100%';
-                    // Affichez l'élément d'incorporation dans la div de prévisualisation
-                    pdfPreview.innerHTML = '';
-                    pdfPreview.appendChild(embedElement);
-                }
-            }
-        });
-    </script>
-
-
-
 
 @endsection

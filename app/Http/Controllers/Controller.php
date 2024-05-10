@@ -10,12 +10,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationApreventive;
-use App\Events\NotificationAnon;
-use App\Events\NotificationProcessus;
-use App\Events\NotificationRisque;
-
 use App\Models\Processuse;
 use App\Models\Objectif;
 use App\Models\Risque;

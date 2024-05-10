@@ -30,7 +30,9 @@ class ListeprocessusController extends Controller
 {
     public function index_listeprocessus()
     {
-        $processus = Processuse::where('user_id',  Auth::user()->id)->get();
+        $processus = Processuse::where('user_id',  Auth::user()->id)
+                                ->orderBy('created_at', 'desc')
+                                ->get();
 
         $objectifData = [];
         $risqueData = [];

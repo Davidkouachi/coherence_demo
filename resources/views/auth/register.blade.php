@@ -152,36 +152,34 @@
 
     <script>
         document.getElementById("registration-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche la soumission par défaut du formulaire
+            event.preventDefault();
 
-            // Récupération des valeurs des champs
             var name = document.getElementById("name").value;
             var email = document.getElementById("email-address").value;
             var tel = document.getElementById("tel").value;
             var password1 = document.getElementById("password").value;
             var password2 = document.getElementById("password2").value;
 
-            // Validation des champs
             if (!name || !email || !tel || !password1 || !password2 ) {
-                NioApp.Toast("<h5>Alert</h5><p>Veuillez remplir tous les champs.", "warning", {position: "top-right"});
+                NioApp.Toast("<h5>Alert</h5><p>Veuillez remplir tous les champs.</p>", "warning", {position: "top-right"});
                 return false;
             }
 
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expression régulière pour valider l'e-mail
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.", "info", {position: "top-right"});
+                NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.</p>", "info", {position: "top-right"});
                 return false;
             }
 
             if (password1 !== password2) {
-                NioApp.Toast("<h5>Erreur</h5><p>Les mots de passe ne correspondent pas.", "error", {position: "top-right"});
+                NioApp.Toast("<h5>Erreur</h5><p>Les mots de passe ne correspondent pas.</p>", "error", {position: "top-right"});
                 return false;
             }
             
             if (password1 === password2) {
                 // Vérification si le mot de passe satisfait les critères
                 if (!verifierMotDePasse(password1) || !verifierMotDePasse(password2) ) {
-                    NioApp.Toast("<h5>Information</h5><p>Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.", "error", {position: "top-right"});
+                    NioApp.Toast("<h5>Information</h5><p>Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.</p>", "error", {position: "top-right"});
                     return false;
                 }
 
@@ -191,31 +189,26 @@
             $(`#modalL`).modal('hide');
             $(`#modalL`).modal('show');
 
-            // Si toutes les validations passent, soumettre le formulaire
             this.submit();
 
             function verifierMotDePasse(motDePasse) {
-                // Vérification de la longueur
+
                 if (motDePasse.length < 8) {
                     return false;
                 }
 
-                // Vérification s'il contient au moins une lettre majuscule
                 if (!/[A-Z]/.test(motDePasse)) {
                     return false;
                 }
 
-                // Vérification s'il contient au moins une lettre minuscule
                 if (!/[a-z]/.test(motDePasse)) {
                     return false;
                 }
 
-                // Vérification s'il contient au moins un chiffre
                 if (!/\d/.test(motDePasse)) {
                     return false;
                 }
 
-                // Si toutes les conditions sont satisfaites, le mot de passe est valide
                 return true;
             }
 
@@ -229,7 +222,7 @@
 
     @if (session('error'))
         <script>
-            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
+            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.</p>", "error", {position: "top-right"});
         </script>
         {{ session()->forget('error') }}
     @endif

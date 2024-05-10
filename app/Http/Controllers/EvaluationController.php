@@ -26,7 +26,9 @@ class EvaluationController extends Controller
         $color_intervals = Color_interval::orderBy('nbre1', 'asc')->get();
         $color_interval_nbre = count($color_intervals);
 
-        $processus = Processuse::where('user_id',  Auth::user()->id)->get();
+        $processus = Processuse::where('user_id',  Auth::user()->id)
+                                ->orderBy('created_at', 'desc')
+                                ->get();
         $risquesData = [];
 
         foreach ($processus as $processu) {

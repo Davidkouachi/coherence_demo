@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationAmnew;
-
 use App\Models\Processuse;
 use App\Models\Objectif;
 use App\Models\Resva;

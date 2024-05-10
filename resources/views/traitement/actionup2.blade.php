@@ -303,12 +303,6 @@
                                                                     <div class="form-control-wrap ">
                                                                         <input value="{{ $risque->cout }}" name="cout" type="tel" class="form-control text-center" id="cout">
                                                                     </div>
-                                                                    <script>
-                                                                        var inputElement = document.getElementById('cout');
-                                                                                inputElement.addEventListener('input', function() {
-                                                                                    this.value = this.value.replace(/[^0-9]/g, '');
-                                                                                });
-                                                                        </script>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -444,12 +438,6 @@
                                                                 <div class="form-control-wrap">
                                                                     <input value="{{ $risque->cout_residuel }}" name="cout_residuel" type="tel" class="form-control text-center" id="cout_residuel">
                                                                 </div>
-                                                                <script>
-                                                                    var inputElement = document.getElementById('cout_residuel');
-                                                                                    inputElement.addEventListener('input', function() {
-                                                                                    this.value = this.value.replace(/[^0-9]/g, '');
-                                                                                });
-                                                                            </script>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
@@ -1037,70 +1025,40 @@
     });
 </script>
 
-<script>
-    const fileInput = document.getElementById('fileInput');
-    const pdfPreview = document.getElementById('pdfPreview');
-    const fileSizeElement = document.getElementById('fileSize');
-
-    var pdfFiles = @json($pdfFiles);
-    var pdfFiles2 = @json($pdfFiles2);
-
-    fileInput.addEventListener('change', function() {
-        // Initialiser la variable trouver
-        let trouver = 0;
-
-        var selectedFileName = this.value.split('\\').pop(); // Récupérer le nom du fichier sélectionné
-
-        // Parcourir la liste des fichiers
-        pdfFiles.forEach(function(pdfFile) {
-            if (selectedFileName === pdfFile.pdf_nom) {
-                NioApp.Toast("<h5>Erreur</h5><p>Ce fichier PDF existe déjà.", "error", {position: "top-right"});
-
-                fileInput.value = ''; // Vider l'input
-
-                trouver = 1;
-                
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
-        });
-        pdfFiles2.forEach(function(pdfFile2) {
-            if (selectedFileName === pdfFile2.pdf_nom) {
-
-                NioApp.Toast("<h5>Erreur</h5><p>Ce fichier PDF existe déjà.", "error", {position: "top-right"});
-
-                fileInput.value = ''; // Vider l'input
-                trouver = 1;
-                    
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
-        });
-
-        // Vérifier la valeur de trouver avant de procéder
-        if (trouver === 0) {
-            // Obtenez le fichier PDF sélectionné
-            const fichier = fileInput.files[0];
-
-            // Vérifiez si un fichier a été sélectionné
-            if (fichier) {
-                // Créez un élément d'incorporation pour le fichier PDF
-                const embedElement = document.createElement('embed');
-                embedElement.src = URL.createObjectURL(fichier);
-                embedElement.type = 'application/pdf';
-                embedElement.style.width = '100%';
-                embedElement.style.height = '100%';
-                // Affichez l'élément d'incorporation dans la div de prévisualisation
-                pdfPreview.innerHTML = '';
-                pdfPreview.appendChild(embedElement);
-                // Affichez la taille du fichier
-                const fileSize = fichier.size; // Taille du fichier en octets
-                const fileSizeInKB = fileSize / 1024; // Taille du fichier en kilo-octets
-                fileSizeElement.textContent = `Taille du fichier : ${fileSizeInKB.toFixed(2)} Ko`;
-            }
+    <script>
+        // Fonction pour formater le prix avec des points
+        function formatPrice(input) {
+            // Supprimer tous les points existants
+            input = input.replace(/\./g, '');
+            
+            // Formater le prix avec des points
+            return input.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
-    });
-</script>
+
+        // Écouter l'événement d'entrée sur les champs de texte
+        document.getElementById('cout').addEventListener('input', function() {
+            this.value = formatPrice(this.value);
+        });
+
+        document.getElementById('cout_residuel').addEventListener('input', function() {
+            this.value = formatPrice(this.value);
+        });
+
+        // Événement pour permettre uniquement les chiffres
+        document.getElementById('cout').addEventListener('keypress', function(event) {
+            const key = event.key;
+            if (isNaN(key)) {
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById('cout_residuel').addEventListener('keypress', function(event) {
+            const key = event.key;
+            if (isNaN(key)) {
+                event.preventDefault();
+            }
+        });
+    </script>
 
 @endsection
 

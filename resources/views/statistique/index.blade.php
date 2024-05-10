@@ -213,18 +213,6 @@
                                                 }
                                             });
                                         </script>
-
-                                        <!--<div class="card-amount">
-                                            <div >
-                                                <a class="btn btn-outline-warning btn-dim">
-                                                    <span  class="me-2" >Détails</span>
-                                                    <span>
-                                                        <em class="ni ni-chevron-right-circle" > </em>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>-->
-
                                     </div>
                                 </div>
                             </div>
@@ -302,16 +290,6 @@
                                             }
                                         });
                                     </script>
-                                    <!--<div class="card-amount">
-                                                                    <div >
-                                                                        <a class="btn btn-outline-warning btn-dim">
-                                                                            <span  class="me-2" >Détails</span>
-                                                                            <span>
-                                                                                <em class="ni ni-chevron-right-circle" > </em>
-                                                                            </span>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>-->
                                 </div>
                             </div>
                         </div>
@@ -384,10 +362,6 @@
                                                 <span class="me-2">
                                                 Quelques Risques
                                                 </span>
-                                                <!--<a href="{{ route('index_liste_risque') }}" class="btn btn-outline-warning btn-dim">
-                                                    <em class="me-1" >Voir Plus</em>
-                                                    <em class="ni ni-eye"></em>
-                                                </a>-->
                                             </h6>
                                         </div>
                                         <div class="card-tools">
@@ -404,13 +378,10 @@
                                                                 const selectDevice = document.getElementById('device');
                                                                 
                                                                 selectDevice.addEventListener('change', function() {
-                                                                    // Récupérez la valeur sélectionnée
                                                                     document.querySelectorAll('[id^="device_data_"]').forEach(function(element) {
                                                                         element.textContent = selectDevice.value;
                                                                     });
                                                                 });
-
-                                                                // Mettez à jour une fois lors du chargement initial
                                                                 document.querySelectorAll('[id^="device_data_"]').forEach(function(element) {
                                                                     element.textContent = selectDevice.value;
                                                                 });
@@ -469,12 +440,8 @@
                                                 @endif
                                             </div>
                                             <div class="nk-tb-col ">
-                                                <span class="tb-sub tb-amount">
-                                                    @php
-                                                        $cout = $risque_limit->cout_residuel;
-                                                        $formatcommande = number_format($cout, 0, '.', '.');
-                                                    @endphp             
-                                                    {{ $formatcommande }} <span id="device_data_{{$risque_limit->id}}"></span>
+                                                <span class="tb-sub tb-amount">            
+                                                    {{ $risque_limit->cout_residuel }} <span id="device_data_{{$risque_limit->id}}"></span>
                                                 </span>
                                             </div>
                                             <div class="nk-tb-col ">
@@ -525,10 +492,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Appeler la fonction de recherche au chargement de la page
+
         searchProcessus();
 
-        // Écouteur pour le changement de sélection
         document.getElementById('selectProcessus').addEventListener('change', function(){
             searchProcessus();
         });
@@ -542,13 +508,8 @@
                     success: function (data) {
                         addGroups(selectedProcessus, data);
                     },
-                    /*error: function () {
-                        toastr.info("Aucune données n'a été trouver.");
-                    }*/
                 });
-            } /*else {
-                toastr.warning("Veuillez selectionner un processus.");
-            }*/
+            } 
         }
 
         function addGroups(selectedProcessus, data) {
@@ -644,13 +605,8 @@
                     success: function (data) {
                         addGroups(selectRisque, data);
                     },
-                    /*error: function () {
-                        toastr.info("Aucune données n'a été trouver.");
-                    }*/
                 });
-            } /*else {
-                toastr.warning("Veuillez selectionner un risque.");
-            }*/
+            } 
         }
 
         function addGroups(selectRisque, data) {
@@ -745,20 +701,16 @@
             $.ajax({
                 url: '/get_date',
                 method: 'GET',
-                data: { date1: date1, date2: date2 }, // Pass date1 and date2 to the server
+                data: { date1: date1, date2: date2 },
                 success: function (data) {
                     addGroups(data);
                 },
-                /*error: function () {
-                    toastr.error("Une erreur s'est produite lors de la récupération des informations.");
-                }*/
             });
         }
 
         function addGroups(data) {
             var dynamicFields = document.getElementById("camenber2");
 
-            // Supprimer le contenu existant
             while (dynamicFields.firstChild) {
                 dynamicFields.removeChild(dynamicFields.firstChild);
             }

@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
-
-use App\Events\NotificationAup;
-use App\Events\NotificationRisqueup;
 
 use App\Models\Processuse;
 use App\Models\Objectif;
@@ -40,6 +36,7 @@ class ListerisqueController extends Controller
                 ->where('page', '!=', 'am')
                 ->where('user_id',  Auth::user()->id)
                 ->select('risques.*','postes.nom as validateur')
+                ->orderBy('created_at', 'desc')
                 ->get();
 
         $causesData = [];
@@ -148,6 +145,7 @@ class ListerisqueController extends Controller
                 ->where('page', '!=', 'am')
                 ->where('risques.user_id',  Auth::user()->id)
                 ->select('risques.*','processuses.nom as processus', 'rejets.motif as motif')
+                ->orderBy('updated_at', 'desc')
                 ->get();
 
         foreach ($risques as $risque) {

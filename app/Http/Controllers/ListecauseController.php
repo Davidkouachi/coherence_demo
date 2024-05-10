@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationAmnew;
-
 use App\Models\Processuse;
 use App\Models\Objectif;
 use App\Models\Resva;
@@ -42,6 +39,7 @@ class ListecauseController extends Controller
                         ->where('causes.page', 'risk')
                         ->where('risques.user_id',  Auth::user()->id)
                         ->select('causes.*','risques.nom as risque', 'risques.statut as statut', 'processuses.nom as processus')
+                        ->orderBy('created_at', 'desc')
                         ->get();
 
         $nbre_total = Amelioration::all()->count();

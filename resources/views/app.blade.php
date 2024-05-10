@@ -9,7 +9,7 @@
     <meta content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers." name="description">
     <link href="images/logo.png" rel="shortcut icon">
     <title>@yield('titre')</title>
-    <link href="assets/css/dashlite0226.css?" rel="stylesheet">
+    <link href="assets/css/dashlite0226.css" rel="stylesheet">
     <link href="assets/css/theme0226.css" rel="stylesheet">
     <script src="{{asset('chart.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
@@ -162,15 +162,12 @@
                                             </a>
                                         </li>
                                         <li >
-                                            <a class="nk-menu-link" @if(session('user_poste')->nom === 'pro') href="{{ route('index_color_risk') }}" @else href="#" @endif >
+                                            <a class="nk-menu-link" href="{{ route('index_color_risk') }}" >
                                                 <span class="nk-menu-icon" >
                                                     <em class="ni ni-opt-dot-alt"></em>
                                                 </span>
                                                 <span class="nk-menu-text me-4">
                                                     Paramètrage des couleurs
-                                                </span>
-                                                <span class="nk-menu-badge bg-danger text-white">
-                                                    pro
                                                 </span>
                                             </a>
                                         </li>
@@ -363,23 +360,10 @@
                                                         {{ Auth::user()->email }}
                                                     </span>
                                                 </div>
-                                                <!--<div class="user-action">
-                                                    <a class="btn btn-icon me-n2" href="user-profile-setting.html">
-                                                        <em class="icon ni ni-setting"></em>
-                                                    </a>
-                                                </div>-->
                                             </div>
                                         </div>
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <!--<li>
-                                                    <a href="{{ route('index_accueil') }}">
-                                                        <em class="icon ni ni-home"></em>
-                                                        <span>
-                                                            Accueil
-                                                        </span>
-                                                    </a>
-                                                </li>-->
                                                 <li>
                                                     <a href="{{ route('index_profil') }}">
                                                         <em class="icon ni ni-user-alt"></em>
@@ -398,14 +382,6 @@
                                                     </a>
                                                 </li>
                                                 @endif
-                                                <!--<li>
-                                                    <a>
-                                                        <em class="icon ni ni-activity-alt"></em>
-                                                        <span>
-                                                            Activité
-                                                        </span>
-                                                    </a>
-                                                </li>-->
                                             </ul>
                                         </div>
                                         <div class="dropdown-inner">
@@ -435,7 +411,8 @@
                 <div class="container-fluid">
                     <div class="nk-footer-wrap">
                         <div class="nk-footer-copyright">
-                            <span>© 2024 Cohérence.</span>
+                            <span>
+                                © <script>document.write(new Date().getFullYear())</script> Cohérence.</span>
                             <span><img height="30" width="30" src="/images/logo.png" alt="" class="me-5"></span>
                             <span id="anime" class="badge rounded bg-warning">Version Démo</span>
                         </div>
@@ -554,25 +531,25 @@
 
     @if (session('success'))
         <script>
-            NioApp.Toast("<h5>Succès</h5><p>{{ session('success') }}.", "success", {position: "top-right"});
+            NioApp.Toast("<h5>Succès</h5><p>{{ session('success') }}.</p>", "success", {position: "top-right"});
         </script>
         {{ session()->forget('success') }}
     @endif
     @if (session('error'))
         <script>
-            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
+            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.</p>", "error", {position: "top-right"});
         </script>
         {{ session()->forget('error') }}
     @endif
     @if (session('warning'))
         <script>
-            NioApp.Toast("<h5>Alert</h5><p>{{ session('warning') }}.", "warning", {position: "top-right"});
+            NioApp.Toast("<h5>Alert</h5><p>{{ session('warning') }}.</p>", "warning", {position: "top-right"});
         </script>
         {{ session()->forget('warning') }}
     @endif
     @if (session('info'))
         <script>
-            NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.", "info", {position: "top-right"});
+            NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.</p>", "info", {position: "top-right"});
         </script>
         {{ session()->forget('info') }}
     @endif

@@ -18,8 +18,6 @@ use App\Models\User;
 use App\Models\Historique_action;
 use App\Models\Amelioration;
 
-use App\Events\NotificationApreventive;
-
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 

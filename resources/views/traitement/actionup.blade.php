@@ -103,7 +103,6 @@
                                                     <thead>
                                                         <tr>
                                                             <th></th>
-                                                            <th>Processus</th>
                                                             <th>Risque</th>
                                                             <th>Evaluation</th>
                                                             <th>Date de création</th>
@@ -114,7 +113,6 @@
                                                         @foreach ($risques as $key => $risque)
                                                             <tr>
                                                                 <td>{{ $key+1 }}</td>
-                                                                <td>{{ $risque->processus }}</td>
                                                                 <td>{{ $risque->nom }}</td>
                                                                 @php
                                                                     $colorMatchFound = false;
@@ -230,30 +228,5 @@
             </div>
         </div>
     @endforeach
-
-    <script>
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('9f9514edd43b1637ff61', {
-          cluster: 'eu'
-        });
-
-        var channel = pusher.subscribe('my-channel-action-non-valider');
-        channel.bind('my-event-action-non-valider', function(data) {
-            Swal.fire({
-                        title: "Alert!",
-                        text: "Nouveau(x) Risque(s) à Modifier",
-                        icon: "info",
-                        confirmButtonColor: "#00d819",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-        });
-    </script>
-
 
 @endsection

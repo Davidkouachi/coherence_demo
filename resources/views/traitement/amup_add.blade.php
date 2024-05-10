@@ -334,12 +334,8 @@
                                                                             <label class="form-label" for="controle">
                                                                                 Coût
                                                                             </label>
-                                                                            @php
-                                                                            $cout = $risque->cout;
-                                                                            $formatcommande = number_format($cout, 0, '.', '.');
-                                                                            @endphp
                                                                             <div class="form-control-wrap">
-                                                                                <input value="{{ $formatcommande }} Fcfa" readonly type="text" class="form-control" id="controle">
+                                                                                <input value="{{ $risque->cout }} Fcfa" readonly type="text" class="form-control" id="controle">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -443,12 +439,8 @@
                                                                             <label class="form-label" for="controle">
                                                                                 Coût
                                                                             </label>
-                                                                            @php
-                                                                            $cout2 = $risque->cout_residuel;
-                                                                            $formatcommande2 = number_format($cout2, 0, '.', '.');
-                                                                            @endphp
                                                                             <div class="form-control-wrap">
-                                                                                <input value="{{ $formatcommande2 }} Fcfa" readonly type="text" class="form-control" id="controle">
+                                                                                <input value="{{ $risque->cout_residuel }} Fcfa" readonly type="text" class="form-control" id="controle">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -669,12 +661,8 @@
                                                                             <label class="form-label" for="controle">
                                                                                 Coût
                                                                             </label>
-                                                                            @php
-                                                                            $cout2 = $causes_select->cout;
-                                                                            $formatcommande2 = number_format($cout2, 0, '.', '.');
-                                                                            @endphp
                                                                             <div class="form-control-wrap">
-                                                                                <input value="{{ $formatcommande2 }} Fcfa" readonly type="text" class="form-control" id="controle">
+                                                                                <input value="{{ $causes_select->cout }} Fcfa" readonly type="text" class="form-control" id="controle">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -778,12 +766,8 @@
                                                                             <label class="form-label" for="controle">
                                                                                 Coût
                                                                             </label>
-                                                                            @php
-                                                                            $cout2 = $causes_select->cout_residuel;
-                                                                            $formatcommande2 = number_format($cout2, 0, '.', '.');
-                                                                            @endphp
                                                                             <div class="form-control-wrap">
-                                                                                <input value="{{ $formatcommande2 }} Fcfa" readonly type="text" class="form-control" id="controle">
+                                                                                <input value="{{ $causes_select->cout_residuel }} Fcfa" readonly type="text" class="form-control" id="controle">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -897,18 +881,14 @@
 
 <script>
     $(document).ready(function() {
-        // Écoutez l'événement de changement de l'élément select
+       
         $('#risqueSelect').on('change', function() {
-            // Récupérez la valeur sélectionnée
             var selectedValue = $(this).val();
-            // Fermez tous les modals existants
             $('.modal').modal('hide');
-            $(`#modalVurisque${selectedValue}`).modal('hide');
-            // Ouvrez le modal correspondant à la valeur sélectionnée
             $(`#modalVurisque${selectedValue}`).modal('show');
 
             var dynamicFields = document.getElementById("dynamic-fields");
-            // Supprimer le contenu existant
+            
             while (dynamicFields.firstChild) {
                 dynamicFields.removeChild(dynamicFields.firstChild);
             }
@@ -919,18 +899,14 @@
 
 <script>
     $(document).ready(function() {
-        // Écoutez l'événement de changement de l'élément select
+        
         $('#causeSelect').on('change', function() {
-            // Récupérez la valeur sélectionnée
+            
             var selectedValu = $(this).val();
-            // Fermez tous les modals existants
             $('.modal').modal('hide');
-            $(`#modalVucause${selectedValu}`).modal('hide');
-            // Ouvrez le modal correspondant à la valeur sélectionnée
             $(`#modalVucause${selectedValu}`).modal('show');
 
             var dynamicFields = document.getElementById("dynamic-fields");
-            // Supprimer le contenu existant
             while (dynamicFields.firstChild) {
                 dynamicFields.removeChild(dynamicFields.firstChild);
             }
@@ -954,7 +930,7 @@
                 var choixSelect = $("input[name='choix_select']:checked").val();
 
                 if (choixSelect !== undefined) {
-                    // Faites quelque chose avec la valeur sélectionnée
+                    
                     if (choixSelect === "cause") {
                         if (selectedCause !== '') {
                             $.ajax({
@@ -962,15 +938,15 @@
                                 method: 'GET',
                                 success: function(data) {
                                     var nbre = data.nbre;
-                                    NioApp.Toast("<h5>Information</h5><p>" + nbre + " Action(s) trouvée(s).", "info", {position: "top-right"});
+                                    NioApp.Toast("<h5>Information</h5><p>" + nbre + " Action(s) trouvée(s).</p>", "info", {position: "top-right"});
                                     addGroups_non_accepte(type, data);
                                 },
                                 error: function() {
-                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.", "error", {position: "top-right"});
+                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"});
                                 }
                             });
                         } else {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.", "warning", {position: "top-right"});
+                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>", "warning", {position: "top-right"});
                         }
                     } else if (choixSelect === "risque") {
                         if (selectedRisque !== '') {
@@ -979,19 +955,19 @@
                                 method: 'GET',
                                 success: function(data) {
                                     var nbre = data.nbre;
-                                    NioApp.Toast("<h5>Information</h5><p>"+nbre+" Action(s) trouvée(s).", "info", {position: "top-right"});
+                                    NioApp.Toast("<h5>Information</h5><p>"+nbre+" Action(s) trouvée(s).</p>", "info", {position: "top-right"});
                                     addGroups_non_accepte(type, data);
                                 },
                                 error: function() {
-                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.", "error", {position: "top-right"});
+                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"});
                                 }
                             });
                         } else {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.", "warning", {position: "top-right"});
+                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>", "warning", {position: "top-right"});
                         }
                     }
                 } else {
-                    NioApp.Toast("<h5>Erreur</h5><p>Veuillez préciser le choix de sélection.", "error", {position: "top-right"});
+                    NioApp.Toast("<h5>Erreur</h5><p>Veuillez préciser le choix de sélection.</p>", "error", {position: "top-right"});
                 }
             });
         });

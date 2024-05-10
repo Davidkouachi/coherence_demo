@@ -42,6 +42,7 @@
                                                     <th>Action</th>
                                                     <th>Risque</th>
                                                     <th>Processus</th>
+                                                    <th>Date de validation</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -52,6 +53,8 @@
                                                         <td>{{ $action->action }}</td>
                                                         <td>{{ $action->risque }}</td>
                                                         <td>{{ $action->processus }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($action->date_validation)->translatedFormat('j F Y '.' à '.' H:i:s') }}
+                                                        </td>
                                                         <td>
                                                             <a data-bs-toggle="modal"
                                                                 data-bs-target="#modalDetail{{ $action->id }}"
@@ -191,30 +194,5 @@
             </div>
         </div>
     @endforeach
-
-    <script>
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('9f9514edd43b1637ff61', {
-          cluster: 'eu'
-        });
-
-        var channel = pusher.subscribe('my-channel-ap');
-        channel.bind('my-event-ap', function(data) {
-            Swal.fire({
-                        title: "Alert!",
-                        text: "Nouvelle(s) action(s) préventive(s)",
-                        icon: "info",
-                        confirmButtonColor: "#00d819",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-        });
-    </script>
-
 
 @endsection

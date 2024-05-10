@@ -5,16 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationApreventive;
-use App\Events\NotificationAnon;
-use App\Events\NotificationProcessus;
-use App\Events\NotificationRisque;
-use App\Events\NotificationAup;
-use App\Events\NotificationAmvalider;
-use App\Events\NotificationAmcorrective;
-use App\Events\NotificationAmrejet;
-
 use App\Models\Processuse;
 use App\Models\Amelioration;
 use App\Models\Objectif;
@@ -50,6 +40,7 @@ class ListeamController extends Controller
                             ->orWhere('statut', '=', 'modif')
                             ->orWhere('statut', '=', 'soumis')
                             ->where('user_id',  Auth::user()->id)
+                            ->orderBy('created_at', 'desc')
                             ->get();
 
         $actionsData = [];
@@ -95,6 +86,7 @@ class ListeamController extends Controller
         $ams = Amelioration::where('statut', 'non-valider')
                            ->orWhere('statut', 'modif')
                            ->where('user_id',  Auth::user()->id)
+                           ->orderBy('updated_at', 'desc')
                            ->get();
 
         $actionsData = [];
@@ -171,6 +163,8 @@ class ListeamController extends Controller
                                     ->select('actions.*', 'postes.id as poste_id', 'processuses.id as processus_id', 'risques.nom as risque', 'causes.nom as cause')
                                     ->first();
 
+                        $am->nom_cause = $action->cause;
+
                         if ($action) {
                             $actionsDatam[$am->id][] = [
                                 'action' => $action->action,
@@ -192,6 +186,8 @@ class ListeamController extends Controller
                                     ->where('actions.id', '=', $suivis->action_id)
                                     ->select('actions.*', 'postes.id as poste_id', 'processuses.id as processus_id', 'risques.nom as risque')
                                     ->first();
+
+                        $am->nom_risque = $action->risque;
 
                         if ($action) {
                             $actionsDatam[$am->id][] = [

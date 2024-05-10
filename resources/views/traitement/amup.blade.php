@@ -212,28 +212,4 @@
         </div>
     @endforeach
 
-    <script>
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('9f9514edd43b1637ff61', {
-          cluster: 'eu'
-        });
-
-        var channel = pusher.subscribe('my-channel-am-rejet');
-        channel.bind('my-channel-am-rejet', function(data) {
-            Swal.fire({
-                        title: "Alert!",
-                        text: "Nouvelle(s) fiche(s) détectée(s)",
-                        icon: "info",
-                        confirmButtonColor: "#00d819",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-        });
-    </script>
-
 @endsection

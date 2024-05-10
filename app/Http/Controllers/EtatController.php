@@ -5,12 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationApreventive;
-use App\Events\NotificationAnon;
-use App\Events\NotificationProcessus;
-use App\Events\NotificationRisque;
-
 use App\Models\Processuse;
 use App\Models\Objectif;
 use App\Models\Risque;
@@ -38,8 +32,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 use PDF;
-
-/*use Barryvdh\DomPDF\Facade\Pdf;*/
 
 class EtatController extends Controller
 {

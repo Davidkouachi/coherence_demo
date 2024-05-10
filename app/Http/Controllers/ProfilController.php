@@ -6,13 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationApreventive;
-use App\Events\NotificationAnon;
-use App\Events\NotificationProcessus;
-use App\Events\NotificationRisque;
-use App\Events\NotificationAup;
-
 use App\Models\Processuse;
 use App\Models\Objectif;
 use App\Models\Risque;

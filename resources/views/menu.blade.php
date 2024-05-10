@@ -27,14 +27,14 @@
                             <div class="col-md-12 col-xxl-12 mb-0" >
                                 <div class="card card-preview" style="background: transparent;">
                                     <div class="card-inner text-center">
-                                        <img height="10%" width="10%" src="{{asset('images/logo.png')}}" alt="">
+                                        <img height="150px" width="185px" src="{{asset('images/logo.png')}}" alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-xxl-12 mt-0" >
                                 <div class="card card-preview" style="background: transparent;">
                                     <div class="card-inner text-center">
-                                        <label class="form-label" style="font-size: 40px;">
+                                        <label class="form-label" style="font-size: 20px;">
                                             <span>Coherence - risk - CRM</span>
                                         </label>
                                     </div>
@@ -42,203 +42,194 @@
                             </div>
                         </form>
                     </div>
+
                     <div class="nk-block">
-                        <div class="row g-gs align-items-center justify-content-center">
-                            <div class="col-lg-6 col-xxl-4">
-                                <div class="card card-bordered pricing recommend">
-                                    <div class="pricing-head">
-                                        <div class="pricing-title">
-                                            <h4 class="card-title title text-warning fw-bold">Démo</h4>
-                                        </div>
-                                    </div>
-                                    <div class="pricing-body">
-                                        <ul class="pricing-features">
-                                            <li>
-                                                <span class="w-50">Nombre de processus</span> - 
-                                                <span class="ms-auto ">
-                                                    2
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Evaluation des processus</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Nombre de risques</span> - 
-                                                <span class="ms-auto ">
-                                                    2
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Validation des risques</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Mise à jour des risques</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Nombre d'incidents</span> - 
-                                                <span class="ms-auto ">
-                                                    2
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Validation des incidents</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Mise à jour des incidents</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Paramétrage des couleurs</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Suivi des actions</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Alert instantanée à l'écran</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Notification par Email ou SMS</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Gestion des utilisateurs</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-cross text-danger fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                        <div class="pricing-action">
-                                            <span class="badge badge-dot bg-primary">Actuel</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-xxl-4">
-                                <div class="card card-bordered pricing recommend"><span class="pricing-badge badge bg-success">Recommendé</span>
-                                    <div class="pricing-head">
-                                        <div class="pricing-title">
-                                            <h4 class="card-title title text-danger fw-bold">Pro</h4>
-                                        </div>
-                                    </div>
-                                    <div class="pricing-body">
-                                        <ul class="pricing-features">
-                                            <li>
-                                                <span class="w-50">Nombre de processus</span> - 
-                                                <span class="ms-auto text-success">
-                                                    illimité
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Evaluation des processus</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Nombre de risques</span> - 
-                                                <span class="ms-auto text-success">
-                                                    illimité
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Validation des risques</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Mise à jour des risques</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Nombre d'incidents</span> - 
-                                                <span class="ms-auto text-success">
-                                                    illimité
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Validation des incidents</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Mise à jour des incidents</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Paramétrage des couleurs</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Suivi des actions</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Alert instantanée à l'écran</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Notification par Email ou SMS</span> - 
-                                                <span class="ms-auto text-success">
-                                                    illimité
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="w-50">Gestion des utilisateurs</span> - 
-                                                <span class="ms-auto">
-                                                    <em class="ni ni-check text-success fw-bold" ></em>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                        <div class="pricing-action">
-                                            <span class="w-50 fw-bold">
-                                                Pour plus d'infos : 
-                                                <span>
-                                                    +225 0715778107 / +225 0140073501
-                                                </span> 
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card card-bordered">
+                            <table class="table table-features">
+                                <thead class="tb-ftr-head table-light">
+                                    <tr class="tb-ftr-item">
+                                        <th class="tb-ftr-info">
+                                            Fonctionnalité
+                                        </th>
+                                        <th class="tb-ftr-plan">
+                                            <span class="text-warning" >Démo</span>
+                                        </th>
+                                        <th class="tb-ftr-plan">
+                                            <span class="text-danger">Pro</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb-ftr-body">
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Validation des risques et des incidents
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Gestion des utilisateurs
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Notification par Email ou SMS
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Alert instantanée à l'écran
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Suivi des actions
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Paramétrage des couleurs
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Mise à jour des risques et des incidents
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Evaluation des processus
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-cross text-danger">
+                                            </em>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <em class="icon ni ni-check-thick text-success">
+                                            </em>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <thead class="tb-ftr-head table-light">
+                                    <tr class="tb-ftr-item">
+                                        <th class="tb-ftr-info">
+                                            Nombre d'enregistrements
+                                        </th>
+                                        <th class="tb-ftr-plan">
+                                            
+                                        </th>
+                                        <th class="tb-ftr-plan">
+                                            
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb-ftr-body">
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Nombre de processus
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <span class="text-warning">02</span>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <span class="text-success">illimité</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Nombre de risque
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <span class="text-warning">02</span>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <span class="text-success">illimité</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="tb-ftr-item">
+                                        <td class="tb-ftr-info">
+                                            Nombre d'incident
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <span class="text-warning">02</span>
+                                        </td>
+                                        <td class="tb-ftr-plan">
+                                            <span class="text-success">illimité</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <thead class="tb-ftr-head table-light">
+                                    <tr class="tb-ftr-item">
+                                        <th class="tb-ftr-info">
+                                            Pour plus d'infos : +225 0715778107 / +225 0140073501
+                                        </th>
+                                        <th class="tb-ftr-plan">
+                                            
+                                        </th>
+                                        <th class="tb-ftr-plan">
+                                            
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

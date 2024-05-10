@@ -166,7 +166,7 @@
         </div>
     </div>
 
-@foreach ($processus as $processu)
+    @foreach ($processus as $processu)
         <div class="modal fade zoom" tabindex="-1" id="modalDetail{{$processu->id}}">
             <div class="modal-dialog modal-sm" role="document" style="width: 75%;">
                 <div class="modal-content">

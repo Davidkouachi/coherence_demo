@@ -45,6 +45,7 @@
                                                     <th>Responsable</th>
                                                     <th>Délai</th>
                                                     <th>Statut</th>
+                                                    <th>Date de création</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -86,6 +87,8 @@
                                                                 </td>
                                                             @endif
                                                         @endif
+                                                        <td>{{ \Carbon\Carbon::parse($action->created_at)->translatedFormat('j F Y '.' à '.' H:i:s') }}
+                                                        </td>
                                                         <td>
                                                             <div class="d-flex" >
                                                                 <form method="post" action="{{ route('index_etat_actionp') }}">
@@ -96,11 +99,6 @@
                                                                         href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-warning border border-1 border-white rounded">
                                                                         <em class="icon ni ni-eye"></em>
                                                                     </a>
-                                                                    <!--<a data-bs-toggle="modal"
-                                                                        data-bs-target="#modalModif{{$action->id}}"
-                                                                        href="#" class="btn btn-icon btn-white btn-dim btn-sm btn-info border border-1 border-white rounded">
-                                                                        <em class="icon ni ni-edit"></em>
-                                                                    </a>-->
                                                                     <button class="btn btn-icon btn-white btn-dim btn-sm btn-primary">
                                                                         <em class="icon ni ni-printer-fill"></em>
                                                                     </button>
@@ -358,30 +356,5 @@
             </div>
         </div>
     @endforeach
-
-    <script>
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('9f9514edd43b1637ff61', {
-          cluster: 'eu'
-        });
-
-        var channel = pusher.subscribe('my-channel-ap');
-        channel.bind('my-event-ap', function(data) {
-            Swal.fire({
-                        title: "Alert!",
-                    text: "Nouvelle(s) Action(s)",
-                        icon: "info",
-                        confirmButtonColor: "#00d819",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-        });
-    </script>
-
 
 @endsection

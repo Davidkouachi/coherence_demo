@@ -121,7 +121,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
-            // When the email button is clicked
+
             document.getElementById("btn_email").addEventListener("click", function(event) {
                 event.preventDefault();
 
@@ -129,7 +129,7 @@
 
                 var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
-                    NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.", "info", {position: "top-right"});
+                    NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.</p>", "info", {position: "top-right"});
                     return false;
                 }
 
@@ -146,11 +146,11 @@
 
                             if (user === 1) {
 
-                                NioApp.Toast("<h5>Succès</h5><p>Mot de passe envoyé.Veuillez vous connecté a nouveau.", "success", {position: "top-right"});
+                                NioApp.Toast("<h5>Succès</h5><p>Mot de passe envoyé.Veuillez vous connecté a nouveau.</p>", "success", {position: "top-right"});
 
                             } else {
 
-                                NioApp.Toast("<h5>Alert</h5><p>Aucun compte n'est associé a ce email.", "warning", {position: "top-right"});
+                                NioApp.Toast("<h5>Alert</h5><p>Aucun compte n'est associé a ce email.</p>", "warning", {position: "top-right"});
                             }
 
                             $('.modal').modal('hide');
@@ -159,7 +159,7 @@
                         },
                         error: function() {
 
-                            NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la vérification de l'email.", "error", {position: "top-right"});
+                            NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la vérification de l'email.</p>", "error", {position: "top-right"});
 
                             $('.modal').modal('hide');
                             $(`#modalmdp`).modal('hide');
@@ -168,7 +168,7 @@
 
                 } else {
 
-                    NioApp.Toast("<h5>Alert</h5><p>Veuillez saisir votre Email s'il vous plait !!!.", "warning", {position: "top-right"});
+                    NioApp.Toast("<h5>Alert</h5><p>Veuillez saisir votre Email s'il vous plait !!!.</p>", "warning", {position: "top-right"});
                 }
 
             });

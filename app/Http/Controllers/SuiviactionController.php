@@ -19,8 +19,6 @@ use App\Models\User;
 use App\Models\Historique_action;
 use App\Models\Amelioration;
 
-use App\Events\NotificationApreventive;
-
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
@@ -37,6 +35,7 @@ class SuiviactionController extends Controller
                 ->where('suivi_actions.statut', 'non-realiser')
                 ->where('actions.type', 'preventive')
                 ->select('actions.*','postes.nom as responsable','risques.nom as risque' ,'risques.date_validation as date_validation' ,'processuses.nom as processus','risques.date_validation as date_validation')
+                ->orderBy('date_validation', 'desc')
                 ->get();
 
         return view('traitement.suiviaction',  ['actions' => $actions]);

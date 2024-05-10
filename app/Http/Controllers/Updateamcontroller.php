@@ -5,16 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationApreventive;
-use App\Events\NotificationAnon;
-use App\Events\NotificationProcessus;
-use App\Events\NotificationRisque;
-use App\Events\NotificationAup;
-use App\Events\NotificationAmvalider;
-use App\Events\NotificationAmcorrective;
-use App\Events\NotificationAmrejet;
-
 use App\Models\Processuse;
 use App\Models\Amelioration;
 use App\Models\Objectif;
@@ -110,6 +100,7 @@ class Updateamcontroller extends Controller
                     $risquee->page = 'am';
                     $risquee->processus_id = $processus_id1[$index];
                     $risquee->poste_id = $poste_id1[$index];
+                    $risquee->user_id = Auth::user()->id;
                     $risquee->save();
 
                     $cause = new Cause();

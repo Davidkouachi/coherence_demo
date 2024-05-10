@@ -5,13 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationApreventive;
-use App\Events\NotificationAnon;
-use App\Events\NotificationProcessus;
-use App\Events\NotificationRisque;
-use App\Events\NotificationAup;
-
 use App\Models\Processuse;
 use App\Models\Objectif;
 use App\Models\Risque;
@@ -214,6 +207,7 @@ class RisqueController extends Controller
                 ->where('page', '=', 'risk')
                 ->where('user_id',  Auth::user()->id)
                 ->select('risques.*','postes.nom as validateur')
+                ->orderBy('created_at', 'desc')
                 ->get();
 
         $causesData = [];
@@ -334,8 +328,6 @@ class RisqueController extends Controller
                 }
             }
 
-            event(new NotificationApreventive());
-
             return redirect()
                     ->back()
                     ->with('success', 'Validation éffectuée.');
@@ -378,8 +370,6 @@ class RisqueController extends Controller
                 $his->nom_action = 'Rejet';
                 $his->user_id = Auth::user()->id;
                 $his->save();
-
-                event(new NotificationAnon());
 
                 return redirect()
                         ->back()

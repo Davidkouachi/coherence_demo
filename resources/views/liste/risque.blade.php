@@ -104,10 +104,6 @@
                                                         <tr>
                                                             <th></th>
                                                             <th>Risque</th>
-                                                            <th>Processus</th>
-                                                            <!--<th>Nombre de cause</th>
-                                                            <th>Nombre d'action Préventive</th>
-                                                            <th>Nombre d'action Corrective</th>-->
                                                             <th>Evaluation</th>
                                                             <th>Coût</th>
                                                             <th>Statut</th>
@@ -131,12 +127,6 @@
                                                             <tr>
                                                                 <td>{{ $key+1 }}</td>
                                                                 <td>{{ $risque->nom }}</td>
-                                                                <td>{{ $risque->nom_processus }}</td>
-                                                                <!--<td>{{ $risque->nbre_cause }}</td>
-                                                                <td>{{ $risque->nbre_actionp }}</td>
-                                                                <td>{{ $risque->nbre_actionc }}</td>-->
-                                                                <!--<td>{{ $risque->vraisemblence_residuel }}</td>
-                                                                <td>{{ $risque->gravite_residuel }}</td>-->
                                                                 @php
                                                                     $colorMatchFound = false;
                                                                 @endphp
@@ -158,18 +148,13 @@
                                                                 @endforeach
 
                                                                 @if(!$colorMatchFound)
-                                                                    <!-- Afficher un message si aucune correspondance n'a été trouvée -->
                                                                     <td>
                                                                         <div class="user-avatar sm" style="background-color:#8e8e8e;"></div>
                                                                     </td>
                                                                 @endif
 
                                                                 <td>
-                                                                    @php
-                                                                        $cout = $risque->cout_residuel;
-                                                                        $formatcommande = number_format($cout, 0, '.', '.');
-                                                                    @endphp
-                                                                    {{ $formatcommande }} Fcfa
+                                                                    {{ $risque->cout_residuel }} Fcfa
                                                                 </td>
                                                                 @if ($risque->statut === 'soumis')
                                                                     <td>
@@ -248,20 +233,6 @@
             </div>
         </div>
     </div>
-
-    @foreach ($risques as $risque)
-        <div class="modal fade zoom" tabindex="-1" id="modalFile{{ $risque->id }}">
-            <div class="modal-dialog modal-lg" role="document" >
-                <div class="modal-content" data-simplebar>
-                    @if ($risque->pdf_nom != '')
-                        <embed src="{{ asset('storage/pdf/' . $risque->pdf_nom) }}" type="application/pdf" width="100%" height="1100px">
-                    @else
-                        <p class="text-center mt-2"  >Aucun fichier </p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endforeach
 
     @foreach ($risques as $risque)
         <div class="modal fade zoom" tabindex="-1" id="modalDetail{{ $risque->id }}">
@@ -374,12 +345,8 @@
                                                                 <label class="form-label " for="controle">
                                                                     Coût
                                                                 </label>
-                                                                @php
-                                                                    $cout = $risque->cout;
-                                                                    $formatcommande = number_format($cout, 0, '.', '.');
-                                                                @endphp
                                                                 <div class="form-control-wrap ">
-                                                                    <input value="{{ $formatcommande }} Fcfa" readonly type="text" class="form-control text-center" id="controle">
+                                                                    <input value="{{ $risque->cout }} Fcfa" readonly type="text" class="form-control text-center" id="controle">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -481,12 +448,8 @@
                                                                 <label class="form-label" for="controle">
                                                                     Coût
                                                                 </label>
-                                                                @php
-                                                                    $cout2 = $risque->cout_residuel;
-                                                                    $formatcommande2 = number_format($cout2, 0, '.', '.');
-                                                                @endphp
                                                                 <div class="form-control-wrap">
-                                                                    <input value="{{ $formatcommande2 }} Fcfa" readonly type="text" class="form-control text-center" id="controle">
+                                                                    <input value="{{ $risque->cout_residuel }} Fcfa" readonly type="text" class="form-control text-center" id="controle">
                                                                 </div>
                                                             </div>
                                                         </div>

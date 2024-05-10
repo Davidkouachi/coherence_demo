@@ -39,6 +39,7 @@ class ListeactionController extends Controller
                         ->where('risques.page', 'risk')
                         ->where('risques.user_id',  Auth::user()->id)
                         ->select('actions.*', 'processuses.nom as processus', 'risques.nom as risque','postes.nom as poste')
+                        ->orderBy('created_at', 'desc')
                         ->get();
 
         foreach ($actions as $action) {
@@ -57,22 +58,7 @@ class ListeactionController extends Controller
 
         $postes = Poste::where('occupe', 'oui')->get();
 
-        return view('liste.actionpreventive', ['actions' => $actions,  'postes' => $postes ]); // Utilisez $action->id au lieu de $request->id
-    }
-
-    public function index_ac_eff()
-    {
-        $actions = Suivi_amelioration::join('ameliorations', 'suivi_ameliorations.amelioration_id', 'ameliorations.id')
-                        ->join('actions', 'suivi_ameliorations.action_id', 'actions.id')
-                        ->join('risques', 'actions.risque_id', 'risques.id')
-                        ->join('processuses', 'risques.processus_id', 'processuses.id')
-                        ->join('postes', 'actions.poste_id', 'postes.id')
-                        ->where('suivi_ameliorations.statut', 'realiser')
-                        ->where('risques.user_id',  Auth::user()->id)
-                        ->select('Suivi_ameliorations.*', 'processuses.nom as processus', 'ameliorations.non_conformite as non_conformite', 'ameliorations.statut as statut_am', 'ameliorations.date_validation as date_validation_am','risques.nom as risque', 'postes.nom as poste', 'actions.action as action', 'actions.date as date')
-                        ->get();
-
-        return view('liste.actioncorrectiveeff', ['actions' => $actions]);
+        return view('liste.actionpreventive', ['actions' => $actions,  'postes' => $postes ]);
     }
 
     public function index_ac()
@@ -85,10 +71,10 @@ class ListeactionController extends Controller
                         ->where('risques.page', 'risk')
                         ->where('risques.user_id',  Auth::user()->id)
                         ->select('actions.*', 'processuses.nom as processus', 'risques.nom as risque', 'postes.nom as poste')
+                        ->orderBy('created_at', 'desc')
                         ->get();
-        $postes = Poste::where('occupe', 'oui')->get();
 
-        return view('liste.actioncorrective', ['actions' => $actions, 'postes' => $postes]);
+        return view('liste.actioncorrective', ['actions' => $actions]);
     }
 
     public function actionc_modif(Request $request)

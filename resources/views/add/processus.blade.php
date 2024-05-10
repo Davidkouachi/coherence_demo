@@ -88,27 +88,19 @@
                                             </div>
                                         </div>
                                         <div class="row g-gs">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <div class="form-group text-center">
-                                                    <button type="button" class="btn btn-lg btn-primary btn-dim" id="ajouter-objectif">
-                                                        <em class="ni ni-plus me-2"></em>
-                                                        <em>Objectif</em>
+                                                    <button type="button" class="btn btn-md btn-primary btn-dim" id="ajouter-objectif">
+                                                        <span>Objectif</span>
+                                                        <em class="icon ni ni-plus"></em>
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <div class="form-group text-center">
-                                                    <a data-bs-toggle="modal" data-bs-target="#modalDetail" class="btn btn-lg btn-warning btn-dim">
-                                                        <em class="ni ni-eye me-2"></em>
-                                                        <em>Voir le fichier</em>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="form-group text-center">
-                                                    <button type="submit" class="btn btn-lg btn-success btn-dim">
-                                                        <em class="ni ni-check me-2"></em>
-                                                        <em>Enregistrer</em>
+                                                    <button type="submit" class="btn btn-md btn-success btn-dim">
+                                                        <span>Enregistrer</span>
+                                                        <em class="icon ni ni-check"></em>
                                                     </button>
                                                 </div>
                                             </div>

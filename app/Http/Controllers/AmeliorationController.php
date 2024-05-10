@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Events\NotificationAcorrective;
-use App\Events\NotificationAmnew;
-
 use App\Models\processuse;
 use App\Models\Objectif;
 use App\Models\Resva;
@@ -408,7 +405,9 @@ class AmeliorationController extends Controller
 
     public function index_liste()
     {
-        $ams = Amelioration::where('user_id',  Auth::user()->id)->get();
+        $ams = Amelioration::where('user_id',  Auth::user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
 
         $actionsData = [];
 
