@@ -43,6 +43,9 @@
                                                     <th>Email</th>
                                                     <th>Contact</th>
                                                     <th>Type de compte</th>
+                                                    <th>Nombre processus</th>
+                                                    <th>Nombre risques</th>
+                                                    <th>Nombre incidents</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -58,11 +61,14 @@
                                                                     Version Pro
                                                                 </span>
                                                             @elseif ($user->poste === 'demo')
-                                                                <span class="badge rounded bg-danger">
+                                                                <span class="badge rounded bg-warning">
                                                                     Version Pro
                                                                 </span>
                                                             @endif
                                                         </td>
+                                                        <td>{{ $user->nbre_processus}}</td>
+                                                        <td>{{ $user->nbre_risque}}</td>
+                                                        <td>{{ $user->nbre_incident}}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

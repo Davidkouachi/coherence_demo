@@ -137,14 +137,6 @@
     </div>
 </div>
 
-<div class="modal fade zoom" tabindex="-1" id="modalDetail">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" id="pdfPreviewmodal" style="height:700px;" data-simplebar>
-            <p class="text-center mt-5">Aucun fichier</p>
-        </div>
-    </div>
-</div>
-
 <script>
     document.getElementById('ajouter-objectif').addEventListener('click', function(event) {
         event.preventDefault();
@@ -174,59 +166,6 @@
         div.querySelector('.btn-remove-objectif').addEventListener('click', function() {
             container.removeChild(div);
         });
-    });
-
-</script>
-
-<script>
-    const fileInput = document.getElementById('fileInput');
-    const pdfPreview = document.getElementById('pdfPreviewmodal');
-
-    var pdfFiles = @json($pdfFiles);
-    var pdfFiles2 = @json($pdfFiles2);
-
-    fileInput.addEventListener('change', function() {
-        // Initialiser la variable trouver
-        let trouver = 0;
-        var selectedFileName = this.value.split('\\').pop(); // Récupérer le nom du fichier sélectionné
-        // Parcourir la liste des fichiers
-        pdfFiles.forEach(function(pdfFile) {
-            if (selectedFileName === pdfFile.pdf_nom) {
-                toastr.error("Ce fichier PDF existe déjà.");
-                fileInput.value = ''; // Vider l'input
-                trouver = 1;
-
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
-        });
-        pdfFiles2.forEach(function(pdfFile2) {
-            if (selectedFileName === pdfFile2.pdf_nom) {
-                toastr.error("Ce fichier PDF existe déjà.");
-                fileInput.value = ''; // Vider l'input
-                trouver = 1;
-
-                pdfPreview.innerHTML = '';
-                fileSizeElement.textContent = '';
-            }
-        });
-        // Vérifier la valeur de trouver avant de procéder
-        if (trouver === 0) {
-            // Obtenez le fichier PDF sélectionné
-            const fichier = fileInput.files[0];
-            // Vérifiez si un fichier a été sélectionné
-            if (fichier) {
-                // Créez un élément d'incorporation pour le fichier PDF
-                const embedElement = document.createElement('embed');
-                embedElement.src = URL.createObjectURL(fichier);
-                embedElement.type = 'application/pdf';
-                embedElement.style.width = '100%';
-                embedElement.style.height = '100%';
-                // Affichez l'élément d'incorporation dans la div de prévisualisation
-                pdfPreview.innerHTML = '';
-                pdfPreview.appendChild(embedElement);
-            }
-        }
     });
 
 </script>

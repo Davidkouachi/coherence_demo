@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\User;
 use App\Models\Poste;
+use App\Models\Processuse;
+use App\Models\Risque;
+use App\Models\Amelioration;
 
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -23,9 +26,16 @@ class ListeuserController extends Controller
     public function index_liste_user()
     {
         $users = User::join('postes', 'users.poste_id', 'postes.id')
-                        ->whereIn('postes.nom', ['demo', 'pro'])
+                        ->where('postes.nom', 'demo')
                         ->select('users.*', 'postes.nom as poste')
                         ->get();
+
+        foreach($users as $user)
+        {
+            $user->nbre_processus = Processuse::where('user_id', $user->id)->count();
+            $user->nbre_risque = Risque::where('user_id', $user->id)->count();
+            $user->nbre_incident = Amelioration::where('user_id', $user->id)->count();
+        }
 
         return view('liste.users', ['users' => $users,]);
     }

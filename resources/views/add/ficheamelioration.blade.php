@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                         @else
-                            <form class="nk-block" id="form" method="post" action="{{ route('index_add') }}">
+                            <form class="nk-block " id="form" method="post" action="{{ route('index_add') }}">
                                 @csrf
                                 <div class="row g-gs">
 
@@ -266,8 +266,8 @@
                                                 <div class="row g-gs mb-2">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <div class="form-control-wrap">
-                                                                <select class="form-select js-select2 select_rech" id="causeSelect" data-search="on" data-placeholder="Recherche Cause" name="causeSelect_id">
+                                                            <div class="form-control-wrap d-flex">
+                                                                <select class="form-select js-select2 select_rech " id="causeSelect" data-search="on" data-placeholder="Recherche Cause" name="causeSelect_id">
                                                                     <option value="">
                                                                     </option>
                                                                     @foreach($causes_selects as $causes_select)
@@ -276,12 +276,15 @@
                                                                     </option>
                                                                     @endforeach
                                                                 </select>
+                                                                <a class="btn btn-outline-warning " id="vue_cause">
+                                                                    <em class="icon ni ni-eye"></em>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <div class="form-control-wrap">
+                                                            <div class="form-control-wrap d-flex">
                                                                 <select class="form-select js-select2 select_rech" id="risqueSelect" data-search="on" data-placeholder="Recherche Risque" name="risqueSelect_id">
                                                                     <option value="">
                                                                     </option>
@@ -291,6 +294,9 @@
                                                                     </option>
                                                                     @endforeach
                                                                 </select>
+                                                                <a class="btn btn-outline-warning " id="vue_risque">
+                                                                    <em class="icon ni ni-eye"></em>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1118,6 +1124,20 @@
 </script>
 
 <script>
+    document.getElementById("vue_cause").addEventListener("click", function(event) {
+        event.preventDefault();
+            var id_cause = $("#causeSelect").val();
+
+            if (id_cause == '') {
+                NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+            }else{
+                $('.modal').modal('hide');
+                $(`#modalVucause${id_cause}`).modal('show'); 
+            }
+        });
+</script>
+
+<script>
     $(document).ready(function() {
         $('#causeSelect').on('change', function() {
             var selectedValu = $(this).val();
@@ -1132,6 +1152,20 @@
             document.getElementById("btn_enrg").style.display = "none";
         });
     });
+</script>
+
+<script>
+    document.getElementById("vue_risque").addEventListener("click", function(event) {
+        event.preventDefault();
+            var id_risque = $("#risqueSelect").val();
+
+            if (id_risque == '') {
+                NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>.", "warning", {position: "top-right"});
+            }else{
+                $('.modal').modal('hide');
+                $(`#modalVurisque${id_risque}`).modal('show'); 
+            }
+        });
 </script>
 
 <script>

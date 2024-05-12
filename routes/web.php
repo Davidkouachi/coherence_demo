@@ -66,10 +66,6 @@ Route::middleware(['auth'])->group(function () {
     /*----------------------------------------------------------------------------------------------------------------------------*/
 
     /*--Utilisateur-------------------------------------------------------------------------------------------------------------------*/
-        /*Route::get('/Nouveau utilisateur', [UserController::class, 'index_user'])->name('index_user');
-        Route::get('/Liste des utilisateurs', [ListeuserController::class, 'index'])->name('index_liste_user');
-        Route::post('/Modification des autorisations', [ListeuserController::class, 'index_user_modif'])->name('index_user_modif');
-        Route::post('/traitement modif user', [ListeuserController::class, 'index_modif_traitement'])->name('index_modif_auto');*/
         Route::get('/Liste des utilisateurs', [ListeuserController::class, 'index_liste_user'])->name('index_liste_user');
     /*----------------------------------------------------------------------------------------------------------------------------*/
 
@@ -81,13 +77,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/traitement modif processus', [ListeprocessusController::class, 'processus_modif'])->name('processus_modif');
         Route::get('/Evaluation des processus', [EvaluationController::class, 'index_processus'])->name('index_evaluation_processus');
     /*----------------------------------------------------------------------------------------------------------------------------*/
-
-    /*--Poste---------------------------------------------------------------------------------------------------------------------
-        Route::get('/Liste Poste', [PosteController::class, 'index_liste_poste'])->name('index_liste_poste');
-        Route::post('/traitement Poste', [PosteController::class, 'index_add_poste_traitement'])->name('index_add_poste_traitement');
-        Route::post('/traitement modif Poste', [PosteController::class, 'index_modif_poste_traitement'])->name('index_modif_poste_traitement');
-        Route::get('/get post user', [PosteController::class, '/get_post_user'])->name('get_post_user');
-    ----------------------------------------------------------------------------------------------------------------------------*/
 
     /*--Risque---------------------------------------------------------------------------------------------------------------------*/
         Route::get('/Nouveau Risque', [RisqueController::class, 'index_risque'])->name('index_risque');
@@ -120,7 +109,6 @@ Route::middleware(['auth'])->group(function () {
 
     /*--Acton corrective-------------------------------------------------------------------------------------------------------------*/
         Route::get('/Liste Action Corrective', [ListeactionController::class, 'index_ac'])->name('index_ac');
-        Route::get('/Liste Action Corrective effectuée', [ListeactionController::class, 'index_ac_eff'])->name('index_ac_eff');
         Route::get('/Suivi des actions correctives', [SuiviactionController::class, 'index_suiviactionc'])->name('index_suiviactionc');
         Route::post('/Suivi_actionc/{id}', [SuiviactionController::class, 'add_suivi_actionc'])->name('add_suivi_actionc');
         Route::post('/actionc_modif', [ListeactionController::class, 'actionc_modif'])->name('actionc_modif');
@@ -153,10 +141,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get_risque/{id}', [StatistiqueController::class, 'get_risque'])->name('get_risque');
         Route::get('/get_date', [StatistiqueController::class, 'get_date'])->name('get_date');  
     /*----------------------------------------------------------------------------------------------------------------------------*/  
-
-    /*--Historique---------------------------------------------------------------------------------------------------------------
-        Route::get('/Historique', [HistoriqueController::class, 'index_historique'])->name('index_historique');
-    ----------------------------------------------------------------------------------------------------------------------------*/ 
 
     /*--Etat---------------------------------------------------------------------------------------------------------------*/
         Route::post('/Etat am', [EtatController::class, 'index_etat_am'])->name('index_etat_am');

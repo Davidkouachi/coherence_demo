@@ -262,7 +262,6 @@
                                                                 <div class="card-inner">
                                                                     <div class="card-head">
                                                                         Action {{ $key+1 }}
-                                                                        
                                                                     </div>
                                                                     <input type="text" value="{{ $actions['suivi_id'] }}" name="suivi_id[]" style="display: none;">
                                                                     <div class="row g-4">

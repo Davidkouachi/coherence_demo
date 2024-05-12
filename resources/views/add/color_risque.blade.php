@@ -40,9 +40,6 @@
                                             <h5 class="title">
                                                 Couleurs en fonction des intervalles
                                             </h5>
-                                            <span class="nk-menu-badge bg-danger text-white">
-                                                pro
-                                            </span>
                                         </div>
                                         @if($color_para->nbre_color > $color_interval_nbre )
                                         <div class="card-tools">

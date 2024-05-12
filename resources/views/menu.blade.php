@@ -27,7 +27,7 @@
                             <div class="col-md-12 col-xxl-12 mb-0" >
                                 <div class="card card-preview" style="background: transparent;">
                                     <div class="card-inner text-center">
-                                        <img height="150px" width="185px" src="{{asset('images/logo.png')}}" alt="">
+                                        <img height="150px" width="185px" src="{{asset('images/logo.png')}}">
                                     </div>
                                 </div>
                             </div>
