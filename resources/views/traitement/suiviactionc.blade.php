@@ -2,18 +2,6 @@
 
 @section('titre', 'Tableau de Suivi')
 
-@section('option_btn')
-
-    <li class="dropdown chats-dropdown">
-        <a href="{{ route('index_accueil') }}" class="dropdown-toggle nk-quick-nav-icon">
-            <div class="icon-status icon-status-na">
-                <em class="icon ni ni-home"></em>
-            </div>
-        </a>
-    </li>
-
-@endsection
-
 @section('content')
 
     <div class="nk-content ">
@@ -40,8 +28,6 @@
                                                 <tr>
                                                     <th>Action</th>
                                                     <th>Responsable</th>
-                                                    <th>Risque</th>
-                                                    <th>Processus</th>
                                                     <th>Fiche d'incident</th>
                                                     <th></th>
                                                 </tr>
@@ -52,8 +38,6 @@
                                                     <tr>
                                                         <td>{{ $am->action }}</td>
                                                         <td>{{ $am->poste }}</td>
-                                                        <td>{{ $am->risque }}</td>
-                                                        <td>{{ $am->delai }}</td>
                                                         <td>{{ $am->nbre_am }}</td>
                                                         <td>
                                                             <a data-bs-toggle="modal"

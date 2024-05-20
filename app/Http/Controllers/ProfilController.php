@@ -106,4 +106,24 @@ class ProfilController extends Controller
         return response()->json(['error' => true]);
     }
 
+    public function info_updatee(Request $request)
+    {
+        $nom_en = $request->input('nom_en');
+        $tel_en = $request->input('tel_en');
+        $prof = $request->input('prof');
+
+        $user = User::find(Auth::user()->id);
+        $user->nom_en = $nom_en;
+        $user->tel_en = $tel_en;
+        $user->prof = $prof;
+        $user->update();
+
+        if ($user) {
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['error' => true]);
+    }
+
 }

@@ -59,14 +59,6 @@
                                 </div>
                             </div>
                             <ul class="nk-menu nk-menu-main ui-s2">
-                                <li class="nk-menu-item ">
-                                    <a class="nk-menu-link" href="{{ route('index_stat') }}">
-                                        <em class="ni ni-bar-chart-alt me-2"></em>
-                                        <span class="nk-menu-text text-dark">
-                                            Statistique
-                                        </span>
-                                    </a>
-                                </li>
                                 <li class="nk-menu-item has-sub">
                                     <a class="nk-menu-toggle btn " >
                                         <em class="ni ni-share-alt me-2"></em>
@@ -128,6 +120,41 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        <li class="nk-menu-item has-sub">
+                                            <a class="nk-menu-link nk-menu-toggle" href="#">
+                                                <span class="nk-menu-icon" >
+                                                    <em class="ni ni-box-view-fill"></em>
+                                                </span>
+                                                <span class="nk-menu-text">
+                                                    Action Préventive
+                                                </span>
+                                            </a>
+                                            <ul class="nk-menu-sub">
+                                                <li class="nk-menu-item">
+                                                    <a class="nk-menu-link" @if(session('user_poste')->nom === 'pro') href="{{ route('index_suiviaction') }}" @else href="#" @endif  >
+                                                        <span class="nk-menu-icon" >
+                                                            <em class="icon ni ni-view-list-sq"></em>
+                                                        </span>
+                                                        <span class="nk-menu-text">
+                                                            Tableau de suivi
+                                                        </span>
+                                                        <span class="nk-menu-badge bg-danger text-white">
+                                                            pro
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="nk-menu-item">
+                                                    <a class="nk-menu-link" href="{{ route('index_ap') }}">
+                                                        <span class="nk-menu-icon" >
+                                                            <em class="ni ni-list-index"></em>
+                                                        </span>
+                                                        <span class="nk-menu-text">
+                                                            Liste des actions
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                         <li >
                                             <a class="nk-menu-link" href="{{ route('index_liste_risque') }}">
                                                 <span class="nk-menu-icon" >
@@ -135,6 +162,16 @@
                                                 </span>
                                                 <span class="nk-menu-text">
                                                     Liste des risques
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li >
+                                            <a class="nk-menu-link" href="{{ route("liste_cause") }}">
+                                                <span class="nk-menu-icon" >
+                                                    <em class="ni ni-list-index"></em>
+                                                </span>
+                                                <span class="nk-menu-text">
+                                                    Liste des causes
                                                 </span>
                                             </a>
                                         </li>
@@ -175,68 +212,27 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a class="nk-menu-toggle btn " >
-                                        <em class="ni ni-alert me-2"></em>
+                                        <em class="ni ni-share-alt me-2"></em>
                                         <span class="nk-menu-text text-dark">
-                                            Causes
+                                            Incidents
                                         </span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li >
-                                            <a class="nk-menu-link" href="{{ route("liste_cause") }}">
+                                            <a class="nk-menu-link" href="{{ route('index_amelioration') }}">
                                                 <span class="nk-menu-icon" >
                                                     <em class="icon ni ni-property-add"></em>
                                                 </span>
                                                 <span class="nk-menu-text ">
-                                                    Liste des causes
+                                                    Fiche de résolution d'incident
                                                 </span>
                                             </a>
                                         </li>
-                                    </ul>
-                                </li>
-                                <li class="nk-menu-item has-sub">
-                                    <a class="nk-menu-toggle btn " >
-                                        <em class="ni ni-box-view-fill me-2"></em>
-                                        <span class="nk-menu-text text-dark">
-                                            Actions
-                                        </span>
-                                    </a>
-                                    <ul class="nk-menu-sub">
                                         <li class="nk-menu-item has-sub">
                                             <a class="nk-menu-link nk-menu-toggle" href="#">
-                                                <em class="ni ni-box-view-fill me-2"></em>
-                                                <span class="nk-menu-text">
-                                                    Action Préventive
+                                                <span class="nk-menu-icon" >
+                                                    <em class="ni ni-box-view-fill"></em>
                                                 </span>
-                                            </a>
-                                            <ul class="nk-menu-sub">
-                                                <li class="nk-menu-item">
-                                                    <a class="nk-menu-link" @if(session('user_poste')->nom === 'pro') href="{{ route('index_suiviaction') }}" @else href="#" @endif  >
-                                                        <span class="nk-menu-icon" >
-                                                            <em class="icon ni ni-view-list-sq"></em>
-                                                        </span>
-                                                        <span class="nk-menu-text">
-                                                            Tableau de suivi
-                                                        </span>
-                                                        <span class="nk-menu-badge bg-danger text-white">
-                                                            pro
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="nk-menu-item">
-                                                    <a class="nk-menu-link" href="{{ route('index_ap') }}">
-                                                        <span class="nk-menu-icon" >
-                                                            <em class="ni ni-list-index"></em>
-                                                        </span>
-                                                        <span class="nk-menu-text">
-                                                            Liste des actions
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nk-menu-item has-sub">
-                                            <a class="nk-menu-link nk-menu-toggle" href="#">
-                                                <em class="ni ni-box-view-fill me-2"></em>
                                                 <span class="nk-menu-text">
                                                     Action Corrective
                                                 </span>
@@ -266,26 +262,6 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nk-menu-item has-sub">
-                                    <a class="nk-menu-toggle btn " >
-                                        <em class="ni ni-share-alt me-2"></em>
-                                        <span class="nk-menu-text text-dark">
-                                            Incidents
-                                        </span>
-                                    </a>
-                                    <ul class="nk-menu-sub">
-                                        <li >
-                                            <a class="nk-menu-link" href="{{ route('index_amelioration') }}">
-                                                <span class="nk-menu-icon" >
-                                                    <em class="icon ni ni-property-add"></em>
-                                                </span>
-                                                <span class="nk-menu-text ">
-                                                    Fiche de résolution d'incident
-                                                </span>
-                                            </a>
                                         </li>
                                         <li >
                                             <a class="nk-menu-link" href="{{ route('index_amelioration_liste') }}" >
@@ -322,24 +298,53 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nk-menu-item ">
+                                    <a class="nk-menu-link" href="{{ route('index_stat') }}">
+                                        <em class="ni ni-bar-chart-alt me-2"></em>
+                                        <span class="nk-menu-text text-dark">
+                                            Statistique
+                                        </span>
+                                    </a>
+                                </li>
+                                {{-- <li class="nk-menu-item ">
+                                    <a class="nk-menu-link" href="{{ route('index_propos') }}">
+                                        <em class="ni ni-file me-2"></em>
+                                        <span class="nk-menu-text text-dark">
+                                            A propos
+                                        </span>
+                                    </a>
+                                </li> --}}
                                 @yield('menu')
                             </ul>
                         </div>
                         <div class="nk-header-tools">
                             <ul class="nk-quick-nav">
+                                @if(!request()->routeIs('index_accueil') )
+                                <li class="dropdown chats-dropdown">
+                                    <a href="{{ route('index_accueil') }}" class="dropdown-toggle nk-quick-nav-icon">
+                                        <div class="icon-status icon-status-na">
+                                            <em class="icon ni ni-home"></em>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                                 @yield('option_btn')
                                 @if (Auth::check())
+                                @if(!request()->routeIs('index_commentaire') )
+                                <li class="chats-dropdown">
+                                    <a class="nk-quick-nav-icon" href="{{route('index_commentaire')}}">
+                                        <div class="icon-status icon-status-na">
+                                            <em class="icon ni ni-chat">
+                                            </em>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
                                 <li class="dropdown user-dropdown">
                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
                                         <div class="user-toggle">
                                             <div class="user-avatar">
                                                 <em class="icon ni ni-user-alt"></em>
-                                            </div>
-                                            <div class="user-info">
-                                                <div class="user-status text-primary"> </div>
-                                                <div class="user-name dropdown-indicator">
-                                                    {{ Auth::user()->email }}
-                                                </div>
                                             </div>
                                         </div>
                                     </a>
@@ -422,6 +427,45 @@
         </div>
     </div>
 
+    @if(session('user_poste')->nom === 'demo')
+        <a class="pmo-st pmo-dark active" data-bs-toggle="modal" data-bs-target="#modalCommentaire" >
+            <div class="pmo-st-img">
+                <em class="icon ni ni-chat fs-20px" ></em>
+            </div>
+        </a>
+    @endif
+
+    <div class="modal fade" tabindex="-1" id="modalCommentaire">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouveau Commentaire</h5>
+                    <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close"><em class="icon ni ni-cross"></em></a>
+                </div>
+                <div class="modal-body">
+                    <form id="form" method="POST" action="{{route('commentaire_add')}}">
+                        @csrf
+                        <div class="form-group">
+                            <label class="form-label" for="default-textarea">Commentaire</label>
+                            <div class="form-control-wrap">
+                                <textarea required name="text" class="form-control no-resize" id="default-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-md btn-success">
+                                <em class="icon ni ni-check" ></em>
+                                <span>Sauvegarder</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-light">
+                    <span class="sub-text">Commentaire</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         @keyframes zoom {
             0% {
@@ -473,6 +517,7 @@
             this.submit();
         });
     </script>
+
     <script>
         document.getElementById("form_click").addEventListener("click", function(event) {
 

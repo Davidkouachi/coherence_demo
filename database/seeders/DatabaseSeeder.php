@@ -35,6 +35,17 @@ class DatabaseSeeder extends Seeder
             'fa' => 'non',
         ]);
 
+        $user = User::create([
+            'name' => 'David Kouachi',
+            'email' => 'david@gmail.com',
+            'password' => bcrypt('David001'),
+            'matricule' => 'C1223459',
+            'tel' => '0102514392',
+            'poste_id' => $poste0->id,
+            'suivi_active' => 'non',
+            'fa' => 'non',
+        ]);
+
 
         $poste1 = Poste::where('nom', 'CONTRÔLEUR')->first();
 

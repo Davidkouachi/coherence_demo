@@ -2,16 +2,6 @@
 
 @section('titre', 'Fiche Amélioration')
 
-@section('option_btn')
-
-<li class="dropdown chats-dropdown">
-    <a href="{{ route('index_accueil') }}" class="dropdown-toggle nk-quick-nav-icon">
-        <div class="icon-status icon-status-na">
-            <em class="icon ni ni-home"></em>
-        </div>
-    </a>
-</li>
-@endsection
 @section('content')
 <div class="nk-content ">
     <div class="container-fluid">
@@ -224,7 +214,7 @@
                                     <div class="card-head">
                                         <h5 class="card-title">
                                             Resultat de la recherche :
-                                            @if($am->choix_select === 'new_risque')
+                                            @if($am->choix_select === 'cause_risque_nt')
                                                 Nouveau risque
                                             @endif
                                             @if($am->choix_select === 'risque')
@@ -241,6 +231,8 @@
                                                 Risque : {{$am->nom_risque}}
                                             @elseif($am->choix_select === 'cause')
                                                 Cause : {{$am->nom_cause}}
+                                            @elseif($am->choix_select === 'cause_risque_nt')
+                                                Nouveau risque : {{$am->nom_new_risque}}
                                             @endif
                                         </h5>
                                     </div>

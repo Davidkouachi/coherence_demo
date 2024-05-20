@@ -3,14 +3,6 @@
 @section('titre', 'Modification Risque')
 
 @section('option_btn')
-
-<li class="dropdown chats-dropdown">
-    <a href="{{ route('index_accueil') }}" class="dropdown-toggle nk-quick-nav-icon">
-        <div class="icon-status icon-status-na">
-            <em class="icon ni ni-home"></em>
-        </div>
-    </a>
-</li>
 <li class="dropdown user-dropdown">
     <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
         <div class="user-toggle">

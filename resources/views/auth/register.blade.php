@@ -30,6 +30,34 @@
                                     @csrf
                                     <div class="form-group">
                                         <div class="form-label-group">
+                                            <label class="form-label" >Entreprise</label>
+                                        </div>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" name="nom_en" placeholder="Entrer le nom de votre entreprise" id="nom_en">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-label-group">
+                                            <label class="form-label" >Contact de l'entreprise</label>
+                                        </div>
+                                        <div class="form-control-wrap">
+                                            <input type="tel" class="form-control form-control-lg" name="tel_en" placeholder="Entrer votre Contact" id="tel_en">
+                                        </div>
+                                        <script>
+                                            var inputElement = document.getElementById('tel_en');
+                                            inputElement.addEventListener('input', function() {
+                                                // Supprimer tout sauf les chiffres
+                                                this.value = this.value.replace(/[^0-9]/g, '');
+
+                                                // Limiter la longueur à 10 caractères
+                                                if (this.value.length > 10) {
+                                                    this.value = this.value.slice(0, 10);
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-label-group">
                                             <label class="form-label" >Nom et prénoms</label>
                                         </div>
                                         <div class="form-control-wrap">
@@ -62,6 +90,14 @@
                                                 }
                                             });
                                         </script>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-label-group">
+                                            <label class="form-label" >Profession</label>
+                                        </div>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" name="prof" placeholder="Entrer votre profession" id="prof">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-label-group">
@@ -155,12 +191,15 @@
             event.preventDefault();
 
             var name = document.getElementById("name").value;
+            var nom_en = document.getElementById("nom_en").value;
+            var tel_en = document.getElementById("tel_en").value;
             var email = document.getElementById("email-address").value;
             var tel = document.getElementById("tel").value;
+            var prof = document.getElementById("prof").value;
             var password1 = document.getElementById("password").value;
             var password2 = document.getElementById("password2").value;
 
-            if (!name || !email || !tel || !password1 || !password2 ) {
+            if (!name || !email || !tel || !password1 || !password2 || !tel_en || !nom_en || !prof) {
                 NioApp.Toast("<h5>Alert</h5><p>Veuillez remplir tous les champs.</p>", "warning", {position: "top-right"});
                 return false;
             }

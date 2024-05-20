@@ -211,6 +211,8 @@ class ListeamController extends Controller
                                     ->select('actions.*', 'postes.id as poste_id', 'processuses.id as processus_id', 'risques.nom as risque', 'causes.nom as cause')
                                     ->first();
 
+                        $am->nom_new_risque = $action->risque;
+
                         if ($action) {
                             $actionsDatam[$am->id][] = [
                                 'action' => $action->action,

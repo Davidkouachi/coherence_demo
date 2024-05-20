@@ -98,10 +98,13 @@ class AuthController extends Controller
 
             $user = User::create([
                 'name' => $request->name,
+                'nom_en' => $request->nom_en,
                 'email' => $request->email,
                 'password' => bcrypt($request->password1),
                 'matricule' => $request->matricule,
                 'tel' => $request->tel,
+                'tel_en' => $request->tel_en,
+                'prof' => $request->prof,
                 'poste_id' => '2',
                 'suivi_active' => 'non',
                 'fa' => 'non',

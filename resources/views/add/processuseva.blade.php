@@ -3,17 +3,10 @@
 @section('titre', 'Nouveau Risque')
 
 @section('option_btn')
-    <li class="dropdown chats-dropdown">
-        <a href="{{ route('index_accueil') }}" class="dropdown-toggle nk-quick-nav-icon">
-            <div class="icon-status icon-status-na">
-                <em class="icon ni ni-home"></em>
-            </div>
-        </a>
-    </li>
     @if( $color_para->nbre_color > $color_interval_nbre)
     @else
     <li class="dropdown user-dropdown">
-        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
+        <a class="dropdown-toggle " data-bs-toggle="dropdown" href="#">
             <div class="user-toggle">
                 <div class="user-avatar">
                     <em class="icon ni ni-plus"></em>
@@ -24,7 +17,7 @@
             <div class="dropdown-inner">
                 <ul class="link-list">
                     <li class="mt-2" >
-                        <a id="ajouterGroupe" class="btn btn-md btn-primary text-white" >
+                        <a id="ajouterGroupe" class="btn btn-md btn-danger text-white" >
                             <em class="icon ni ni-plus"></em>
                             <span>
                                 Cause
@@ -32,7 +25,7 @@
                         </a>
                     </li>
                     <li class="mt-2" >
-                        <a id="ajouterActionpr" class="btn btn-md btn-primary text-white">
+                        <a id="ajouterActionpr" class="btn btn-md btn-warning text-white">
                             <em class="icon ni ni-plus"></em>
                             <span>
                                 Action Préventive
@@ -40,7 +33,7 @@
                         </a>
                     </li>
                     <li class="mt-2" >
-                        <a id="ajouterActionco" class="btn btn-md btn-primary text-white">
+                        <a id="ajouterActionco" class="btn btn-md btn-success text-white">
                             <em class="icon ni ni-plus"></em>
                             <span>
                                 Action corrective

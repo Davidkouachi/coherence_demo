@@ -50,6 +50,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     /*----------------------------------------------------------------------------------------------------------------------------*/
 
+     /*--Propos-------------------------------------------------------------------------------------------------------------------*/
+        Route::get('/A propos', [Controller::class, 'index_propos'])->name('index_propos');
+        Route::get('/Commentaires', [Controller::class, 'index_commentaire'])->name('index_commentaire');
+        Route::post('/Commentaire add', [Controller::class, 'commentaire_add'])->name('commentaire_add');
+    /*----------------------------------------------------------------------------------------------------------------------------*/
+
     /*--Paramétrage de couleurs---------------------------------------------------------------------------------------------------*/
         Route::get('/Color paramettre', [ParamettreController::class, 'index_color_risk'])->name('index_color_risk');
         Route::post('/Color paramettre traitement', [ParamettreController::class, 'color_para_traitement'])->name('color_para_traitement');
@@ -63,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/suiviactivenon', [ProfilController::class, 'suivi_non']);
         Route::post('/mdp_update', [ProfilController::class, 'mdp_update'])->name('mdp_update');
         Route::get('/info_update', [ProfilController::class, 'info_update']);
+        Route::get('/info_updatee', [ProfilController::class, 'info_updatee']);
     /*----------------------------------------------------------------------------------------------------------------------------*/
 
     /*--Utilisateur-------------------------------------------------------------------------------------------------------------------*/
