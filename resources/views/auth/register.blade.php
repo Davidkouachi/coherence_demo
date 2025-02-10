@@ -200,25 +200,45 @@
             var password2 = document.getElementById("password2").value;
 
             if (!name || !email || !tel || !password1 || !password2 || !tel_en || !nom_en || !prof) {
-                NioApp.Toast("<h5>Alert</h5><p>Veuillez remplir tous les champs.</p>", "warning", {position: "top-right"});
+                // NioApp.Toast("<h5>Alert</h5><p>Veuillez remplir tous les champs.</p>", "warning", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text: "Veuillez remplir tous les champs.",
+                });
                 return false;
             }
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.</p>", "info", {position: "top-right"});
+                // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.</p>", "info", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text: "Veuillez saisir une adresse e-mail valide.",
+                });
                 return false;
             }
 
             if (password1 !== password2) {
-                NioApp.Toast("<h5>Erreur</h5><p>Les mots de passe ne correspondent pas.</p>", "error", {position: "top-right"});
+                // NioApp.Toast("<h5>Erreur</h5><p>Les mots de passe ne correspondent pas.</p>", "error", {position: "top-right"});
+                Swal.fire({
+                    icon: "warning",
+                    title: "Alert",
+                    text: "Les mots de passe ne correspondent pas.",
+                });
                 return false;
             }
             
             if (password1 === password2) {
                 // Vérification si le mot de passe satisfait les critères
                 if (!verifierMotDePasse(password1) || !verifierMotDePasse(password2) ) {
-                    NioApp.Toast("<h5>Information</h5><p>Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.</p>", "error", {position: "top-right"});
+                    // NioApp.Toast("<h5>Information</h5><p>Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.</p>", "error", {position: "top-right"});
+                    Swal.fire({
+                        icon: "info",
+                        title: "Alert",
+                        text: "Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.",
+                    });
                     return false;
                 }
 
@@ -261,7 +281,12 @@
 
     @if (session('error'))
         <script>
-            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.</p>", "error", {position: "top-right"});
+            // NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.</p>", "error", {position: "top-right"});
+            Swal.fire({
+                icon: "error",
+                title: "Erreur",
+                text: "{{ session('error') }}.",
+            });
         </script>
         {{ session()->forget('error') }}
     @endif

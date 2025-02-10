@@ -1,32 +1,24 @@
 <!DOCTYPE html>
-<html class="js" lang="fr">
+<html lang="fr">
 <meta content="text/html;charset=utf-8" http-equiv="content-type">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="Softnio" name="author">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <meta content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers." name="description">
-    <link href="images/logo.png" rel="shortcut icon">
+    <meta charset="utf-8"></meta>
+    <meta content="Softnio" name="author"></meta>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"></meta>
+    <meta content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers." name="description"></meta>
+    <link href="{{ asset('images/logo.png') }}" rel="shortcut icon"></link>
     <title>@yield('titre')</title>
-    <link href="assets/css/dashlite0226.css" rel="stylesheet">
-    <link href="assets/css/theme0226.css" rel="stylesheet">
-    <script src="{{asset('chart.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link href="{{ asset('assets/css/dashlite0226.css') }}" rel="stylesheet"></link>
+    <link href="{{ asset('assets/css/theme0226.css') }}" rel="stylesheet"></link>
+    <script src="{{ asset('chart.js') }}"></script>
     <script src="{{ asset('pusher.min.js') }}"></script>
-    </link>
-    </link>
-    </link>
-    </meta>
-    </meta>
-    </meta>
-    </meta>
 </head>
 
 <body class="nk-body bg-lighter ">
     <div class="nk-app-root">
         <div class="nk-wrap ">
+            
             <div class="nk-header is-light nk-header-fixed">
                 <div class="container-fluid">
                     <div class="nk-header-wrap">
@@ -424,6 +416,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -528,44 +521,44 @@
         });
     </script>
 
-        <div class="modal fade" tabindex="-1" id="modalAlert2" aria-modal="true" style="position: fixed;" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body modal-body-lg text-center">
-                        <div class="nk-modal">
-                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-cross bg-danger"></em>
-                            <h4 class="nk-modal-title">Session a éxpiré !</h4>
-                            <div class="nk-modal-action mt-5">
-                                <form class="login-form">
-                                    <div class="form-group">
-                                        <a class="btn btn-lg btn-mw btn-light" id="logoutBtn">
-                                            ok
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
+    {{-- <div class="modal fade" tabindex="-1" id="modalAlert2" aria-modal="true" style="position: fixed;" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body modal-body-lg text-center">
+                    <div class="nk-modal">
+                        <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-cross bg-danger"></em>
+                        <h4 class="nk-modal-title">Session a éxpiré !</h4>
+                        <div class="nk-modal-action mt-5">
+                            <form class="login-form">
+                                <div class="form-group">
+                                    <a class="btn btn-lg btn-mw btn-light" id="logoutBtn">
+                                        ok
+                                    </a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div> --}}
 
-        <script>
-            document.getElementById('logoutBtn').addEventListener('click', function(event) {
-                event.preventDefault(); // Pour éviter le comportement par défaut du lien
-                window.location.reload();
-            });
-        </script>
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Pour éviter le comportement par défaut du lien
+            window.location.reload();
+        });
+    </script>
 
-        <script>
-            function afficherModalApresDelai() {
-                $('.modal').modal('hide');
-                $('#modalAlert2').modal('show');
-            }
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(afficherModalApresDelai, 900000);
-            });
-        </script>
+    {{-- <script>
+        function afficherModalApresDelai() {
+            $('.modal').modal('hide');
+            $('#modalAlert2').modal('show');
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(afficherModalApresDelai, 900000);
+        });
+    </script> --}}
 
     <script src="{{asset('assets/js/bundle0226.js')}}"></script>
     <script src="{{asset('assets/js/scripts0226.js')}}"></script>
@@ -574,32 +567,66 @@
     <script src="{{asset('assets/js/example-toastr0226.js') }}"></script>
     <script src="{{asset('assets/js/example-sweetalert0226.js') }}"></script>
 
+        {{-- <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
+        </script> --}}
+
     @if (session('success'))
-        <script>
+        {{-- <script>
             NioApp.Toast("<h5>Succès</h5><p>{{ session('success') }}.</p>", "success", {position: "top-right"});
+        </script> --}}
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Succès",
+                text: "{{ session('success') }}",
+            });
         </script>
         {{ session()->forget('success') }}
     @endif
     @if (session('error'))
-        <script>
+        {{-- <script>
             NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.</p>", "error", {position: "top-right"});
+        </script> --}}
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Erreur",
+                text: "{{ session('error') }}",
+            });
         </script>
         {{ session()->forget('error') }}
     @endif
     @if (session('warning'))
-        <script>
+        {{-- <script>
             NioApp.Toast("<h5>Alert</h5><p>{{ session('warning') }}.</p>", "warning", {position: "top-right"});
+        </script> --}}
+        <script>
+            Swal.fire({
+                icon: "warning",
+                title: "Alert",
+                text: "{{ session('warning') }}",
+            });
         </script>
         {{ session()->forget('warning') }}
     @endif
     @if (session('info'))
-        <script>
+        {{-- <script>
             NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.</p>", "info", {position: "top-right"});
+        </script> --}}
+        <script>
+            Swal.fire({
+                icon: "info",
+                title: "Information",
+                text: "{{ session('info') }}",
+            });
         </script>
         {{ session()->forget('info') }}
     @endif
-
-    
 
 </body>
 

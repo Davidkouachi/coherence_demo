@@ -155,7 +155,6 @@
             container.removeChild(div);
         });
     });
-
 </script>
 
 @endsection

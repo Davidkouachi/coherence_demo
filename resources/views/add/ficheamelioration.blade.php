@@ -256,8 +256,8 @@
                                                 <div class="row g-gs mb-2">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <div class="form-control-wrap d-flex">
-                                                                <select class="form-select js-select2 select_rech " id="causeSelect" data-search="on" data-placeholder="Recherche Cause" name="causeSelect_id">
+                                                            <div class="form-control-wrap mb-2">
+                                                                <select class="form-select js-select2 select_rech me-1" id="causeSelect" data-search="on" data-placeholder="Recherche Cause" name="causeSelect_id">
                                                                     <option value="">
                                                                     </option>
                                                                     @foreach($causes_selects as $causes_select)
@@ -266,16 +266,19 @@
                                                                     </option>
                                                                     @endforeach
                                                                 </select>
+                                                            </div>
+                                                            <div class="form-control-wrap text-center">
                                                                 <a class="btn btn-outline-warning " id="vue_cause">
                                                                     <em class="icon ni ni-eye"></em>
+                                                                    <span>Voir les détails</span>
                                                                 </a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <div class="form-control-wrap d-flex">
-                                                                <select class="form-select js-select2 select_rech" id="risqueSelect" data-search="on" data-placeholder="Recherche Risque" name="risqueSelect_id">
+                                                            <div class="form-control-wrap mb-2">
+                                                                <select class="form-select js-select2 select_rech me-1" id="risqueSelect" data-search="on" data-placeholder="Recherche Risque" name="risqueSelect_id">
                                                                     <option value="">
                                                                     </option>
                                                                     @foreach($risques as $risque)
@@ -284,8 +287,11 @@
                                                                     </option>
                                                                     @endforeach
                                                                 </select>
+                                                            </div>
+                                                            <div class="form-control-wrap text-center">
                                                                 <a class="btn btn-outline-warning " id="vue_risque">
                                                                     <em class="icon ni ni-eye"></em>
+                                                                    <span>Voir les détails</span>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -434,15 +440,13 @@
 
 <ul class="nk-sticky-toolbar" id="groupes_btn" >
     <li class="demo-thumb" id="btn-afficher" style="display: none;">
-        <a data-type="afficher" class="toggle tipinfo action-afficher" aria-label="Aficher les actions" data-bs-original-title="Aficher les actions">
-            <em class="icon ni ni-eye">
-            </em>
+        <a data-type="afficher" class="toggle tipinfo action-afficher bg-warning text-white" aria-label="Aficher les actions" data-bs-original-title="Aficher les actions">
+            <em class="icon ni ni-eye"></em>
         </a>
     </li>
     <li class="demo-settings" id="btn-new-action" style="display: none;"> 
-        <a class="toggle tipinfo action-new" aria-label="Nouvelle Action" data-bs-original-title="Nouvelle Action" data-type="nouvelle-action">
-            <em class="icon ni ni-plus">
-            </em>
+        <a class="toggle tipinfo action-new bg-primary text-white" aria-label="Nouvelle Action" data-bs-original-title="Nouvelle Action" data-type="nouvelle-action">
+            <em class="icon ni ni-plus"></em>
         </a>
     </li>
 </ul>
@@ -1119,7 +1123,12 @@
             var id_cause = $("#causeSelect").val();
 
             if (id_cause == '') {
-                NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+                // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text: "Veuillez sélectionner une cause.",
+                });
             }else{
                 $('.modal').modal('hide');
                 $(`#modalVucause${id_cause}`).modal('show'); 
@@ -1150,7 +1159,12 @@
             var id_risque = $("#risqueSelect").val();
 
             if (id_risque == '') {
-                NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>.", "warning", {position: "top-right"});
+                // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>.", "warning", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text: "Veuillez sélectionner un risque.",
+                });
             }else{
                 $('.modal').modal('hide');
                 $(`#modalVurisque${id_risque}`).modal('show'); 
@@ -1174,7 +1188,12 @@
 
                     if (choixSelect === "cause") {
                         if (selectedCause === '') {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+                            // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+                            Swal.fire({
+                                icon: "info",
+                                title: "Alert",
+                                text: "Veuillez sélectionner une cause.",
+                            });
                         }else{
                             var type_new = this.getAttribute("data-type");
                             addGroup(type_new);
@@ -1182,6 +1201,11 @@
                     } else if (choixSelect === "risque") {
                         if (selectedRisque === '') {
                             NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>.", "warning", {position: "top-right"});
+                            Swal.fire({
+                                icon: "info",
+                                title: "Alert",
+                                text: "Veuillez sélectionner un risque.",
+                            });
                         }else{
                             var type_new = this.getAttribute("data-type");
                             addGroup(type_new);
@@ -1322,15 +1346,30 @@
                                 method: 'GET',
                                 success: function(data) {
                                     var nbre = data.nbre;
-                                    NioApp.Toast("<h5>Information</h5><p>" + nbre + " Action(s) trouvée(s)</p>.", "info", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Information</h5><p>" + nbre + " Action(s) trouvée(s)</p>.", "info", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: "Alert",
+                                        text:+ nbre +"Action(s) trouvée(s).",
+                                    });
                                     addGroups_non_accepte(type, data);
                                 },
                                 error: function() {
-                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Erreur",
+                                        text:"Une erreur s'est produite lors de la récupération des informations.",
+                                    });
                                 }
                             });
                         } else {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>", "warning", {position: "top-right"});
+                            // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>", "warning", {position: "top-right"});
+                            Swal.fire({
+                                icon: "info",
+                                title: "Alert",
+                                text:"Veuillez sélectionner une cause.",
+                            });
                         }
                     } else if (choixSelect === "risque") {
                         if (selectedRisque !== '') {
@@ -1339,19 +1378,39 @@
                                 method: 'GET',
                                 success: function(data) {
                                     var nbre = data.nbre;
-                                    NioApp.Toast("<h5>Information</h5><p>"+nbre+" Action(s) trouvée(s).</p>", "info", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Information</h5><p>"+nbre+" Action(s) trouvée(s).</p>", "info", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: "Alert",
+                                        text:+ nbre +"Action(s) trouvée(s).",
+                                    });
                                     addGroups_non_accepte(type, data);
                                 },
                                 error: function() {
-                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Erreur",
+                                        text:"Une erreur s'est produite lors de la récupération des informations.",
+                                    });
                                 }
                             });
                         } else {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>", "warning", {position: "top-right"});
+                            // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>", "warning", {position: "top-right"});
+                            Swal.fire({
+                                icon: "info",
+                                title: "Alert",
+                                text:"Veuillez sélectionner un risque.",
+                            });
                         }
                     }
                 } else {
-                    NioApp.Toast("<h5>Erreur</h5><p>Veuillez préciser le choix de sélection.</p>", "error", {position: "top-right"});
+                    // NioApp.Toast("<h5>Erreur</h5><p>Veuillez préciser le choix de sélection.</p>", "error", {position: "top-right"});
+                    Swal.fire({
+                        icon: "info",
+                        title: "Alert",
+                        text:"Veuillez préciser le choix de sélection.",
+                    });
                 }
             });
         });

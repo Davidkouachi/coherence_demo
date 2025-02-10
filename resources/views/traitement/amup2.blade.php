@@ -399,7 +399,12 @@
                         // Si toutes les cases sont cochées, décocher la dernière case cochée
                         checkbox.checked = false;
 
-                        NioApp.Toast("<h5>Alert</h5><p>Impossible de supprimé cette action.</p>", "warning", {position: "top-right"});
+                        // NioApp.Toast("<h5>Alert</h5><p>Impossible de supprimé cette action.</p>", "warning", {position: "top-right"});
+                        Swal.fire({
+                            icon: "info",
+                            title: "Alert",
+                            text: "Impossible de supprimer cette action.",
+                        });
                     }
                 });
             });

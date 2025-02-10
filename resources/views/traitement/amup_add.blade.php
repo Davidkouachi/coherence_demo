@@ -899,7 +899,12 @@
             var id_cause = $("#causeSelect").val();
 
             if (id_cause == '') {
-                NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+                // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>.", "warning", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text: "Veuillez sélectionner une cause.",
+                });
             }else{
                 $('.modal').modal('hide');
                 $(`#modalVucause${id_cause}`).modal('show'); 
@@ -931,7 +936,12 @@
             var id_risque = $("#risqueSelect").val();
 
             if (id_risque == '') {
-                NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>.", "warning", {position: "top-right"});
+                // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>.", "warning", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text: "Veuillez sélectionner un risque.",
+                });
             }else{
                 $('.modal').modal('hide');
                 $(`#modalVurisque${id_risque}`).modal('show'); 
@@ -962,15 +972,30 @@
                                 method: 'GET',
                                 success: function(data) {
                                     var nbre = data.nbre;
-                                    NioApp.Toast("<h5>Information</h5><p>" + nbre + " Action(s) trouvée(s).</p>", "info", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Information</h5><p>" + nbre + " Action(s) trouvée(s).</p>", "info", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: "Alert",
+                                        text: + nbre +" Action(s) trouvée(s).",
+                                    });
                                     addGroups_non_accepte(type, data);
                                 },
                                 error: function() {
-                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Alert",
+                                        text: "Une erreur s'est produite lors de la récupération des informations.",
+                                    });
                                 }
                             });
                         } else {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>", "warning", {position: "top-right"});
+                            // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner une cause.</p>", "warning", {position: "top-right"});
+                            Swal.fire({
+                                icon: "info",
+                                title: "Alert",
+                                text: "Veuillez sélectionner une cause.",
+                            });
                         }
                     } else if (choixSelect === "risque") {
                         if (selectedRisque !== '') {
@@ -979,19 +1004,39 @@
                                 method: 'GET',
                                 success: function(data) {
                                     var nbre = data.nbre;
-                                    NioApp.Toast("<h5>Information</h5><p>"+nbre+" Action(s) trouvée(s).</p>", "info", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Information</h5><p>"+nbre+" Action(s) trouvée(s).</p>", "info", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: "Alert",
+                                        text: + nbre +" Action(s) trouvée(s).",
+                                    });
                                     addGroups_non_accepte(type, data);
                                 },
                                 error: function() {
-                                    NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"});
+                                    {{-- NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la récupération des informations.</p>", "error", {position: "top-right"}); --}}
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Alert",
+                                        text: "Une erreur s'est produite lors de la récupération des informations.",
+                                    });
                                 }
                             });
                         } else {
-                            NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>", "warning", {position: "top-right"});
+                            // NioApp.Toast("<h5>Alert</h5><p>Veuillez sélectionner un risque.</p>", "warning", {position: "top-right"});
+                            Swal.fire({
+                                icon: "info",
+                                title: "Alert",
+                                text: "Veuillez sélectionner un risque.",
+                            });
                         }
                     }
                 } else {
-                    NioApp.Toast("<h5>Erreur</h5><p>Veuillez préciser le choix de sélection.</p>", "error", {position: "top-right"});
+                    // NioApp.Toast("<h5>Erreur</h5><p>Veuillez préciser le choix de sélection.</p>", "error", {position: "top-right"});
+                    Swal.fire({
+                        icon: "error",
+                        title: "Alert",
+                        text: "Veuillez préciser le choix de sélection.",
+                    });
                 }
             });
         });

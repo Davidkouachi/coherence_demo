@@ -753,7 +753,12 @@
 
         if (nom_cause.value === '' || dispositif.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une cause.", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une cause.", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: "Veuillez saisir une cause.",
+            });
 
         } else { 
 
@@ -817,7 +822,12 @@
 
         if (actionp.value === '' || delai.value === '' || responsable_idp.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action preventive.", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action preventive.", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: "Veuillez saisir une action preventive.",
+            });
 
         } else {
 
@@ -899,7 +909,12 @@
 
         if (actionc.value === '' || responsable_idc.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action corrective.", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action corrective.", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: "Veuillez saisir une action corrective.",
+            });
 
         } else {
 
@@ -972,7 +987,12 @@
                     // Si toutes les cases sont cochées, décocher la dernière case cochée
                     checkbox.checked = false;
 
-                    NioApp.Toast("<h5>Erreur</h5><p>Impossible de supprimer cette cause.", "error", {position: "top-right"});
+                    // NioApp.Toast("<h5>Erreur</h5><p>Impossible de supprimer cette cause.", "error", {position: "top-right"});
+                    Swal.fire({
+                        icon: "error",
+                        title: "Alert",
+                        text: "Impossible de supprimer cette cause.",
+                    });
                 }
             });
         });
@@ -991,7 +1011,12 @@
                     // Si toutes les cases sont cochées, décocher la dernière case cochée
                     checkbox.checked = false;
 
-                    NioApp.Toast("<h5>Erreur</h5><p>Impossible de supprimer cette Action préventive.", "error", {position: "top-right"});
+                    // NioApp.Toast("<h5>Erreur</h5><p>Impossible de supprimer cette Action préventive.", "error", {position: "top-right"});
+                    Swal.fire({
+                        icon: "error",
+                        title: "Alert",
+                        text: "Impossible de supprimer cette Action préventive.",
+                    });
                 }
             });
         });
@@ -1010,7 +1035,12 @@
                     // Si toutes les cases sont cochées, décocher la dernière case cochée
                     checkbox.checked = false;
 
-                    NioApp.Toast("<h5>Erreur</h5><p>Impossible de supprimer cette Action corrective.", "error", {position: "top-right"});
+                    // NioApp.Toast("<h5>Erreur</h5><p>Impossible de supprimer cette Action corrective.", "error", {position: "top-right"});
+                    Swal.fire({
+                        icon: "error",
+                        title: "Alert",
+                        text: "Impossible de supprimer cette Action corrective.",
+                    });
                 }
             });
         });

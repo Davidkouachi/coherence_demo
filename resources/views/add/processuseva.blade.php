@@ -662,7 +662,12 @@
                 const objectifs = data.objectifs;
                 const nbre = data.nbre;
 
-                NioApp.Toast("<h5>Information</h5><p>" + nbre + " Objectif(s) trouvé(s).</p>", "info", {position: "top-right"});
+                // NioApp.Toast("<h5>Information</h5><p>" + nbre + " Objectif(s) trouvé(s).</p>", "info", {position: "top-right"});
+                Swal.fire({
+                    icon: "info",
+                    title: "Alert",
+                    text:+ nbre +" Objectif(s) trouvé(s).",
+                });
 
                 listeObjectifs.innerHTML = "";
                 objectifs.forEach(objectif => {
@@ -684,7 +689,12 @@
 
         if (nom_cause.value === '' || dispositif.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une cause.</p>", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une cause.</p>", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: " Veuillez saisir une cause.",
+            });
 
         } else {
 
@@ -745,7 +755,12 @@
 
         if (actionp.value === '' || delai.value === '' || responsable_idp.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action preventive.</p>", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action preventive.</p>", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: " Veuillez saisir une action préventive.",
+            });
 
         } else {
 
@@ -826,7 +841,12 @@
 
         if (actionc.value === '' || responsable_idc.value === '') {
 
-            NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action corrective.</p>", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une action corrective.</p>", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: " Veuillez saisir une action corrective.",
+            });
 
         } else {
 

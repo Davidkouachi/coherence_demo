@@ -74,7 +74,7 @@ class AuthController extends Controller
                 session(['user_poste' => $poste]);
             }
 
-            return redirect()->intended(route('index_accueil'))->with('success', 'Connexion réussi.');
+            return redirect()->intended(route('index_accueil'));
         }
 
         return redirect()->back()->withInput(['email' => $request->input('email'), 'password' => $request->input('password')])->with([

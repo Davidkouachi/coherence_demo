@@ -90,13 +90,23 @@
 
     @if (session('error'))
         <script>
-            NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
+            // NioApp.Toast("<h5>Erreur</h5><p>{{ session('error') }}.", "error", {position: "top-right"});
+            Swal.fire({
+                icon: "error",
+                title: "Erreur",
+                text: "{{ session('error') }}.",
+            });
         </script>
         {{ session()->forget('error') }}
     @endif
     @if (session('info'))
         <script>
-            NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.", "info", {position: "top-right"});
+            // NioApp.Toast("<h5>Information</h5><p>{{ session('info') }}.", "info", {position: "top-right"});
+            Swal.fire({
+                icon: "info",
+                title: "Alert",
+                text: "{{ session('info') }}.",
+            });
         </script>
         {{ session()->forget('info') }}
     @endif
@@ -129,7 +139,12 @@
 
                 var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
-                    NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.</p>", "info", {position: "top-right"});
+                    // NioApp.Toast("<h5>Information</h5><p>Veuillez saisir une adresse e-mail valide.</p>", "info", {position: "top-right"});
+                    Swal.fire({
+                        icon: "info",
+                        title: "Alert",
+                        text: "Veuillez saisir une adresse e-mail valide.",
+                    });
                     return false;
                 }
 
@@ -146,11 +161,21 @@
 
                             if (user === 1) {
 
-                                NioApp.Toast("<h5>Succès</h5><p>Mot de passe envoyé.Veuillez vous connecté a nouveau.</p>", "success", {position: "top-right"});
+                                // NioApp.Toast("<h5>Succès</h5><p>Mot de passe envoyé.Veuillez vous connecté a nouveau.</p>", "success", {position: "top-right"});
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Succès",
+                                    text: "Mot de passe envoyé.Veuillez vous connecté a nouveau.",
+                                });
 
                             } else {
 
-                                NioApp.Toast("<h5>Alert</h5><p>Aucun compte n'est associé a ce email.</p>", "warning", {position: "top-right"});
+                                // NioApp.Toast("<h5>Alert</h5><p>Aucun compte n'est associé a ce email.</p>", "warning", {position: "top-right"});
+                                Swal.fire({
+                                    icon: "info",
+                                    title: "Alert",
+                                    text: "Aucun compte n'est associé a ce email.",
+                                });
                             }
 
                             $('.modal').modal('hide');
@@ -159,7 +184,12 @@
                         },
                         error: function() {
 
-                            NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la vérification de l'email.</p>", "error", {position: "top-right"});
+                            // NioApp.Toast("<h5>Erreur</h5><p>Une erreur s'est produite lors de la vérification de l'email.</p>", "error", {position: "top-right"});
+                            Swal.fire({
+                                icon: "error",
+                                title: "Alert",
+                                text: "Une erreur s'est produite lors de la vérification de l'email.",
+                            });
 
                             $('.modal').modal('hide');
                             $(`#modalmdp`).modal('hide');
@@ -168,7 +198,12 @@
 
                 } else {
 
-                    NioApp.Toast("<h5>Alert</h5><p>Veuillez saisir votre Email s'il vous plait !!!.</p>", "warning", {position: "top-right"});
+                    // NioApp.Toast("<h5>Alert</h5><p>Veuillez saisir votre Email s'il vous plait !!!.</p>", "warning", {position: "top-right"});
+                    Swal.fire({
+                        icon: "info",
+                        title: "Alert",
+                        text: "Veuillez saisir votre Email s'il vous plait !!!",
+                    });
                 }
 
             });
